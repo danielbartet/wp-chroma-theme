@@ -1,0 +1,23 @@
+$light-grey: #8c8c8c
+$primary-color: rgb(72, 49, 255)
+$secondary-color: rgb(255, 80, 166)
+$third-color: rgb(59, 114, 255)
+$green-color: rgb(68, 230, 163)
+
+$mobileFold: 1270px
+
+// @include primaryGradient()
+@mixin primaryGradient($degrees)
+  background: linear-gradient($degrees, $primary-color, $secondary-color)
+// @include primaryGradientFaded()
+@mixin primaryGradientFaded($degrees)
+  background: linear-gradient($degrees, rgba($primary-color, .88), rgba($secondary-color, .88))
+// @include secondaryGradient
+@mixin secondaryGradient($degrees)
+  background: linear-gradient($degrees, $primary-color, $third-color)
+//@include triGradient(45deg)
+@mixin triGradient($degrees)
+  background: linear-gradient($degrees, darken(rgba($third-color, .85), 25%) 0%, rgba($primary-color, .84) 25%, rgba($secondary-color, .85) 100%), rgba(0,0,0,.15)
+//@include transition()
+@mixin transition()
+  transition: all .17s

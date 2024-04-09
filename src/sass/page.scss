@@ -1,0 +1,75 @@
+body {
+  scroll-behavior: smooth;
+}
+.comparison-block {
+     vertical-align: top;
+      display: inline-block;
+      width:49%;
+      height: auto;
+    }
+
+.table-background{
+  background: -webkit-linear-gradient(90deg, #25c481, #25b7c4);
+  background: linear-gradient(90deg, #25c481, #25b7c4);
+  width: 115%;
+  color: #fff;
+  height: 420px;
+  line-height: 2;
+  margin-left: -6.4%;
+  margin-right: -6.4%;
+}
+
+.table-background h1 {
+  font-size: 30px;
+  color: #fff;
+  font-weight: 300;
+  text-align: center;
+  line-height: 2;
+}
+
+.custom_header {
+  font-size: 1.6em;
+  line-height: 1.2 !important;
+  font-weight: 400;
+}
+
+.simply-centered form, .simply-centered div  {
+  box-sizing: border-box;
+}
+
+.simply-centered form {
+  max-width: 728px;
+  padding: 0px 4%;
+  margin: 0px auto 16px;
+}
+
+.simply-centered .post-title {
+  text-align: center;
+}
+.sc-half {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0 auto;
+  width: 49%;
+  vertical-align: top;
+}
+@media (max-width: 770) {
+  .sc-half {
+    width: 100%;
+  }
+}
+.tag-title {
+  max-width: 1200px;
+  margin: 45px auto 15px;
+  padding: 0px 1%;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+
+.rating_card_left {
+  .entry-content_figure {
+    padding-bottom: 60% !important; 
+  }
+}

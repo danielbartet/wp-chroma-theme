@@ -1,0 +1,126 @@
+.contrib-profile {border-radius: 4px; display: inline-block; width: 30% !important; float: left; margin-right: 10px; margin-top: 10px;}
+.discuss-forum {
+  height: 60px;
+    display: block;
+    padding-top: 18px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 340px;
+    font-size: 1.2em;
+    font-weight: 400 !important;
+    border-radius: 2px;
+    color: #fff !important;
+    text-shadow: none !important;
+    cursor: pointer;
+    text-align: center;
+}
+.authors-wrap {
+  color: #222;
+  max-width: 320px !important;
+  justify-content: center !important;
+  margin: 2% 0;
+  h6 {
+    margin: 10px auto 24px;
+    line-height: .8;
+    color: #8a8a8a;
+    font-weight: 400;
+  }
+  #ga_button {
+    color: #fff;
+    background: linear-gradient(135deg, #007aff, #4831ff);
+    border: none
+  }
+}
+.para300 {
+  height: 300px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .wp-user-avatar {
+    border-radius: 50%;
+    max-height: 290px;
+    width: auto;
+    padding: 4%;
+  }
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    color: #fff
+  }
+}
+.author-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.author-text {
+  max-width: 640px;
+  padding: 0 4%;
+  line-height: 1.5;
+  color: white;
+}
+
+.authors-wrap a {
+  color: #006cff;
+}
+.authors-wrap a:hover {
+      color: #006cff;
+}
+.authorInfo {
+  padding: 0px 20px 20px 20px;
+}
+.authordescription {
+  line-height: 1.4;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.author-social {
+  padding: 0 4% !important;
+  li {
+    display: inline-block;
+    margin-right: 8%;
+  }
+}
+.authors-social {
+  display: inline-block;
+  width: 50%;
+  padding: 0px 10px 10px 10px;
+  font-size: 24px;
+  width: 58%;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+.authors-social a:hover {
+  color: #2b85ff;
+  text-shadow: none;
+  background: none;
+}
+ .authorLinks {
+   font-size: 1rem;
+   margin-bottom: 8px;
+ }
+ .authorLinks a:hover {
+  background: rgba(255,255,255,1);
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 93%, #2f88ff 93%, #2f88ff 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(95.5%, rgba(255,255,255,1)), color-stop(95.5%, #2f88ff), color-stop(100%, #2f88ff));
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 93%, #2f88ff 93%, #2f88ff 100%);
+  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 93%, #2f88ff 93%, #2f88ff 100%);
+  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 93%, #2f88ff 93%, #2f88ff 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 93%, #2f88ff 93%, #2f88ff 100%);
+  background-repeat: no-repeat,no-repeat,repeat-x;
+  text-shadow: 1px 1px #fff, -1px 1px #fff, -1px 2px #fff, 0px 1px #fff, -2px 1px #fff, -1px 0px #fff, -3px 0px #fff, -2.5px 0px #fff, -3.5px 0px #fff, -4px 0px #fff, -4.5px 0px #fff, -5px 0px #fff, 3px 0px #fff, 2.5px 0px #fff, 2px 0px #fff, 3.5px 0px #fff, 3.5px 0px #fff, 4px 0px #fff, 4.5px 0px #fff, 5px 0px #fff, 5px 0px #fff;
+}
+ .authors-social {
+   li {
+     a {
+       svg {
+         width: 30px;
+         height: 30px;
+       }
+     }
+   }
+ }
+
+ .author-cards {
+   background: white;
+ }

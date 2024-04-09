@@ -1,0 +1,22 @@
+a, button, input {
+  touch-action: manipulation;
+}
+a, a:visited {
+  color: #006cff;
+	text-decoration: none;
+	transition: color .24s;
+  -webkit-text-decoration-skip: objects;
+	}
+.post-info-name a {
+  font-weight: 400;
+}
+
+a:hover, .post-info-name a:hover,  {
+  color: #2e87ff;
+	text-decoration: none;
+}
+
+a:active,
+a:focus {
+	outline: none;
+}

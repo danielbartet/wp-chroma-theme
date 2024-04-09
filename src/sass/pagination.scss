@@ -1,0 +1,116 @@
+.nav-links {
+	float: left;
+	margin-top: 20px;
+	position: relative;
+	width: 100%;
+	}
+
+.pagination {
+	clear: both;
+	display: inline-block;
+	position: relative;
+	font-size: .8rem;
+	font-weight: 700;
+	line-height: 100%;
+	padding: 0;
+	text-transform: uppercase;
+}
+
+.pagination span, .pagination a {
+	background: #fff;
+	border: 1px solid #444;
+	-webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+	    -ms-border-radius: 2px;
+	     -o-border-radius: 2px;
+		border-radius: 2px;
+	color: #aaa;
+	display: block;
+	float: left;
+	font-size: .8rem;
+	font-weight: 400;
+	margin: 2px 5px 2px 0;
+	padding: 9px 12px 8px;
+	text-decoration: none;
+	width: auto;
+      text-transform: capitalize;
+	}
+
+.pagination a,
+.pagination a:visited {
+	color: #444;
+	}
+.pagination .current,
+.pagination a:hover {
+	background: #444;
+	color: #fff;
+	}
+
+
+.load-more-wrap {
+  max-width: 200px;
+  width: 100%;
+  margin: 0px auto 52px;
+  height: 40px;
+  transition: all .2s;
+}
+.more-wrap {
+  display: flex;
+  margin: 1px auto 18px;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 4px;
+  background: #ff0023;
+  background: linear-gradient(-45deg,#9000ff,#ff005e);
+}
+.more-white {
+  width: 100%;
+  width: calc(100% - 4px);
+  margin: 2px 2px 3px 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+.inf-more-but {
+  border: none;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: .046em;
+  font-size: 1.024rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  padding: 12px;
+  transition: all .17s;
+  color: #5600ff;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.17);
+  transform: translate3d(0,0,0);
+  background: #ff0023;
+  background: -webkit-linear-gradient(135deg, #5600ff, #ff007c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  svg {
+    margin: 0px 8px 0px 0px;
+  }
+}
+
+.inf-more-but:hover, .more-white:hover {
+	color: #fff;
+  background: transparent;
+  -webkit-text-fill-color: #fff;
+  animation: textlift .2s linear;
+ 	animation-fill-mode: forwards;
+  & svg {
+		fill: #fff;
+		}
+	}
+
+.no-more-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 4px auto 12px;
+}
+
+.paginate-links {
+ display: none;
+}

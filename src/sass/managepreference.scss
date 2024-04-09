@@ -1,0 +1,113 @@
+.newsletter-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 {
+        text-align: center;
+        margin: 5% 0;
+    }
+
+    form {
+
+        .email-name {
+            margin: 0 5%;
+        }
+
+        .input-fields {
+            box-shadow: none;
+            display: flex;
+            margin: 2% 0;
+            width: 40%;
+
+            @media (min-width: 320px) and (max-width: 480px) {
+                width: 100%;
+            }
+
+            input {
+                border: none;
+                background: none;
+                box-shadow: none;
+                border-radius: 0;
+                border-bottom: 2px solid #8e2de2;
+                &:focus {
+                    outline: 0;
+                }
+            }
+        }
+    }
+
+    .select-newsletter {
+        margin: 2% 5%;
+    }
+
+
+    .newsletter-submit {
+        margin: 5%;
+        padding: 1% 5%;
+        border: 2px solid #8e2de2;
+        color: #4a00e0;
+        text-transform: capitalize;
+        font-weight: bold;
+        border-radius: 5px;
+        font-size: 1.5em;
+        transition: all linear 300ms;
+
+        &:hover {
+            transform: translateY(-10px);
+            box-shadow: 4px 4px 4px rgba(0,0,0,0.3);
+            color: white;
+            background: #8e2de2;
+        }
+    }
+
+    .privacy-policy {
+        margin: 0 5%;
+    }
+
+    #error {
+        margin: 0 5%;
+        color: red;
+    }
+}
+
+
+.insert-newsletter {
+    margin: 5% 0;
+    @media (min-width: 320px) and (max-width: 480px) {
+        margin: 50% 0;
+    }
+}
+
+.newsletter-choices {
+    display: flex;
+    justify-content: space-between;
+
+    @media (min-width: 320px) and (max-width: 480px) {
+        flex-direction: column;
+    }
+    h4 {
+        color: white;
+    }
+
+    input[type=checkbox] {
+        margin: 15px 20px 15px 0;
+    }
+
+    .newsletter-choice {
+        padding: 5% 3%;
+        margin: 0 2% 0 0;
+        box-shadow: 4px 4px 4px rgba(0,0,0,0.15);
+        border-radius: 5px;
+        background: linear-gradient(to right, #8e2de2, #4a00e0);
+        color: white;
+        @media (min-width: 320px) and (max-width: 480px) {
+            margin: 2% 0 0 0;
+        }
+
+        .newsletter-choices_header {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

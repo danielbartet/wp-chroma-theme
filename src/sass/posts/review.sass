@@ -1,0 +1,72 @@
+.review_cta
+  position: fixed
+  top: auto
+  bottom: 0px
+  left: 0px
+  right: 0px
+  z-index: 500
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 100%
+  height: 100px
+  margin: 0px auto
+  padding: 2px 4%
+  background: rgba(255,255,255,.92)
+  border-top: 2px solid lightgrey
+  border-bottom: 2px solid lightgrey
+  color: #000
+  opacity: 0
+  @media (max-width: $mobileFold)
+    bottom: 50px
+  &-con
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    max-width: 375px
+    margin: 0px auto
+  &-data
+    width: 90%
+    margin-left: 12px
+  &-box
+    width: 100%
+    display: flex 
+    justify-content: space-between
+    align-items: center
+    padding: 4px 0px
+  &-img
+    width: auto
+    height: 92%
+    border-radius: 4px
+  &-title, &-price
+    font-weight: 700
+    margin-right: 12px
+  &-price
+    color: green
+  &-stars
+    color: #e49500
+    span
+      margin-right: 2px
+      &:last-of-type
+        margin-right: 0px
+  &-button
+    position: relative
+    z-index: 2
+    border: solid 1px
+    border-radius: 4px
+    padding: 4px 8px
+    font-weight: 600
+  &-link
+    display: block
+    position: absolute
+    z-index: 1
+    opacity: 0
+    top: 0px
+    left: 0px
+    width: 100%
+    height: 100%
+
+.content-main
+  .review_cta-img
+    width: auto

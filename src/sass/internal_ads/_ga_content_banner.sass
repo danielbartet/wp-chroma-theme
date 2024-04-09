@@ -1,0 +1,66 @@
+.carousel-box, .content-main
+  .ga_banner
+    $ga_banner_break: 620px
+    width: 100%
+    max-width: 728px
+    height: 100px
+    background: red
+    background: linear-gradient(0deg, rgba(0,0,247,0.6), rgba(255,150,0,0)),linear-gradient(120deg, rgba(0,255,127,0.6), rgba(0,0,100,0)),linear-gradient(240deg, rgba(255,129,2,0.9), rgba(135,60,255,0.4))
+    -webkit-filter: blur(0px)
+    border-radius: 2px
+    display: flex
+    align-content: center
+    align-items: center
+    padding: 10px
+    margin-bottom: 16px
+    text-decoration: none
+    overflow: hidden
+    @media (max-width: $ga_banner_break)
+      flex-direction: column
+      height: 280px
+      border-radius: 0px
+    &_title
+      color: #fff
+      text-decoration: none
+      font-size: 22px
+      font-weight: 800
+      line-height: 1.35
+    &_inner
+      display: flex
+      width: 90%
+      justify-content: space-evenly
+      align-content: center
+      margin-left: 12px
+      text-decoration: none
+      @media (max-width: $ga_banner_break)
+        margin-top: 12px
+        flex-wrap: wrap
+    &_card
+      height: 100%
+      text-decoration: none
+      margin: 4px 8px
+      @media (max-width: $ga_banner_break)
+        width: 46%
+        width: calc(50% - 16px)
+        height: auto
+        text-align: center
+    &_img
+      display: block
+      width: 100px
+      height: 60px
+      max-height: 100%
+      margin: 0px auto
+      object-fit: cover
+      box-shadow: 0 2px 20px 0 rgba(0,0,0,0.15)
+      @media (max-width: $ga_banner_break)
+        width: 100%
+        max-width: 180px
+        height: auto
+        max-height: 80px
+    &_text
+      font-size: 14px
+      margin: 4px auto
+      display: block
+      color: #fff
+      text-align: center
+      text-decoration: none

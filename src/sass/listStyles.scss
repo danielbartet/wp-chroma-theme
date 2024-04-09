@@ -1,0 +1,21 @@
+.bullets {
+    li{
+        list-style: none;
+        display: flex;
+        align-items: center;
+     }
+     li:before {
+        content: '';
+        display: inline-block;
+        text-align: center;
+        background-repeat: no-repeat;
+        height: 60px;
+        width: 80px;
+        background-image: url('https://cdn.idropnews.com/wp-content/uploads/2020/03/11093413/buttonIcon.png') !important;
+        margin: 4% 0 0 0;
+
+        @media(min-width: 320px) and (max-width: 480px) {
+           width: 108px;
+        }
+     }
+}

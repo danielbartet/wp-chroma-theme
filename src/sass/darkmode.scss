@@ -1,0 +1,255 @@
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 24px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 1px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: rgba(72,49,255,0.88);
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px rgba(72,49,255,0.88);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(25px);
+    -ms-transform: translateX(25px);
+    transform: translateX(25px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .switch-container {
+      width: 100%;
+      margin: 0 6%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      @media (min-width: 320px) and (max-width: 480px) {
+          margin: 0 3%;
+      }
+
+
+      label {
+          margin: 0 3% 0 0;
+      }
+
+      .toggle-dark-mode {
+          margin: 0;
+          padding: 0;
+          font-weight: bold;
+          color: rgba(72,49,255,0.88) !important;
+      }
+  }
+
+  // dark mode main class
+  .dark-mode {
+      background: #000;
+      margin-top: 0 !important;
+      padding-top: 3px;
+        // bread crumbs
+        .breadcrumbs {
+            li {
+                color: white;
+            }
+
+            a {
+                color: white;
+            }
+        }
+    // header credentials
+    .author-name, .readAndPublish, .post-date, .post-title, cite {
+        color: white;
+    }    
+
+    // engage bar
+    .engagebar {
+        background: #000;
+    }
+
+    // main content
+    .content-main {
+        background: #000;
+
+        h2 {
+            color: white;
+        }
+        
+        p.has-drop-cap:not(:focus)::first-letter {
+            color: white;
+        }
+        p {
+            color: white;
+
+             a {
+                 color: #006cff;
+             }
+        }
+    }
+
+    .post-wrap-out1 {
+        .the-post-content {
+            background: #000 !important;
+        }
+    }
+    // lists
+    ol, ul {
+        li {
+            color: white;
+
+            a {
+                color: #006cff;
+            }
+        }
+    }
+    // read next
+    #read_next {
+        color: white;
+    }
+    // stack widget
+    .related-posts {
+        a {
+            background: #fff;
+            box-shadow: 4px 4px 4px rgba(255,255,255,0.60);
+            p {
+                color: #000;
+            }
+        }
+    }
+    // side bar
+    .feat-widget-wrap {
+        background: #000;
+
+        .feat-widget-text {
+            h2 {
+                color: white;
+            }
+        }
+    }
+
+    .side-pop-wrap {
+        li {
+            &:hover {
+                & a {
+                    background: #000;
+                  }
+            }
+        }
+    }
+    // subscription email input
+    .mc-field-group {
+        input {
+            color: white;
+        }
+    }
+    // revcontent ad
+    .rc-headline {
+        color: white !important;
+    }
+
+    // block quote styling
+    .wp-block-quote:before {
+        border-image: linear-gradient(135deg,#7431f5 0%, #ff5eaf 50%, #000 50%, #000 100%);
+        border-image-slice: 1;
+    }
+
+    .wp-block-quote:after {
+        border-image: linear-gradient(315deg, #7431f5 0%, #ff5eaf 50%, #000 50%, #000 100%);
+        border-image-slice: 1;
+    }
+
+    .content-main pre {
+        color: white;
+
+        em {
+            color: white;
+        }
+    }
+
+    .content-main h3 {
+        color: white;
+    }
+
+    .figcaption_link, .review-attribute {
+        color: white;
+    }
+
+    .giveaway-box {
+        h2 {
+            color: black;
+        }
+
+        div {
+            p {
+                color: #777 !important;
+            }
+        }
+
+        .buttonContainer {
+            .ga_button {
+                background: linear-gradient(
+                    135deg
+                    , #007aff, #4831ff);
+            }
+        }
+    }
+
+    table {
+        tr:nth-of-type(odd) {
+            background: white;
+          }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: white;
+        
+        * {
+            color: white !important;
+        }
+    }
+  }
+
+
+  

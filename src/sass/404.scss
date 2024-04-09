@@ -1,0 +1,98 @@
+.error404 .site {
+    background: #000;
+}
+
+#post-404 {
+    text-align: center;
+    width: 100%;
+    margin: 120px auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#post-404 h1 {
+    font-size: 6rem;
+    font-weight: 400;
+    line-height: 100%;
+    margin-bottom: 20px;
+    opacity: .9;
+    color: #fff;
+}
+
+#post-404 p {
+    max-width: 480px;
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 130%;
+    color: #101010;
+    font-size: 1rem;
+    line-height: 130%;
+    text-align: left;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    & a {
+        color: #fff;
+        text-align: center;
+    }
+}
+
+$size: 48px;
+
+.orb-box {
+    width: 100%;
+    width: $size * 3.2;
+    height: $size * 3.2;
+    margin: $size auto;
+    position: relative;
+    opacity: .9;
+    animation: float 3.8s infinite linear;
+}
+
+.orb {
+    height: $size;
+    width: $size;
+    margin: 0 auto;
+    border-radius: $size * 20;
+    position: absolute;
+    z-index: 0;
+    opacity: .96;
+}
+
+.blue-orb {
+    background: linear-gradient(140deg, rgba(0, 198, 255, 1), rgba(75, 0, 255, 0.8)), radial-gradient(circle at $size/4 $size/4, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+    top: 12px;
+    left: 12px;
+    right: auto;
+    bottom: auto;
+}
+
+.green-orb {
+    background: linear-gradient(140deg, #00ffa7, rgba(0, 195, 33, 0.8)), radial-gradient(circle at $size/4 $size/4, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+    top: auto;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
+
+.red-orb {
+    background: linear-gradient(140deg, #de00ff, rgba(255, 0, 13, 0.8)), radial-gradient(circle at $size/4 $size/4, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+    top: 12px;
+    right: 12px;
+    left: auto;
+    bottom: auto;
+}
+
+@keyframes float {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error404 {
+    background: #000 !important;
+}

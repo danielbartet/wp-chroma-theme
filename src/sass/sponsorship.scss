@@ -1,0 +1,46 @@
+.post_sponsorship {
+    border-top: 1.5px solid lightgrey;
+    border-bottom: 1.5px solid lightgrey;
+    width: 100%;
+    display: flex;
+  }
+
+  .post_sponsorship p { 
+    color: #00ce83;
+    font-style: italic;
+  }
+
+  .post_sponsorship h3 {
+    color: rgba(72,49,255,0.88);
+  }
+
+  .post_sponsorship img {
+    max-height: 300px;
+    max-width: 300px;
+  }
+
+  .post_sponsorship_link {
+    display: flex;
+  }
+
+  @media(min-width: 320px) and (max-width: 480px) {
+      .post_sponsorship_link {
+          flex-direction: column;
+          align-items: center;
+      }
+
+      .post_sponsorship img {
+          max-height: 200px;
+          max-width: 200px;
+      }
+
+      .post_sponsorship h3 {
+          font-size: 1.2em;
+          text-align: center;
+      }
+
+      .post_sponsorship p {
+          font-size: 1em;
+          text-align: center;
+      }
+  }

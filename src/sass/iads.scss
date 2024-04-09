@@ -1,0 +1,195 @@
+.iphone-8-link {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  color: #fff !important;
+  width: 90%;
+  max-width: 360px;
+  padding: .6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: .0324em;
+  text-shadow: 0px 0px 1.34em rgba(0,0,0,.32);
+  margin: 24px auto;
+  border-radius: 4em;
+  text-align: center;
+  line-height: 1.45em;
+  text-decoration: none !important;
+}
+.win {
+  transform: translateZ(0);
+  width: 100%;
+  height: 220px;
+  color: #fff !important;
+  font-size: 2em;
+  text-align: center;
+  line-height: 25px;
+  box-sizing: border-box;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 4px;
+  text-shadow: 0px 1px 12px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -4;
+  }
+  .win-disc {
+    font-size: .75rem;
+    font-weight: 100;
+  }
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: -1;
+    transform: translateZ(0px);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.42) 60%, rgba(0, 0, 0, 0.72) 100%);
+  }
+  &:hover:before {
+    z-index: -1;
+  }
+}
+
+.wallpapes_img {
+  position: absolute;
+  z-index: -2;
+}
+
+.win-slide {
+  display: block;
+  text-indent: 10px;
+  position: relative;
+  height: 45px;
+  font-weight: 300;
+  span {
+    font-size: 1.65rem;
+    position: relative;
+    height: 0;
+    opacity: 0;
+    width: 100%;
+    white-space: nowrap;
+    animation:  win-slide 12s linear infinite 0s;
+    text-align: center;
+    display: block;
+    display: flex;
+    justify-content: center;
+  &:nth-of-type(2) {
+    animation-delay: 3s;
+  }
+  &:nth-of-type(3) {
+    animation-delay: 6s;
+  }
+  &:nth-of-type(4) {
+    animation-delay: 9s;
+  }
+  }
+}
+
+@keyframes win-slide {
+0% { transform: translateX(-6em); opacity: 0; }
+8%   { transform: translateX(0); opacity: 1; }
+20%   { transform: translateX(0); opacity: 1; }
+32% { transform: translateX(6em); opacity: 0; }
+100% {transform: none; display: none; }
+}
+
+.win div {
+  box-sizing: border-box;
+  width: 120px;
+  margin: 12px auto;
+  font-size: 1.12rem;
+  font-weight: 300;
+  line-height: 1.75;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, .32);
+  background: rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.wallpapes {
+  transform: translateZ(0);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 320px;
+  margin: 15px auto;
+  color: #fff !important;
+  font-size: 2rem;
+  text-align: center;
+  box-sizing: border-box;
+  font-weight: 300;
+  line-height: 1.25;
+  float: left;
+  border-radius: 4px;
+  text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  position: relative;
+  span {
+    display: block;
+    margin: 5px auto;
+    position: relative;
+  }
+  span:first-of-type {
+    font-size: 1.5rem;
+  }
+  div {
+    box-sizing: border-box;
+    width: 120px;
+    margin: 0 auto;
+    font-size: 1.3rem;
+    line-height: 1.75;
+    margin-top: 20px;
+    border-radius: 4px;
+    opacity: .95;
+    border: 1px solid rgba(255, 255, 255, .32);
+    background: rgba(0, 0, 0, .1);
+    position: relative;
+  }
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: -1;
+    transform: translateZ(0px);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.42) 60%, rgba(0, 0, 0, 0.72) 100%);
+  }
+  &:hover:before {
+    z-index: -1;
+  }
+}
+.wallpapes-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -4;
+}

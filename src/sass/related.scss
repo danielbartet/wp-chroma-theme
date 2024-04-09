@@ -1,0 +1,96 @@
+.related-title {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  top: 40px;
+  margin: 0px auto 0px;
+}
+.related-posts {
+  display: flex;
+  height: 380px;
+  padding: 30px 8px 0px;
+  justify-content: center;
+  .related-card {
+    display: flex;
+    position: relative;
+    transform: translateZ(0);
+    margin: 10px 5px;
+    height: 100%;
+    vertical-align: top;
+    width: 70vw;
+    min-width: 240px;
+    max-height: 320px;
+    padding: 0px 0px 14px 0px;
+    border-radius: 4px;
+    overflow: hidden;
+    color: #000;
+    width: 33.3333333333%;
+    justify-content: space-between;
+    img {
+      object-fit: cover;
+      margin-bottom: 2px;
+    }
+    p {
+      width: 100%;
+      font-weight: 700;
+      line-height: 1.35;
+      padding: 5px 14px 10px;
+      color: #000;
+      margin-bottom: 0px;
+    }
+  }
+  @media (max-width: 727px) {
+        display: flex;
+        white-space: nowrap;
+        margin-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        cursor: grab;
+        overflow: scroll;
+        justify-content: flex-start;
+        .related-card {
+          position: relative;
+          margin: 0px 12px;
+          overflow: hidden;
+          white-space: normal;
+          margin: 10px;
+        }
+    }
+}
+.stack-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  padding-bottom: 12px;
+  .lazyload-container {
+    padding-top: 60%;
+  }
+  .prices {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 14px;
+    span {
+      color: #444;
+      font-weight: 400;
+      letter-spacing: -.0142em;
+    &:nth-of-type(2) {
+      font-weight: 400;
+      color: #00ce83;
+    }
+  &:last-of-type {
+    text-decoration: line-through;
+    color: #f05f70;
+    font-weight: 300;
+    }
+  }
+}
+  .stackadd {
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    border-radius: 4px;
+    margin: 12px auto 0px;
+  }
+}

@@ -1,0 +1,31 @@
+<?php
+	/**
+	 * Categories page
+	 *
+	 * Display categories page
+	 *
+	 * @link http://anspress.io
+	 * @since 1.0
+	 *
+	 * @package AnsPress
+	 * @subpackage Categories for AnsPress
+	 */
+
+	global $question_categories;
+?>
+<?php dynamic_sidebar( 'ap-top' ); ?>
+<style>
+.ap-list-head {
+margin: 0 auto !important;
+padding: 0px !important;
+}
+.ap-search-head {
+	width: 100% !important;
+	max-width: 500px !important;
+	margin: 0 auto !important;
+	float: none !important;
+}
+.ap-filter-ask {
+	display: none;
+}
+</style>
