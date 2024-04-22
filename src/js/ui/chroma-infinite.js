@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function() {
+  'use strict';
 //infinite scroll object definition
 const InfiniteScroll = function(loadBtn) {
 
@@ -61,3 +63,4 @@ const InfiniteScroll = function(loadBtn) {
   })
 
 }
+});

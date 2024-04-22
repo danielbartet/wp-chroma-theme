@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function() {
+  'use strict';
 class scrollAnchors {
   constructor() {
     this.scrollFD = window.scroll
@@ -26,3 +28,4 @@ class scrollAnchors {
     }
   }
 }
+});

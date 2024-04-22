@@ -26,7 +26,7 @@ add_action('wp_logout','logout_page');
 //Registration Form Redirect For recaptcha
 function my_registration_page_redirect() {
 	global $pagenow;
-	if ( ( strtolower($pagenow) == 'wp-login.php') && ( strtolower( $_GET['action'] ) == 'register' ) ) {
+	if ( ( strtolower($pagenow) == 'wp-login.php') && array_key_exists('action', $_GET) && ( strtolower( $_GET['action'] ) == 'register' ) ) {
 		wp_redirect( home_url('/forums-register/') );
 	}
 }
