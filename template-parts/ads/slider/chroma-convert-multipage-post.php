@@ -33,7 +33,7 @@ function chroma_convert_multipage_post( $content ) {
           
           // <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           $adScript = $dom->createElement('script');
-          $adScript->setAttribute('async', '');
+          $adScript->setAttribute('async');
           $adScript->setAttribute('src', "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js");
           $adUnit = $dom->createElement('aside');
           $adUnit->setAttribute('class','floatfixAd ad-box');

@@ -2,34 +2,31 @@
   "name": "iDrop",
   "version": "0.1.0",
   "scripts": {
-    "build-css": "sass --no-source-map src/sass/_INDEX.scss dist/css/main.css --style=compressed",
+    "build-css": "node-sass --include-path scss src/sass/_INDEX.scss dist/css/main.css --output-style compressed",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "devDependencies": {
-    "@babel/core": "^7.18.0",
-    "@babel/preset-env": "^7.18.0",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-babel": "^8.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-babel": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-debug": "^4.0.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-uglify": "^3.0.2",
-    "redux": "^4.2.0",
-    "sass": "^1.54.9"
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.1",
+    "gulp-watch": "^5.0.1",
+    "redux": "^4.0.1"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "babel-cli": "^6.26.0",
-    "blueimp-gallery": "^3.4.0",
-    "chokidar": "^3.6.0",
-    "concurrently": "^7.2.2",
-    "core-js": "^3.37.0",
-    "imagesloaded": "^5.0.0",
-    "masonry-layout": "^4.2.2",
-    "nodemon": "^2.0.15",
-    "npm": "^8.11.0",
-    "regenerator-runtime": "^0.14.1"
+    "concurrently": "^5.1.0",
+    "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
+    "npm": "^6.4.1"
   }
 }

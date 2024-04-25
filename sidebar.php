@@ -1,62 +1,49 @@
 <?php
-function getSB1() { ?>
-<div class="side-title-wrap sb1">
-  <?php
-  $ga_args = array(
-    'category_name' => 'giveaways',
-    'posts_per_page' => -1,
-    'orderby'  => 'rand'
-  );
-  $giveaways = new WP_Query($ga_args);
-  $ga_titles = array();
-  $ga_posts = array();
-  foreach($giveaways->posts as $ga_post) {
-    if (get_field('giveaway_end_date', $ga_post->ID) && (date_create(get_field('giveaway_end_date', $ga_post->ID)) > new DateTime(date_create()->format('Y-m-d H:i:s')))) {
-      array_push($ga_posts, $ga_post);
-      array_push($ga_titles, trim(str_replace('Giveaway', '', $ga_post->post_title)));
-    }
-  }
-
-  if (!empty($ga_posts)) {
-    $alt = get_post_meta($ga_posts[0]->ID, '_wp_attachment_image_alt', true);
-    echo get_the_post_thumbnail($ga_posts[0]->ID, 'inside-post', ['class' => 'lazyload-img llreplace wallpapes_img', 'alt' => $alt, 'title' => $alt]);
-    ?>
-    <a href="https://www.idropnews.com/giveaways/?utm_source=giveaways-sidebar-banner" class="win box-shadow-rise ripple">
-      <span class="win-slide">Win a Free</span>
-      <span class="win-slide">
-        <?php
-        // Asegúrate de que hay títulos disponibles antes de intentar mostrarlos
-        for ($i = 0; $i < min(4, count($ga_titles)); $i++) {
-          echo "<span>{$ga_titles[$i]}</span>";
-        }
-        ?>
-      </span>
-      <div class="box-shadow-nohover">Enter</div>
-      <span class="win-disc">* Guaranteed by iDrop News.</span>
-    </a>
+  function getSB1() { ?>
+  <div class="side-title-wrap sb1">
     <?php
-  } else {
-    // Manejar el caso en que no hay publicaciones de sorteos disponibles
-    echo '<p>No giveaways available at this time.</p>';
-  }
-  ?>
-</div>
-<?php } ?>
+    $ga_args = array(
+      'category_name' => 'giveaways',
+      'posts_per_page' => -1,
+      'orderby'  => 'rand'
+    );
+    $giveaways = new WP_Query( $ga_args );
+    $ga_titles = array();
+    $ga_posts = array();
+    foreach($giveaways->posts as $ga_post) {
+      if (get_field('giveaway_end_date', $ga_post->ID) && (date_create(get_field('giveaway_end_date', $ga_post->ID)) > new DateTime(date_create()->format('Y-m-d H:i:s'))) ) {
+        array_push($ga_posts, $ga_post);
+        array_push($ga_titles, trim(str_replace('Giveaway', '',$ga_post->post_title)));
+      }
+    }
+
+    ?>
+  	<a href="https://www.idropnews.com/giveaways/?utm_source=giveaways-sidebar-banner" class="win box-shadow-rise ripple">
+    <?php
+      $alt = get_post_meta($ga_posts[0]->ID, '_wp_attachment_image_alt', true);
+      echo get_the_post_thumbnail($ga_posts[0]->ID, 'inside-post', ['class' => 'lazyload-img llreplace wallpapes_img', 'alt' => $alt, 'title' => $alt ]);
+  	?>
+  		<span class="win-slide">Win a Free</span>
+  		<span class="win-slide">
+  		<span><?php echo $ga_titles[0]; ?></span><span><?php echo $ga_titles[1]; ?></span><span><?php echo $ga_titles[2]; ?></span><span><?php echo$ga_titles[3]; ?></span></span>
+  			<div class="box-shadow-nohover">
+  				Enter
+  			</div>
+  			<span class="win-disc">* Guaranteed by iDrop News.</span>
+  		</a>
+  </div>
+  <?php } ?>
 
   <?php function getSB2() {
-    global $post;
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;  ?>
+    global $post; ?>
     <div class="sb2">
     		<h3 class="side-list-title"><?php $sideTitle = (has_category('giveaways')) ? 'Giveaways' : 'Trending'; echo $sideTitle;?></h3>
     <ol class="side-pop-wrap">
     		<?php
         $count = 0;
-        $popular_days_ago = (has_category('giveaways')) ? '600 days ago' : '600 days ago';
-error_log('#####log#####: '.$popular_days_ago);
+        $popular_days_ago = (has_category('giveaways')) ? '600 days ago' : '7 days ago';
         $category =  (has_category('giveaways')) ? 'giveaways' : null;
-error_log('#####log#####: '.$category);
 		$post_id = get_the_ID();
-error_log('#####log#####: '.$post_id);
 		$recent = (!has_category('giveaways') ? 
 		new WP_Query(
 			array(
@@ -81,10 +68,7 @@ error_log('#####log#####: '.$post_id);
 				'category__in' => array( 17047 ),
 				'post__not_in' => array($post_id),
 				'suppress_filters' => true
-	)));
-error_log('#####log#####');
-error_log($recent->have_posts());
-error_log('#####log#####');      
+	)));      
    while($recent->have_posts()) : $recent->the_post(); $count++; if ($count == 1) { ?>
     			<li>
     				<a class="feat-widget-wrap ripple" href="<?php the_permalink(); ?>">

@@ -20,14 +20,13 @@ function getPostImages() {
     let postImagesLength = postImages.length;
     document.cookie = "postImagesLength = " + postImagesLength
     // set php variable to image array length
-    <?php $totalSlides = isset($_COOKIE['postImagesLength']) ? intval($_COOKIE['postImagesLength']) : 0; ?>
+    <?php $totalSlides = $_COOKIE['postImagesLength']; ?>
   }
 }
 
 setTimeout(getPostImages, 1000);
 </script>
 <?php 
-  $totalSlideSeconds = 0;
   $imageSeconds = 11;
   for($i = 1; $i <= $totalSlides; $i++) {
     // totalSeconds from Medium ascending time: '11 seconds for the second image, and minus an additional second for each subsequent image'
@@ -37,6 +36,7 @@ setTimeout(getPostImages, 1000);
   // total time calculation
   $totalTime = ($word_count / $wordsPerSecond);
   $totalTime += $firstImage;
+  $totalSlideSeconds= 4;
   if($totalSlideSeconds > 0) {
     $totalTime += $totalSlideSeconds;
   }

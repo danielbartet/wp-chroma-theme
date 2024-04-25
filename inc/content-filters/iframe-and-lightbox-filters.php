@@ -3,12 +3,9 @@ function iframes_aspect_wrapper($content) {
   $content = preg_replace('/<center>\s*(<iframe.*>*.<\/iframe>)\s*<\/center>/iU', '\1', $content);
   if(empty($content))
     return $content;
-  //$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
-  $content = htmlspecialchars($content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+  $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
   $dom = new DOMDocument();
-  libxml_use_internal_errors(true); // Suprimir errores de libxml
-  $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD); // Cargar el contenido sin añadir doctype, html o body implícitamente
-  libxml_clear_errors(); // Limpiar errores de libxml
+  $dom->loadHTML($content);
   $iframes = $dom->getElementsByTagName('iframe');
   if ($iframes->length < 1)
     return $content;
@@ -17,8 +14,9 @@ function iframes_aspect_wrapper($content) {
     $videoWrap->setAttribute('class','videowrapper');
     $ifr->parentNode->replaceChild($videoWrap, $ifr);
     $videoWrap->appendChild($ifr);
+    $dom->saveHTML($videoWrap);
   }
-  $content = $dom->saveHTML();
+  $content = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $dom->saveHTML()));
   return $content;
 }
 add_filter( 'the_content', 'iframes_aspect_wrapper' );
@@ -26,20 +24,18 @@ add_filter( 'the_content', 'iframes_aspect_wrapper' );
 function lightbox_seeker($content) {
   if(empty($content))
     return $content;
-  //$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
-  $content = htmlspecialchars($content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+  $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
   $dom = new DOMDocument();
-  libxml_use_internal_errors(true); // Suprimir errores de libxml
-  $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD); // Cargar el contenido sin añadir doctype, html o body implícitamente
-  libxml_clear_errors(); // Limpiar errores de libxml
+  $dom->loadHTML($content);
   $imgs = $dom->getElementsByTagName('img');
   if ($imgs->length < 1)
     return $content;
   foreach($imgs as $img) {
     $imgClasses = $img->getAttribute('class') . " lightbox_trigger";
     $img->setAttribute('class', $imgClasses);
+    $dom->saveHTML($img);
   }
-  $content = $dom->saveHTML();
+  $content = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $dom->saveHTML()));
   return $content;
 }
 add_filter( 'the_content', 'lightbox_seeker' );

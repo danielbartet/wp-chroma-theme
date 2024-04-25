@@ -14,7 +14,6 @@ Website Developed and Designed by iDropnews
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0, minimum-scale=1">
 <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
 <?php
-global $post;
 if(is_front_page()) { ?>
 <title>iDrop News | Apple News, iPhone Rumors, iOS Tips and Giveaways</title>
 <?php }
@@ -166,9 +165,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		// link and title index should correspond
 		$giveaway_titles = array();
 		$giveaway_links = array();
-		
-		$selected_title = '';
-		$selected_link = '';
+
 		// if giveaways has posts push titles to the array
 		// only push if giveaway end date is valid
 		$current = getCurrentDate();
@@ -189,21 +186,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			}
 			wp_reset_postdata();
 			// generate random index
-			if (!empty($giveaway_titles)) {
 				if($giveawayOption !== 'Default: Randomize Giveaways') {
 					$index = array_search($giveawayOption, $giveaway_titles);
-					if ($index === false) {
-						$index = rand(0, count($giveaway_titles) - 1);
-					}
 				} else {
-					$index = rand(0, count($giveaway_titles) - 1);
+					$index = rand(0, (count($giveaway_titles) - 1));
 				}
-		
-				if (isset($giveaway_titles[$index]) && isset($giveaway_links[$index])) {
-					$selected_title = $giveaway_titles[$index];
-					$selected_link = $giveaway_links[$index];
-				}
-			}			?>
+				$selected_title = $giveaway_titles[$index];
+				$selected_link = $giveaway_links[$index];
+			?>
 			<a href="<?php echo $selected_link; ?>?utm_source=giveaways-navigation-banner" class="ga-banner">
                 Enter for a Chance to Win: <?php echo $selected_title; ?>
             </a>
