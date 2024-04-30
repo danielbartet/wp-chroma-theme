@@ -1,4 +1,10 @@
 <?php
+$file = WP_PLUGIN_DIR . '/cm-components/components/ui/breadcrumb.php';
+if (file_exists($file)) {
+    require_once $file;
+} else {
+    error_log("El archivo $file no existe.");
+}
 function get_schema_json() {
   if (is_single()) { ?>
     <script type="application/ld+json">

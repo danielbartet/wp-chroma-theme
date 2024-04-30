@@ -3,7 +3,8 @@ function iframes_aspect_wrapper($content) {
   $content = preg_replace('/<center>\s*(<iframe.*>*.<\/iframe>)\s*<\/center>/iU', '\1', $content);
   if(empty($content))
     return $content;
-  $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+  //$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+  $content = htmlspecialchars($content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $dom = new DOMDocument();
   $dom->loadHTML($content);
   $iframes = $dom->getElementsByTagName('iframe');
@@ -24,7 +25,8 @@ add_filter( 'the_content', 'iframes_aspect_wrapper' );
 function lightbox_seeker($content) {
   if(empty($content))
     return $content;
-  $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+  //$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+  $content = htmlspecialchars($content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $dom = new DOMDocument();
   $dom->loadHTML($content);
   $imgs = $dom->getElementsByTagName('img');

@@ -1,4 +1,11 @@
 <?php
+$file = WP_PLUGIN_DIR . '/cm-components/components/social-sharing-buttons-analytics/views/default.php';
+if (file_exists($file)) {
+    require_once $file;
+} else {
+    error_log("El archivo $file no existe.");
+}
+
 global $multipage;
 ?>
 <div class="engagebar">

@@ -191,8 +191,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				} else {
 					$index = rand(0, (count($giveaway_titles) - 1));
 				}
-				$selected_title = $giveaway_titles[$index];
-				$selected_link = $giveaway_links[$index];
+				$selected_title = '';
+				$selected_link = '';
+				if(count($giveaway_titles) > 0){
+					$selected_title = $giveaway_titles[$index];
+				}
+				if(count($giveaway_links) > 0){
+					$selected_link = $giveaway_links[$index];
+				}
 			?>
 			<a href="<?php echo $selected_link; ?>?utm_source=giveaways-navigation-banner" class="ga-banner">
                 Enter for a Chance to Win: <?php echo $selected_title; ?>

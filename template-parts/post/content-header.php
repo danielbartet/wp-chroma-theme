@@ -20,8 +20,8 @@ function getPostImages() {
     let postImagesLength = postImages.length;
     document.cookie = "postImagesLength = " + postImagesLength
     // set php variable to image array length
-    <?php $totalSlides = $_COOKIE['postImagesLength']; ?>
-  }
+    <?php $totalSlides = isset($_COOKIE['postImagesLength']) ? intval($_COOKIE['postImagesLength']) : 0; ?>
+ }
 }
 
 setTimeout(getPostImages, 1000);
