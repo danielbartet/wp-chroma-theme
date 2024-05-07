@@ -1,1 +1,71 @@
-"use strict";var InfiniteScroll=function(t){var n=this,o=document.getElementById("prev-post"),s=document.getElementById("prev-post")?document.getElementById("prev-post").getAttribute("infinite-source"):null,a=document.getElementById("infinite-data");this.infiniteGetContent=function(i,e){if(null!=o&&void 0!==o){0;var r=document.getElementById("infinite-loader");null!=r&&void 0!==r||((r=document.createElement("div")).id="infinite-loader",r.classList.add("infinite-loader"),a.parentNode.insertBefore(r,a.nextSibling)),i.setAttribute("style","position: fixed; top: "+e.clientY+"px; left: 0px; right: 0px; opacity: 0; transform: scale(0);"),r.classList.add("is-active"),window.fetch(s).then(function(e){return e.text()}).then(function(e){var t=(new DOMParser).parseFromString(e,"text/html");o.setAttribute("infinite-source",t.getElementById("prev-post").getAttribute("infinite-source"));var n=t.getElementById("infinite-data").children;r.classList.remove("is-active"),Array.prototype.forEach.call(n,function(e){var t=e.cloneNode(!0);a.appendChild(t)}),i.setAttribute("style","position: static; top: auto; left: auto; opacity: 1; transform: scale(1);"),s=document.getElementById("prev-post").getAttribute("infinite-source")}).catch(function(e){n.errorMessage(),console.log("error is",e)})}else n.errorMessage()},this.errorMessage=function(){var e=document.createElement("span");e.innerText="All Posts Have Been Loaded",e.classList.add("no-more-text"),t.parentNode.replaceChild(e,t)},t.addEventListener("click",function(e){e.preventDefault(),n.infiniteGetContent(t,e)})};
+document.addEventListener("DOMContentLoaded", function() {
+    'use strict';
+  
+    const InfiniteScroll = function(loadBtn) {
+      var infiniteCount = 0;
+      var infinitePrev = document.getElementById('prev-post');
+      var infiniteUrl = infinitePrev ? infinitePrev.getAttribute("infinite-source") : null;
+      var infiniteContainer = document.getElementById('infinite-data');
+  
+      this.infiniteGetContent = function() {
+        if (!infinitePrev || !infiniteUrl) {
+          this.errorMessage(loadBtn);
+          return;
+        }
+  
+        infiniteCount++;
+        let loader = document.getElementById('infinite-loader');
+        if (!loader) {
+          loader = document.createElement('div');
+          loader.id = 'infinite-loader';
+          loader.className = 'infinite-loader';
+          infiniteContainer.parentNode.insertBefore(loader, infiniteContainer.nextSibling);
+        }
+  
+        loader.classList.add('is-active');
+  
+        fetch(infiniteUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            let parser = new DOMParser();
+            let dataHTML = parser.parseFromString(data, "text/html");
+            let newPrev = dataHTML.getElementById('prev-post');
+            if (newPrev) {
+              infinitePrev.setAttribute("infinite-source", newPrev.getAttribute("infinite-source"));
+              infiniteUrl = newPrev.getAttribute("infinite-source");
+            }
+            Array.from(dataHTML.getElementById('infinite-data').children).forEach(node => {
+              infiniteContainer.appendChild(node.cloneNode(true));
+            });
+            loader.classList.remove("is-active");
+          })
+          .catch(error => {
+            console.error('Fetch error:', error);
+            this.errorMessage(loadBtn);
+          });
+      }
+  
+      this.errorMessage = function(button) {
+        let noMore = document.createElement('span');
+        noMore.textContent = 'All available posts have been loaded';
+        noMore.className = 'no-more-text';
+        button.parentNode.replaceChild(noMore, button);
+      }
+  
+      loadBtn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        this.infiniteGetContent();
+      });
+    }
+  
+    var loadButton = document.getElementById('load-more-btn');
+    if (loadButton) {
+      new InfiniteScroll(loadButton);
+    }
+  });
+  
