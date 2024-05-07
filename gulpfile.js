@@ -13,6 +13,7 @@ const debug = require('gulp-debug');
 // Paths
 const paths = {
   js: [
+    './node_modules/redux/dist/redux.min.js',
     './src/js/utilities.js',
     './src/js/state-management/store.js',
     './src/js/lazy-load.js',
