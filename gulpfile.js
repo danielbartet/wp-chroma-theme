@@ -3,7 +3,6 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
 const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
@@ -46,12 +45,12 @@ function js() {
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['@babel/env'],
-      plugins: ['@babel/plugin-transform-modules-commonjs']  // Incluido para manejar la sintaxis de módulos
+      plugins: ['@babel/plugin-transform-modules-commonjs']
     }))
     .pipe(concat('main.js'))
-    .pipe(uglify().on('error', function (err) {
-      console.error('Error during JavaScript minification:', err.toString());
-    }))
+    // .pipe(uglify().on('error', function (err) {
+    //   console.error('Error during JavaScript minification:', err.toString());
+    // }))  // Comentado para facilitar la depuración
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/js/'));
 }
