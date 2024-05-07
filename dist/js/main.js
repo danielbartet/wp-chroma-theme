@@ -13178,7 +13178,7 @@ if (window.location.href.indexOf('utm_source=Facebook') <= -1) {
   var revContentAdsense = '<!-- Ezoic - revcontent - native_bottom --><div id="ezoic-pub-ad-placeholder-107"><div id="rcjsload_030a3a"></div></div><!-- End Ezoic - revcontent - native_bottom -->';
   if (document.getElementById("content_ad_container") != null) {
     document.getElementById("content_ad_container").innerHTML = revContentAdsense;
-    appendScript(window.location.protocol + "//" + window.location.hostname + "/wp-content/themes/chroma/dist/js/rev-content.js", "", "");
+    //appendScript(window.location.protocol + "//" + window.location.hostname + "/wp-content/themes/chroma/dist/js/rev-content.js", "", "");
   }
 }
 

@@ -22,8 +22,8 @@ function chroma_scripts_method() {
 	wp_enqueue_script('main');
 
   //slider script
-  if(is_page_template('page-imageRefresh.php'))
-    wp_enqueue_script('slider', get_template_directory_uri() . '/dist/js/slider.js', '', '', true);
+  // if(is_page_template('page-imageRefresh.php'))
+  //   wp_enqueue_script('slider', get_template_directory_uri() . '/dist/js/slider.js', '', '', true);
 
 	//addme script
 	wp_register_script('addme', get_template_directory_uri() . '/dist/js/addme.js', '', '', true);
@@ -45,7 +45,7 @@ function chroma_scripts_method() {
 	}
 	//enqueue wallpapers scripts and like button
 	if (has_term('','wallpaper-categories') || is_tax( 'wallpaper-categories' ) || is_page_template('page-wallpaper-latest.php')) {
-    wp_register_script( 'wallscript', get_template_directory_uri() . '/dist/js/wallscript.js', array('main'), filemtime( get_template_directory() . '/dist/js/wallscript.js' ), true);
+    //wp_register_script( 'wallscript', get_template_directory_uri() . '/dist/js/wallscript.js', array('main'), filemtime( get_template_directory() . '/dist/js/wallscript.js' ), true);
     //like button object
     wp_localize_script('wallscript', 'ajaxPage', array(
         'url' => admin_url('admin-ajax.php'),
@@ -73,10 +73,10 @@ function chroma_scripts_method() {
 add_action('wp_enqueue_scripts', 'chroma_scripts_method', 10);
 
 function priority_enqueue() {
-  if ( is_home() || is_front_page() || is_category() || is_search() || is_author() || is_tag()) {
-      wp_register_script('infinite-scroll', get_template_directory_uri() . '/dist/js/chroma-infinite.js', '', filemtime( get_template_directory() . '/dist/js/chroma-infinite.js' ), true);
-      wp_enqueue_script('infinite-scroll');
-  }
+  // if ( is_home() || is_front_page() || is_category() || is_search() || is_author() || is_tag()) {
+  //     wp_register_script('infinite-scroll', get_template_directory_uri() . '/dist/js/chroma-infinite.js', '', filemtime( get_template_directory() . '/dist/js/chroma-infinite.js' ), true);
+  //     wp_enqueue_script('infinite-scroll');
+  // }
 }
 add_action('wp_enqueue_scripts', 'priority_enqueue', 0);
 
