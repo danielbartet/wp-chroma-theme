@@ -11,7 +11,6 @@ const debug = require('gulp-debug');
 
 const paths = {
   js: [
-    './node_modules/redux/dist/redux.min.js',
     './src/js/utilities.js',
     './src/js/state-management/store.js',
     './src/js/lazy-load.js',
@@ -30,7 +29,8 @@ const paths = {
     "./src/ad-loaders/ad-appender.js",
     "./src/ad-loaders/rev-content.js",
     './src/js/wallpapers/wallscript.js',
-    './src/js/like-button.js'
+    './src/js/like-button.js',
+    './node_modules/redux/dist/redux.min.js'
   ],
   sass: [
     './src/sass/social-share-fix/share-fix.sass',
