@@ -14,6 +14,7 @@ const debug = require('gulp-debug');
 // Paths
 const paths = {
   js: [
+    './node_modules/redux/dist/redux.min.js',
     './src/js/utilities.js',
     './src/js/state-management/store.js',
     './src/js/lazy-load.js',
@@ -25,7 +26,6 @@ const paths = {
     './src/js/form-action.js',
     './src/js/ui/chroma-infinite.js',
     './src/js/ui/chroma-scroll-anchors.js',
-    './node_modules/redux/dist/redux.min.js',
     './node_modules/masonry-layout/dist/masonry.pkgd.js',
     './node_modules/imagesloaded/imagesloaded.pkgd.min.js',
     './node_modules/blueimp-gallery/js/blueimp-gallery.min.js',
