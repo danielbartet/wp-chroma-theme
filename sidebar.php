@@ -50,13 +50,10 @@ function getSB1() { ?>
     		<h3 class="side-list-title"><?php $sideTitle = (has_category('giveaways')) ? 'Giveaways' : 'Trending'; echo $sideTitle;?></h3>
     <ol class="side-pop-wrap">
     		<?php
-        $count = 0;
-        $popular_days_ago = (has_category('giveaways')) ? '600 days ago' : '600 days ago';
-error_log('#####log#####: '.$popular_days_ago);
-        $category =  (has_category('giveaways')) ? 'giveaways' : null;
-error_log('#####log#####: '.$category);
+       		 $count = 0;
+       		 $popular_days_ago = (has_category('giveaways')) ? '600 days ago' : '600 days ago';
+	        $category =  (has_category('giveaways')) ? 'giveaways' : null;
 		$post_id = get_the_ID();
-error_log('#####log#####: '.$post_id);
 		$recent = (!has_category('giveaways') ? 
 		new WP_Query(
 			array(
@@ -82,10 +79,7 @@ error_log('#####log#####: '.$post_id);
 				'post__not_in' => array($post_id),
 				'suppress_filters' => true
 	)));
-error_log('#####log#####');
-error_log($recent->have_posts());
-error_log('#####log#####');      
-   while($recent->have_posts()) : $recent->the_post(); $count++; if ($count == 1) { ?>
+	while($recent->have_posts()) : $recent->the_post(); $count++; if ($count == 1) { ?>
     			<li>
     				<a class="feat-widget-wrap ripple" href="<?php the_permalink(); ?>">
     				<?php if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) { ?>
