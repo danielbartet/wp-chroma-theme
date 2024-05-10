@@ -217,7 +217,6 @@ if($adsOn === 'off') {
 <script>
 const s = document.querySelector('.switch-checkbox');
 const mainContainer = document.getElementById('body-main-wrap');
-console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   mainContainer.classList.add('dark-mode');
   document.body.style.background = '#000';

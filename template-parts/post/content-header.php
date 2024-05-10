@@ -96,7 +96,7 @@ setTimeout(getPostImages, 1000);
               if (!$multipage) {
                 if ($modifiedTime >= $publishTime + 86400) { ?>
                   <div class="post-info-right post-info-date">
-                    <time class="post-date" datetime="<?php?>">
+                    <time class="post-date" datetime="<?php ?>">
                       Updated: <?php echo the_modified_time('M jS, Y'); ?>
                     </time>
                   </div>

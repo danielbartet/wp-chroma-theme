@@ -1,4 +1,4 @@
-import fbInitializer from "/var/www/html/wp-content/plugins/cm-components/components/forms/signup/facebook-api-init.js"
+import fbInitializer from "./facebook-api-init.js"
 document.addEventListener("DOMContentLoaded", function() {
   'use strict';
 const fbApiInit = new fbInitializer()

@@ -131,57 +131,62 @@ if ( ($adsOn == "on") || ($adsOn == "auto_adsense") ): ?>
   let cards = Array.from(document.querySelectorAll('.stack-card'));
   let related_posts = document.querySelector('.related-posts');
 
-  if(isMobile) {
-    for(let i = 0; i < cards.length; i++) {
-      related_posts.appendChild(cards[i]);
-    }
-  } else {
-      let prev_btn = document.createElement('button');
-      let next_btn = document.createElement('button');
-      let start = 0;
-      let end = 2;
-      next_btn.innerHTML = '<h2 style="margin: 0; color: white; padding: 0 2px;">&#62;</h2>';
-      prev_btn.innerHTML = '<h2 style="margin: 0; color: white; padding: 0 2px;">&#60;</h2>';
-      prev_btn.classList.add('hidden');
-      cards[end].classList.add('stack-btn-container');
-      next_btn.classList.add('stack-btn-overlay-next');
-      prev_btn.classList.add('stack-btn-overlay-prev');
-
-      related_posts.appendChild(prev_btn);
-
+  if(related_posts){
+    if(isMobile) {
       for(let i = 0; i < cards.length; i++) {
-          related_posts.appendChild(cards[i]);
-          if(parseInt(cards[i].id) > end) {
+        related_posts.appendChild(cards[i]);
+      }
+    } else {
+        let prev_btn = document.createElement('button');
+        let next_btn = document.createElement('button');
+        let start = 0;
+        let end = 2;
+        next_btn.innerHTML = '<h2 style="margin: 0; color: white; padding: 0 2px;">&#62;</h2>';
+        prev_btn.innerHTML = '<h2 style="margin: 0; color: white; padding: 0 2px;">&#60;</h2>';
+        prev_btn.classList.add('hidden');
+        if (end < cards.length) {
+          cards[end].classList.add('stack-btn-container');
+        }
+        next_btn.classList.add('stack-btn-overlay-next');
+        prev_btn.classList.add('stack-btn-overlay-prev');
+  
+        related_posts.appendChild(prev_btn);
+  
+        for(let i = 0; i < cards.length; i++) {
+            related_posts.appendChild(cards[i]);
+            if(parseInt(cards[i].id) > end) {
+              cards[i].style.display = 'none';
+            }
+        }
+  
+        related_posts.appendChild(next_btn);
+  
+        next_btn.addEventListener('click', () => {
+          transition(3,5, next_btn, prev_btn);
+        });
+  
+        prev_btn.addEventListener('click', () => {
+          transition(0,2, prev_btn, next_btn);
+        })
+  
+  
+        function transition(startIndex, endIndex, button1, button2) {
+          console.log(start, end);
+        for(let i = start; i <= end; i++) {
             cards[i].style.display = 'none';
           }
+          start = startIndex;
+          end = endIndex;
+  
+          for(let i = start; i <= end; i++) {
+            cards[i].style.display = 'block';
+          }
+  
+          button1.classList.add('hidden');
+          button2.classList.remove('hidden');
       }
-
-      related_posts.appendChild(next_btn);
-
-      next_btn.addEventListener('click', () => {
-        transition(3,5, next_btn, prev_btn);
-      });
-
-      prev_btn.addEventListener('click', () => {
-        transition(0,2, prev_btn, next_btn);
-      })
-
-
-      function transition(startIndex, endIndex, button1, button2) {
-        console.log(start, end);
-      for(let i = start; i <= end; i++) {
-          cards[i].style.display = 'none';
-        }
-        start = startIndex;
-        end = endIndex;
-
-        for(let i = start; i <= end; i++) {
-          cards[i].style.display = 'block';
-        }
-
-        button1.classList.add('hidden');
-        button2.classList.remove('hidden');
     }
+
   }
 
   

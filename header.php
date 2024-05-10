@@ -15,6 +15,7 @@ Website Developed and Designed by iDropnews
 <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
 <?php
 global $post;
+$post_id = get_the_ID();
 if(is_front_page()) { ?>
 <title>iDrop News | Apple News, iPhone Rumors, iOS Tips and Giveaways</title>
 <?php }
@@ -38,7 +39,7 @@ else if ( ! function_exists( '_wp_render_title_tag' ) ) {
 <meta name="google-site-verification" content="cnJng1Jj7amBUH3xzr0BQwux53IZGClYW7J0ooafpuk" />
 <meta property="fb:pages" content="258546567630716" />
 <?php if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) { ?>
-<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID) ); ?>
+<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id) ); ?>
 <?php } ?>
 <?php if ( is_single() ) { ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -71,7 +72,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<?php
 	//toggle auto ads on/off
-	$adsOn = get_post_meta( $post->ID, 'chromma-toggle-ads', true );
+	$adsOn = get_post_meta( $post_id, 'chromma-toggle-ads', true );
   get_schema_json();
 ?>
 
