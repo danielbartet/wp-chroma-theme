@@ -8,14 +8,7 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   mode: 'production',
   entry: {
-    main: './src/index.js', // Deberás crear un punto de entrada JS que importe todos tus scripts
-    //form: './src/js/form-action.js',
-    slider: './src/js/slider/slider.js',
-    ads: './src/ad-loaders/ad-appender.js',
-    revContent: './src/ad-loaders/rev-content.js',
-    disqus: './src/js/disqus.js',
-    gallery: './src/js/gallery-initial.js',
-    wallscript: './src/js/wallpapers/wallscript.js'
+    main: './src/index.js', // Main entry point
   },
   output: {
     filename: '[name].js',
@@ -29,19 +22,22 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-transform-runtime']
           }
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.s[ac]ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [autoprefixer()]
+              postcssOptions: {
+                plugins: [autoprefixer()]
+              }
             }
           },
           'sass-loader'
@@ -56,8 +52,44 @@ module.exports = {
     })
   ],
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000, // Set reasonable minSize to not overly split chunks
+      maxSize: 50000, // Maximum chunk size
+      minChunks: 1,
+      maxAsyncRequests: 6,
+      maxInitialRequests: 4,
+      automaticNameDelimiter: '~',
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    },
     minimizer: [
-      new TerserPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            comments: false,
+            ascii_only: true,
+          },
+        },
+        extractComments: false,
+      }),
       new OptimizeCSSAssetsPlugin({})
     ],
   }

@@ -1,42 +1,61 @@
 <?php
 // Enqueue and register scripts and styles for the theme
 
-function chroma_scripts_method() {
-    // Versioning based on file modification times
-    $csstime = filemtime(get_template_directory() . '/dist/css/main.css');
-    $jstime = filemtime(get_template_directory() . '/dist/js/main.js');
+function get_latest_file($dir, $prefix) {
+    $latest_mtime = 0;
+    $latest_file = '';
 
+    $base_path = get_template_directory() . $dir;
+    $base_url = get_template_directory_uri() . $dir;
+
+    foreach (glob($base_path . $prefix . '*') as $file) {
+        if (filemtime($file) > $latest_mtime) {
+            $latest_mtime = filemtime($file);
+            $latest_file = $base_url . '/' . basename($file);
+        }
+    }
+
+    return $latest_file;
+}
+
+function chroma_scripts_method() {
     // Deregister default WordPress scripts
     wp_deregister_script('wp-embed');
     wp_deregister_script('jquery');
 
     // Register and enqueue styles
-    wp_enqueue_style('chroma-styles', get_template_directory_uri() . '/dist/css/main.css', array(), $csstime);
+    $main_css = get_latest_file('/dist/css/', 'main');
+    wp_enqueue_style('chroma-styles', $main_css, array(), null);
 
     // Register Redux script if used and needed before main.js
     wp_register_script('redux', 'https://cdn.jsdelivr.net/npm/redux@4.0.5/dist/redux.min.js', [], null, true);
     wp_enqueue_script('redux');
 
     // Register main JavaScript file with dependency on Redux
-    wp_register_script('main', get_template_directory_uri() . '/dist/js/main.js', ['redux'], $jstime, true);
+    $main_js = get_latest_file('/dist/js/', 'main');
+    wp_register_script('main', $main_js, ['redux'], null, true);
     wp_enqueue_script('main');
 
     // Register additional scripts with dependencies
-    wp_register_script('masonry-layout', get_template_directory_uri() . '/dist/js/gallery.js', ['main'], $jstime, true);
-    wp_register_script('apple-affiliate-linker', get_template_directory_uri() . '/dist/js/apple-affiliate-linker.js', ['main'], $jstime, true);
-    wp_register_script('addme', get_template_directory_uri() . '/dist/js/addme.js', array(), '', true);
-    wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', false, '1.12.4', true);
-    
+    $gallery_js = get_latest_file('/dist/js/', 'gallery');
+    wp_register_script('masonry-layout', $gallery_js, ['main'], null, true);
+
+    $affiliate_js = get_latest_file('/dist/js/', 'apple-affiliate-linker');
+    wp_register_script('apple-affiliate-linker', $affiliate_js, ['main'], null, true);
+
     // Enqueue scripts based on specific conditions
     if (is_single()) {
-        wp_enqueue_script('gleam-tracking', get_template_directory_uri() . '/dist/js/gleam-tracking.js', ['main'], '', true);
+        $gleam_js = get_latest_file('/dist/js/', 'gleam-tracking');
+        wp_enqueue_script('gleam-tracking', $gleam_js, ['main'], null, true);
         wp_enqueue_script('disqus-comment-count', '//idropnews.disqus.com/count.js', '', null, true);
         add_action('wp_footer', 'disqus_config');
     }
 
     if (has_term('', 'wallpaper-categories') || is_tax('wallpaper-categories') || is_page_template('page-wallpaper-latest.php')) {
-        wp_enqueue_style('wallpapers', get_template_directory_uri() . '/dist/css/wallpaper.css', false, filemtime(get_template_directory() . '/dist/css/wallpaper.css'), 'all');
-        wp_enqueue_script('wallscript');
+        $wallpapers_css = get_latest_file('/dist/css/', 'wallpaper');
+        wp_enqueue_style('wallpapers', $wallpapers_css, array(), null);
+        $wallscript_js = get_latest_file('/dist/js/', 'wallscript');
+        wp_enqueue_script('wallscript', $wallscript_js, ['main'], null, true);
     }
 
     if (get_post_format() && in_array(get_post_format(), array('gallery'))) {
@@ -49,7 +68,8 @@ function chroma_scripts_method() {
     }
 
     if (is_page('unsubscribe')) {
-        wp_enqueue_script('subscription_form', get_template_directory_uri() . '/dist/js/form.js', ['main'], '', true);
+        $form_js = get_latest_file('/dist/js/', 'form');
+        wp_enqueue_script('subscription_form', $form_js, ['main'], null, true);
     }
 }
 
@@ -82,4 +102,3 @@ function chroma_async_scripts($tag, $handle, $src) {
 }
 
 add_filter('script_loader_tag', 'chroma_async_scripts', 10, 3);
-

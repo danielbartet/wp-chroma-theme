@@ -382,7 +382,7 @@ span.embed-youtube embed {
         a {
           color: #333;
           text-decoration: underline;
-          text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
             &:hover {
                 color: #006cff;
                 text-decoration: none;
