@@ -16,6 +16,7 @@ import './js/slider/slider.js';
 //import './js/form-action.js';
 import './js/ui/chroma-infinite.js';
 import './js/ui/chroma-scroll-anchors.js';
+import './js/ui/chroma.js';
 import './js/gallery-initial.js';
 import './ad-loaders/ad-appender.js';
 import './ad-loaders/rev-content.js';
