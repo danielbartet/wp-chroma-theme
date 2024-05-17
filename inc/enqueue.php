@@ -43,6 +43,9 @@ function chroma_scripts_method() {
     $affiliate_js = get_latest_file('/dist/js/', 'apple-affiliate-linker');
     wp_register_script('apple-affiliate-linker', $affiliate_js, ['main'], null, true);
 
+    $chroma_js = get_latest_file('/dist/js/', 'chroma');
+    wp_register_script('chroma', $chroma_js, ['main'], null, true);
+
     // Enqueue scripts based on specific conditions
     if (is_single()) {
         $gleam_js = get_latest_file('/dist/js/', 'gleam-tracking');
