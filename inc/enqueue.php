@@ -11,7 +11,7 @@ function get_latest_file($dir, $prefix) {
     foreach (glob($base_path . $prefix . '*') as $file) {
         if (filemtime($file) > $latest_mtime) {
             $latest_mtime = filemtime($file);
-            $latest_file = $base_url . '/' . basename($file);
+            $latest_file = $base_url . basename($file);
         }
     }
 
