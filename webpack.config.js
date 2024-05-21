@@ -1,18 +1,51 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development', // Cambia a 'development' para debugging si es necesario
   entry: {
-    main: './src/index.js', // Main entry point
+    utilities: '/src/js/utilities.js', // Asegúrate de que la ruta es correcta
+    main: {
+      import: [
+        '/src/js/lazy-load.js',
+        '/src/js/social-events.js',
+        '/src/js/ui/chroma-scroll-anchors.js',
+        '/src/js/state-management/store.js',
+        '/src/js/_INDEX.js',
+      ],
+      dependOn: 'utilities' // Asegura que 'utilities.js' se cargue primero
+    },
+    //form: '/src/js/form-action.js', // Cambia a la ubicación correcta si es necesario
+    slider: '/src/js/slider/slider.js',
+    gallery: {
+      import: [
+        'masonry-layout',
+        'imagesloaded',
+        'blueimp-gallery',
+        '/src/js/gallery-initial.js',
+      ],
+      dependOn: 'utilities'
+    },
+    infinite: '/src/js/ui/chroma-infinite.js',
+    disqus: '/src/js/disqus.js',
+    ads: [
+      '/src/ad-loaders/ad-appender.js',
+      '/src/ad-loaders/rev-content.js'
+    ],
+    // SASS/CSS entries
+    mainCss: './src/sass/_INDEX.scss',
+    shareFix: './src/sass/social-share-fix/share-fix.sass',
+    wallCss: './src/wallsass/wallpaper.scss',
+    adminTheme: "./src/sass/colors.scss",
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist/js')
+    path: path.resolve(__dirname, 'dist/js'),
+    clean: true, // Esto reemplaza el uso de CleanWebpackPlugin
   },
   module: {
     rules: [
@@ -28,7 +61,7 @@ module.exports = {
         }
       },
       {
-        test: /\.s[ac]ss$/,
+        test: /\.(scss|sass)$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -47,49 +80,20 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '../css/[name].css'
-    })
+      filename: '../css/[name].css',
+    }),
   ],
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 20000, // Set reasonable minSize to not overly split chunks
-      maxSize: 80000, // Maximum chunk size
-      minChunks: 1,
-      maxAsyncRequests: 6,
-      maxInitialRequests: 4,
-      automaticNameDelimiter: '~',
-      cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          reuseExistingChunk: true
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    },
+    minimize: false,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          compress: {
-            comparisons: false,
-            inline: 2,
-          },
-          mangle: {
-            safari10: true,
-          },
-          output: {
-            comments: false,
-            ascii_only: true,
-          },
-        },
-        extractComments: false,
+          keep_fnames: true, // Evitar que Terser cambie los nombres de las funciones
+          keep_classnames: true // Similar, pero para nombres de clases
+        }
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new CssMinimizerPlugin() // Usado para la minificación de CSS
     ],
-  }
+  },
+  watch: true
 };

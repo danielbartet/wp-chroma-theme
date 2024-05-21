@@ -1,1 +1,81 @@
-"use strict";function setFBCookie(){var e=new Date;e.setTime(e.getTime()+36e5),e.toUTCString(),document.cookie="referred=facebook"}function getFBCookie(e){for(var t=e+"=",o=decodeURIComponent(document.cookie).split(";"),a=0;a<o.length;a++){for(var n=o[a];" "==n.charAt(0);)n=n.substring(1);if(0==n.indexOf(t))return n.substring(t.length,n.length)}return""}function checkFBCookie(){return"facebook"==getFBCookie("referred")}function appendScript(e,t,o){document.getElementsByTagName("head")[0];var a=document.getElementsByTagName("body")[0],n=document.createElement("script"),d=document.createTextNode(t);n.type="text/javascript",n.async=o,1<e.length&&(n.src=e),n.appendChild(d),a.appendChild(n)}(-1<document.referrer.indexOf("facebook")||-1<window.location.href.indexOf("utm_source=Facebook")&&0<document.getElementsByClassName("page-1").length)&&setFBCookie();var lastPage=void 0===document.getElementsByClassName("gallery-pagination")[0];if(checkFBCookie()&&(document.getElementById("fb-box").innerHTML='<div class="fb-like" data-href="https://www.facebook.com/idropnews/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>&nbsp;<div class="fb-share-button" data-href="'+window.location.href+'" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>',lastPage)){var styleNode=document.createElement("style");styleNode.type="text/css";var styleText=document.createTextNode(".carousel-box {display: flex; flex-direction: column;} .comments-title, #disqus_thread, .disqus {display: none;} .ad-box{order: 1;} .win {order: 2;} #fb-box{order: 3; max-width: 500px;} .gallery-windows{order: 4;} .gallery-footer-ad{order: 6;} .gallery-footer-first{order: 5;}");styleNode.appendChild(styleText),document.getElementsByTagName("body")[0].appendChild(styleNode)}if(window.location.href.indexOf("utm_source=Facebook")<=-1){var revContentAdsense='\x3c!-- Ezoic - revcontent - native_bottom --\x3e<div id="ezoic-pub-ad-placeholder-107"><div id="rcjsload_030a3a"></div></div>\x3c!-- End Ezoic - revcontent - native_bottom --\x3e';null!=document.getElementById("content_ad_container")&&(document.getElementById("content_ad_container").innerHTML=revContentAdsense,appendScript(window.location.protocol+"//"+window.location.hostname+"/wp-content/themes/chroma/dist/js/rev-content.js","",""))}(adsbygoogle=window.adsbygoogle||[]).onload=function(){[].forEach.call(document.getElementsByClassName("lazyad"),function(){adsbygoogle.push({})})};
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+var __webpack_exports__ = {};
+
+
+// facebook cookie tracker, layout adjuster, lazy ads
+function setFBCookie() {
+  var d = new Date();
+  d.setTime(d.getTime() + 3600000);
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = "referred=facebook";
+  +expires + ";path=/";
+}
+function getFBCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+function checkFBCookie() {
+  var referred = getFBCookie("referred");
+  if (referred == "facebook") return true;else return false;
+}
+
+//construct and append scripts
+function appendScript(pathToScript, innerScript, allowAsync) {
+  var theHead = document.getElementsByTagName("head")[0],
+    theFoot = document.getElementsByTagName("body")[0],
+    autoAdScript = document.createElement("script"),
+    innerTextNode = document.createTextNode(innerScript);
+  autoAdScript.type = "text/javascript";
+  autoAdScript.async = allowAsync;
+  if (pathToScript.length > 1) {
+    autoAdScript.src = pathToScript;
+  }
+  autoAdScript.appendChild(innerTextNode);
+  theFoot.appendChild(autoAdScript);
+}
+if (document.referrer.indexOf('facebook') > -1 || window.location.href.indexOf('utm_source=Facebook') > -1 && document.getElementsByClassName('page-1').length > 0) {
+  setFBCookie();
+}
+var lastPage = typeof document.getElementsByClassName('gallery-pagination')[0] == 'undefined' ? true : false;
+if (checkFBCookie()) {
+  // var contentAds = '<div id="contentad461269"></div>';
+  //
+  // document.getElementById("content_ad_container").innerHTML = contentAds;
+  // appendScript(window.location.protocol + "//" + window.location.hostname + "/wp-content/themes/chroma/dist/js/contentads.js", "", "");
+
+  if (lastPage) {
+    var styleNode = document.createElement('style');
+    styleNode.type = "text/css";
+    var styleText = document.createTextNode('.carousel-box {display: flex; flex-direction: column;} .comments-title, #disqus_thread, .disqus {display: none;} .ad-box{order: 1;} .win {order: 2;} #fb-box{order: 3; max-width: 500px;} .gallery-windows{order: 4;} .gallery-footer-ad{order: 6;} .gallery-footer-first{order: 5;}');
+    styleNode.appendChild(styleText);
+    document.getElementsByTagName('body')[0].appendChild(styleNode);
+  }
+}
+if (window.location.href.indexOf('utm_source=Facebook') <= -1) {
+  var revContentAdsense = '<!-- Ezoic - revcontent - native_bottom --><div id="ezoic-pub-ad-placeholder-107"><div id="rcjsload_030a3a"></div></div><!-- End Ezoic - revcontent - native_bottom -->';
+  if (document.getElementById("content_ad_container") != null) {
+    document.getElementById("content_ad_container").innerHTML = revContentAdsense;
+    //appendScript(window.location.protocol + "//" + window.location.hostname + "/wp-content/themes/chroma/dist/js/rev-content.js", "", "");
+  }
+}
+
+//push lazy adsense units
+(adsbygoogle = window.adsbygoogle || []).onload = function () {
+  [].forEach.call(document.getElementsByClassName("lazyad"), function () {
+    adsbygoogle.push({});
+  });
+};
+/******/ })()
+;

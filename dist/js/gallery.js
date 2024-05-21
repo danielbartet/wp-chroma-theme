@@ -1,1 +1,4592 @@
-!function(t,e){"function"==typeof define&&define.amd?define("jquery-bridget/jquery-bridget",["jquery"],function(i){return e(t,i)}):"object"==typeof module&&module.exports?module.exports=e(t,require("jquery")):t.jQueryBridget=e(t,t.jQuery)}(window,function(t,e){"use strict";function i(i,s,a){function l(t,e,n){var o,s="$()."+i+'("'+e+'")';return t.each(function(t,l){var h=a.data(l,i);if(h){var d=h[e];if(d&&"_"!=e.charAt(0)){var u=d.apply(h,n);o=void 0===o?u:o}else r(s+" is not a valid method")}else r(i+" not initialized. Cannot call methods, i.e. "+s)}),void 0!==o?o:t}function h(t,e){t.each(function(t,n){var o=a.data(n,i);o?(o.option(e),o._init()):(o=new s(n,e),a.data(n,i,o))})}(a=a||e||t.jQuery)&&(s.prototype.option||(s.prototype.option=function(t){a.isPlainObject(t)&&(this.options=a.extend(!0,this.options,t))}),a.fn[i]=function(t){return"string"==typeof t?l(this,t,o.call(arguments,1)):(h(this,t),this)},n(a))}function n(t){!t||t&&t.bridget||(t.bridget=i)}var o=Array.prototype.slice,s=t.console,r=void 0===s?function(){}:function(t){s.error(t)};return n(e||t.jQuery),i}),function(t,e){"function"==typeof define&&define.amd?define("ev-emitter/ev-emitter",e):"object"==typeof module&&module.exports?module.exports=e():t.EvEmitter=e()}("undefined"!=typeof window?window:this,function(){function t(){}var e=t.prototype;return e.on=function(t,e){if(t&&e){var i=this._events=this._events||{},n=i[t]=i[t]||[];return-1==n.indexOf(e)&&n.push(e),this}},e.once=function(t,e){if(t&&e){this.on(t,e);var i=this._onceEvents=this._onceEvents||{};return(i[t]=i[t]||{})[e]=!0,this}},e.off=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){var n=i.indexOf(e);return-1!=n&&i.splice(n,1),this}},e.emitEvent=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){var n=0,o=i[n];e=e||[];for(var s=this._onceEvents&&this._onceEvents[t];o;){var r=s&&s[o];r&&(this.off(t,o),delete s[o]),o.apply(this,e),o=i[n+=r?0:1]}return this}},t}),function(t,e){"use strict";"function"==typeof define&&define.amd?define("get-size/get-size",[],function(){return e()}):"object"==typeof module&&module.exports?module.exports=e():t.getSize=e()}(window,function(){"use strict";function t(t){var e=parseFloat(t);return-1==t.indexOf("%")&&!isNaN(e)&&e}function e(){}function i(){for(var t={width:0,height:0,innerWidth:0,innerHeight:0,outerWidth:0,outerHeight:0},e=0;e<h;e++)t[l[e]]=0;return t}function n(t){var e=getComputedStyle(t);return e||a("Style returned "+e+". Are you running this code in a hidden iframe on Firefox? See http://bit.ly/getsizebug1"),e}function o(){if(!d){d=!0;var e=document.createElement("div");e.style.width="200px",e.style.padding="1px 2px 3px 4px",e.style.borderStyle="solid",e.style.borderWidth="1px 2px 3px 4px",e.style.boxSizing="border-box";var i=document.body||document.documentElement;i.appendChild(e);var o=n(e);s.isBoxSizeOuter=r=200==t(o.width),i.removeChild(e)}}function s(e){if(o(),"string"==typeof e&&(e=document.querySelector(e)),e&&"object"==typeof e&&e.nodeType){var s=n(e);if("none"==s.display)return i();var a={};a.width=e.offsetWidth,a.height=e.offsetHeight;for(var d=a.isBorderBox="border-box"==s.boxSizing,u=0;u<h;u++){var c=l[u],p=s[c],m=parseFloat(p);a[c]=isNaN(m)?0:m}var f=a.paddingLeft+a.paddingRight,y=a.paddingTop+a.paddingBottom,g=a.marginLeft+a.marginRight,v=a.marginTop+a.marginBottom,C=a.borderLeftWidth+a.borderRightWidth,w=a.borderTopWidth+a.borderBottomWidth,b=d&&r,E=t(s.width);!1!==E&&(a.width=E+(b?0:f+C));var S=t(s.height);return!1!==S&&(a.height=S+(b?0:y+w)),a.innerWidth=a.width-(f+C),a.innerHeight=a.height-(y+w),a.outerWidth=a.width+g,a.outerHeight=a.height+v,a}}var r,a="undefined"==typeof console?e:function(t){console.error(t)},l=["paddingLeft","paddingRight","paddingTop","paddingBottom","marginLeft","marginRight","marginTop","marginBottom","borderLeftWidth","borderRightWidth","borderTopWidth","borderBottomWidth"],h=l.length,d=!1;return s}),function(t,e){"use strict";"function"==typeof define&&define.amd?define("desandro-matches-selector/matches-selector",e):"object"==typeof module&&module.exports?module.exports=e():t.matchesSelector=e()}(window,function(){"use strict";var t=function(){var t=window.Element.prototype;if(t.matches)return"matches";if(t.matchesSelector)return"matchesSelector";for(var e=["webkit","moz","ms","o"],i=0;i<e.length;i++){var n=e[i]+"MatchesSelector";if(t[n])return n}}();return function(e,i){return e[t](i)}}),function(t,e){"function"==typeof define&&define.amd?define("fizzy-ui-utils/utils",["desandro-matches-selector/matches-selector"],function(i){return e(t,i)}):"object"==typeof module&&module.exports?module.exports=e(t,require("desandro-matches-selector")):t.fizzyUIUtils=e(t,t.matchesSelector)}(window,function(t,e){var i={};i.extend=function(t,e){for(var i in e)t[i]=e[i];return t},i.modulo=function(t,e){return(t%e+e)%e},i.makeArray=function(t){var e=[];if(Array.isArray(t))e=t;else if(t&&"object"==typeof t&&"number"==typeof t.length)for(var i=0;i<t.length;i++)e.push(t[i]);else e.push(t);return e},i.removeFrom=function(t,e){var i=t.indexOf(e);-1!=i&&t.splice(i,1)},i.getParent=function(t,i){for(;t!=document.body;)if(t=t.parentNode,e(t,i))return t},i.getQueryElement=function(t){return"string"==typeof t?document.querySelector(t):t},i.handleEvent=function(t){var e="on"+t.type;this[e]&&this[e](t)},i.filterFindElements=function(t,n){var o=[];return(t=i.makeArray(t)).forEach(function(t){if(t instanceof HTMLElement)if(n){e(t,n)&&o.push(t);for(var i=t.querySelectorAll(n),s=0;s<i.length;s++)o.push(i[s])}else o.push(t)}),o},i.debounceMethod=function(t,e,i){var n=t.prototype[e],o=e+"Timeout";t.prototype[e]=function(){var t=this[o];t&&clearTimeout(t);var e=arguments,s=this;this[o]=setTimeout(function(){n.apply(s,e),delete s[o]},i||100)}},i.docReady=function(t){var e=document.readyState;"complete"==e||"interactive"==e?setTimeout(t):document.addEventListener("DOMContentLoaded",t)},i.toDashed=function(t){return t.replace(/(.)([A-Z])/g,function(t,e,i){return e+"-"+i}).toLowerCase()};var n=t.console;return i.htmlInit=function(e,o){i.docReady(function(){var s=i.toDashed(o),r="data-"+s,a=document.querySelectorAll("["+r+"]"),l=document.querySelectorAll(".js-"+s),h=i.makeArray(a).concat(i.makeArray(l)),d=r+"-options",u=t.jQuery;h.forEach(function(t){var i,s=t.getAttribute(r)||t.getAttribute(d);try{i=s&&JSON.parse(s)}catch(e){return void(n&&n.error("Error parsing "+r+" on "+t.className+": "+e))}var a=new e(t,i);u&&u.data(t,o,a)})})},i}),function(t,e){"function"==typeof define&&define.amd?define("outlayer/item",["ev-emitter/ev-emitter","get-size/get-size"],e):"object"==typeof module&&module.exports?module.exports=e(require("ev-emitter"),require("get-size")):(t.Outlayer={},t.Outlayer.Item=e(t.EvEmitter,t.getSize))}(window,function(t,e){"use strict";function i(t){for(var e in t)return!1;return null,!0}function n(t,e){t&&(this.element=t,this.layout=e,this.position={x:0,y:0},this._create())}var o=document.documentElement.style,s="string"==typeof o.transition?"transition":"WebkitTransition",r="string"==typeof o.transform?"transform":"WebkitTransform",a={WebkitTransition:"webkitTransitionEnd",transition:"transitionend"}[s],l={transform:r,transition:s,transitionDuration:s+"Duration",transitionProperty:s+"Property",transitionDelay:s+"Delay"},h=n.prototype=Object.create(t.prototype);h.constructor=n,h._create=function(){this._transn={ingProperties:{},clean:{},onEnd:{}},this.css({position:"absolute"})},h.handleEvent=function(t){var e="on"+t.type;this[e]&&this[e](t)},h.getSize=function(){this.size=e(this.element)},h.css=function(t){var e=this.element.style;for(var i in t)e[l[i]||i]=t[i]},h.getPosition=function(){var t=getComputedStyle(this.element),e=this.layout._getOption("originLeft"),i=this.layout._getOption("originTop"),n=t[e?"left":"right"],o=t[i?"top":"bottom"],s=this.layout.size,r=-1!=n.indexOf("%")?parseFloat(n)/100*s.width:parseInt(n,10),a=-1!=o.indexOf("%")?parseFloat(o)/100*s.height:parseInt(o,10);r=isNaN(r)?0:r,a=isNaN(a)?0:a,r-=e?s.paddingLeft:s.paddingRight,a-=i?s.paddingTop:s.paddingBottom,this.position.x=r,this.position.y=a},h.layoutPosition=function(){var t=this.layout.size,e={},i=this.layout._getOption("originLeft"),n=this.layout._getOption("originTop"),o=i?"paddingLeft":"paddingRight",s=i?"left":"right",r=i?"right":"left",a=this.position.x+t[o];e[s]=this.getXValue(a),e[r]="";var l=n?"paddingTop":"paddingBottom",h=n?"top":"bottom",d=n?"bottom":"top",u=this.position.y+t[l];e[h]=this.getYValue(u),e[d]="",this.css(e),this.emitEvent("layout",[this])},h.getXValue=function(t){var e=this.layout._getOption("horizontal");return this.layout.options.percentPosition&&!e?t/this.layout.size.width*100+"%":t+"px"},h.getYValue=function(t){var e=this.layout._getOption("horizontal");return this.layout.options.percentPosition&&e?t/this.layout.size.height*100+"%":t+"px"},h._transitionTo=function(t,e){this.getPosition();var i=this.position.x,n=this.position.y,o=parseInt(t,10),s=parseInt(e,10),r=o===this.position.x&&s===this.position.y;if(this.setPosition(t,e),!r||this.isTransitioning){var a=t-i,l=e-n,h={};h.transform=this.getTranslate(a,l),this.transition({to:h,onTransitionEnd:{transform:this.layoutPosition},isCleaning:!0})}else this.layoutPosition()},h.getTranslate=function(t,e){var i=this.layout._getOption("originLeft"),n=this.layout._getOption("originTop");return t=i?t:-t,e=n?e:-e,"translate3d("+t+"px, "+e+"px, 0)"},h.goTo=function(t,e){this.setPosition(t,e),this.layoutPosition()},h.moveTo=h._transitionTo,h.setPosition=function(t,e){this.position.x=parseInt(t,10),this.position.y=parseInt(e,10)},h._nonTransition=function(t){this.css(t.to),t.isCleaning&&this._removeStyles(t.to);for(var e in t.onTransitionEnd)t.onTransitionEnd[e].call(this)},h.transition=function(t){if(parseFloat(this.layout.options.transitionDuration)){var e=this._transn;for(var i in t.onTransitionEnd)e.onEnd[i]=t.onTransitionEnd[i];for(i in t.to)e.ingProperties[i]=!0,t.isCleaning&&(e.clean[i]=!0);if(t.from){this.css(t.from);this.element.offsetHeight;null}this.enableTransition(t.to),this.css(t.to),this.isTransitioning=!0}else this._nonTransition(t)};var d="opacity,"+function(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})}(r);h.enableTransition=function(){if(!this.isTransitioning){var t=this.layout.options.transitionDuration;t="number"==typeof t?t+"ms":t,this.css({transitionProperty:d,transitionDuration:t,transitionDelay:this.staggerDelay||0}),this.element.addEventListener(a,this,!1)}},h.onwebkitTransitionEnd=function(t){this.ontransitionend(t)},h.onotransitionend=function(t){this.ontransitionend(t)};var u={"-webkit-transform":"transform"};h.ontransitionend=function(t){if(t.target===this.element){var e=this._transn,n=u[t.propertyName]||t.propertyName;delete e.ingProperties[n],i(e.ingProperties)&&this.disableTransition(),n in e.clean&&(this.element.style[t.propertyName]="",delete e.clean[n]),n in e.onEnd&&(e.onEnd[n].call(this),delete e.onEnd[n]),this.emitEvent("transitionEnd",[this])}},h.disableTransition=function(){this.removeTransitionStyles(),this.element.removeEventListener(a,this,!1),this.isTransitioning=!1},h._removeStyles=function(t){var e={};for(var i in t)e[i]="";this.css(e)};var c={transitionProperty:"",transitionDuration:"",transitionDelay:""};return h.removeTransitionStyles=function(){this.css(c)},h.stagger=function(t){t=isNaN(t)?0:t,this.staggerDelay=t+"ms"},h.removeElem=function(){this.element.parentNode.removeChild(this.element),this.css({display:""}),this.emitEvent("remove",[this])},h.remove=function(){s&&parseFloat(this.layout.options.transitionDuration)?(this.once("transitionEnd",function(){this.removeElem()}),this.hide()):this.removeElem()},h.reveal=function(){delete this.isHidden,this.css({display:""});var t=this.layout.options,e={};e[this.getHideRevealTransitionEndProperty("visibleStyle")]=this.onRevealTransitionEnd,this.transition({from:t.hiddenStyle,to:t.visibleStyle,isCleaning:!0,onTransitionEnd:e})},h.onRevealTransitionEnd=function(){this.isHidden||this.emitEvent("reveal")},h.getHideRevealTransitionEndProperty=function(t){var e=this.layout.options[t];if(e.opacity)return"opacity";for(var i in e)return i},h.hide=function(){this.isHidden=!0,this.css({display:""});var t=this.layout.options,e={};e[this.getHideRevealTransitionEndProperty("hiddenStyle")]=this.onHideTransitionEnd,this.transition({from:t.visibleStyle,to:t.hiddenStyle,isCleaning:!0,onTransitionEnd:e})},h.onHideTransitionEnd=function(){this.isHidden&&(this.css({display:"none"}),this.emitEvent("hide"))},h.destroy=function(){this.css({position:"",left:"",right:"",top:"",bottom:"",transition:"",transform:""})},n}),function(t,e){"use strict";"function"==typeof define&&define.amd?define("outlayer/outlayer",["ev-emitter/ev-emitter","get-size/get-size","fizzy-ui-utils/utils","./item"],function(i,n,o,s){return e(t,i,n,o,s)}):"object"==typeof module&&module.exports?module.exports=e(t,require("ev-emitter"),require("get-size"),require("fizzy-ui-utils"),require("./item")):t.Outlayer=e(t,t.EvEmitter,t.getSize,t.fizzyUIUtils,t.Outlayer.Item)}(window,function(t,e,i,n,o){"use strict";function s(t,e){var i=n.getQueryElement(t);if(i){this.element=i,h&&(this.$element=h(this.element)),this.options=n.extend({},this.constructor.defaults),this.option(e);var o=++u;this.element.outlayerGUID=o,c[o]=this,this._create(),this._getOption("initLayout")&&this.layout()}else l&&l.error("Bad element for "+this.constructor.namespace+": "+(i||t))}function r(t){function e(){t.apply(this,arguments)}return e.prototype=Object.create(t.prototype),e.prototype.constructor=e,e}function a(t){if("number"==typeof t)return t;var e=t.match(/(^\d*\.?\d*)(\w*)/),i=e&&e[1],n=e&&e[2];return i.length?(i=parseFloat(i))*(m[n]||1):0}var l=t.console,h=t.jQuery,d=function(){},u=0,c={};s.namespace="outlayer",s.Item=o,s.defaults={containerStyle:{position:"relative"},initLayout:!0,originLeft:!0,originTop:!0,resize:!0,resizeContainer:!0,transitionDuration:"0.4s",hiddenStyle:{opacity:0,transform:"scale(0.001)"},visibleStyle:{opacity:1,transform:"scale(1)"}};var p=s.prototype;n.extend(p,e.prototype),p.option=function(t){n.extend(this.options,t)},p._getOption=function(t){var e=this.constructor.compatOptions[t];return e&&void 0!==this.options[e]?this.options[e]:this.options[t]},s.compatOptions={initLayout:"isInitLayout",horizontal:"isHorizontal",layoutInstant:"isLayoutInstant",originLeft:"isOriginLeft",originTop:"isOriginTop",resize:"isResizeBound",resizeContainer:"isResizingContainer"},p._create=function(){this.reloadItems(),this.stamps=[],this.stamp(this.options.stamp),n.extend(this.element.style,this.options.containerStyle),this._getOption("resize")&&this.bindResize()},p.reloadItems=function(){this.items=this._itemize(this.element.children)},p._itemize=function(t){for(var e=this._filterFindItemElements(t),i=this.constructor.Item,n=[],o=0;o<e.length;o++){var s=new i(e[o],this);n.push(s)}return n},p._filterFindItemElements=function(t){return n.filterFindElements(t,this.options.itemSelector)},p.getItemElements=function(){return this.items.map(function(t){return t.element})},p.layout=function(){this._resetLayout(),this._manageStamps();var t=this._getOption("layoutInstant"),e=void 0!==t?t:!this._isLayoutInited;this.layoutItems(this.items,e),this._isLayoutInited=!0},p._init=p.layout,p._resetLayout=function(){this.getSize()},p.getSize=function(){this.size=i(this.element)},p._getMeasurement=function(t,e){var n,o=this.options[t];o?("string"==typeof o?n=this.element.querySelector(o):o instanceof HTMLElement&&(n=o),this[t]=n?i(n)[e]:o):this[t]=0},p.layoutItems=function(t,e){t=this._getItemsForLayout(t),this._layoutItems(t,e),this._postLayout()},p._getItemsForLayout=function(t){return t.filter(function(t){return!t.isIgnored})},p._layoutItems=function(t,e){if(this._emitCompleteOnItems("layout",t),t&&t.length){var i=[];t.forEach(function(t){var n=this._getItemLayoutPosition(t);n.item=t,n.isInstant=e||t.isLayoutInstant,i.push(n)},this),this._processLayoutQueue(i)}},p._getItemLayoutPosition=function(){return{x:0,y:0}},p._processLayoutQueue=function(t){this.updateStagger(),t.forEach(function(t,e){this._positionItem(t.item,t.x,t.y,t.isInstant,e)},this)},p.updateStagger=function(){var t=this.options.stagger;{if(null!==t&&void 0!==t)return this.stagger=a(t),this.stagger;this.stagger=0}},p._positionItem=function(t,e,i,n,o){n?t.goTo(e,i):(t.stagger(o*this.stagger),t.moveTo(e,i))},p._postLayout=function(){this.resizeContainer()},p.resizeContainer=function(){if(this._getOption("resizeContainer")){var t=this._getContainerSize();t&&(this._setContainerMeasure(t.width,!0),this._setContainerMeasure(t.height,!1))}},p._getContainerSize=d,p._setContainerMeasure=function(t,e){if(void 0!==t){var i=this.size;i.isBorderBox&&(t+=e?i.paddingLeft+i.paddingRight+i.borderLeftWidth+i.borderRightWidth:i.paddingBottom+i.paddingTop+i.borderTopWidth+i.borderBottomWidth),t=Math.max(t,0),this.element.style[e?"width":"height"]=t+"px"}},p._emitCompleteOnItems=function(t,e){function i(){o.dispatchEvent(t+"Complete",null,[e])}function n(){++r==s&&i()}var o=this,s=e.length;if(e&&s){var r=0;e.forEach(function(e){e.once(t,n)})}else i()},p.dispatchEvent=function(t,e,i){var n=e?[e].concat(i):i;if(this.emitEvent(t,n),h)if(this.$element=this.$element||h(this.element),e){var o=h.Event(e);o.type=t,this.$element.trigger(o,i)}else this.$element.trigger(t,i)},p.ignore=function(t){var e=this.getItem(t);e&&(e.isIgnored=!0)},p.unignore=function(t){var e=this.getItem(t);e&&delete e.isIgnored},p.stamp=function(t){(t=this._find(t))&&(this.stamps=this.stamps.concat(t),t.forEach(this.ignore,this))},p.unstamp=function(t){(t=this._find(t))&&t.forEach(function(t){n.removeFrom(this.stamps,t),this.unignore(t)},this)},p._find=function(t){if(t)return"string"==typeof t&&(t=this.element.querySelectorAll(t)),t=n.makeArray(t)},p._manageStamps=function(){this.stamps&&this.stamps.length&&(this._getBoundingRect(),this.stamps.forEach(this._manageStamp,this))},p._getBoundingRect=function(){var t=this.element.getBoundingClientRect(),e=this.size;this._boundingRect={left:t.left+e.paddingLeft+e.borderLeftWidth,top:t.top+e.paddingTop+e.borderTopWidth,right:t.right-(e.paddingRight+e.borderRightWidth),bottom:t.bottom-(e.paddingBottom+e.borderBottomWidth)}},p._manageStamp=d,p._getElementOffset=function(t){var e=t.getBoundingClientRect(),n=this._boundingRect,o=i(t);return{left:e.left-n.left-o.marginLeft,top:e.top-n.top-o.marginTop,right:n.right-e.right-o.marginRight,bottom:n.bottom-e.bottom-o.marginBottom}},p.handleEvent=n.handleEvent,p.bindResize=function(){t.addEventListener("resize",this),this.isResizeBound=!0},p.unbindResize=function(){t.removeEventListener("resize",this),this.isResizeBound=!1},p.onresize=function(){this.resize()},n.debounceMethod(s,"onresize",100),p.resize=function(){this.isResizeBound&&this.needsResizeLayout()&&this.layout()},p.needsResizeLayout=function(){var t=i(this.element);return this.size&&t&&t.innerWidth!==this.size.innerWidth},p.addItems=function(t){var e=this._itemize(t);return e.length&&(this.items=this.items.concat(e)),e},p.appended=function(t){var e=this.addItems(t);e.length&&(this.layoutItems(e,!0),this.reveal(e))},p.prepended=function(t){var e=this._itemize(t);if(e.length){var i=this.items.slice(0);this.items=e.concat(i),this._resetLayout(),this._manageStamps(),this.layoutItems(e,!0),this.reveal(e),this.layoutItems(i)}},p.reveal=function(t){if(this._emitCompleteOnItems("reveal",t),t&&t.length){var e=this.updateStagger();t.forEach(function(t,i){t.stagger(i*e),t.reveal()})}},p.hide=function(t){if(this._emitCompleteOnItems("hide",t),t&&t.length){var e=this.updateStagger();t.forEach(function(t,i){t.stagger(i*e),t.hide()})}},p.revealItemElements=function(t){var e=this.getItems(t);this.reveal(e)},p.hideItemElements=function(t){var e=this.getItems(t);this.hide(e)},p.getItem=function(t){for(var e=0;e<this.items.length;e++){var i=this.items[e];if(i.element==t)return i}},p.getItems=function(t){var e=[];return(t=n.makeArray(t)).forEach(function(t){var i=this.getItem(t);i&&e.push(i)},this),e},p.remove=function(t){var e=this.getItems(t);this._emitCompleteOnItems("remove",e),e&&e.length&&e.forEach(function(t){t.remove(),n.removeFrom(this.items,t)},this)},p.destroy=function(){var t=this.element.style;t.height="",t.position="",t.width="",this.items.forEach(function(t){t.destroy()}),this.unbindResize();var e=this.element.outlayerGUID;delete c[e],delete this.element.outlayerGUID,h&&h.removeData(this.element,this.constructor.namespace)},s.data=function(t){var e=(t=n.getQueryElement(t))&&t.outlayerGUID;return e&&c[e]},s.create=function(t,e){var i=r(s);return i.defaults=n.extend({},s.defaults),n.extend(i.defaults,e),i.compatOptions=n.extend({},s.compatOptions),i.namespace=t,i.data=s.data,i.Item=r(o),n.htmlInit(i,t),h&&h.bridget&&h.bridget(t,i),i};var m={ms:1,s:1e3};return s.Item=o,s}),function(t,e){"function"==typeof define&&define.amd?define(["outlayer/outlayer","get-size/get-size"],e):"object"==typeof module&&module.exports?module.exports=e(require("outlayer"),require("get-size")):t.Masonry=e(t.Outlayer,t.getSize)}(window,function(t,e){var i=t.create("masonry");i.compatOptions.fitWidth="isFitWidth";var n=i.prototype;return n._resetLayout=function(){this.getSize(),this._getMeasurement("columnWidth","outerWidth"),this._getMeasurement("gutter","outerWidth"),this.measureColumns(),this.colYs=[];for(var t=0;t<this.cols;t++)this.colYs.push(0);this.maxY=0,this.horizontalColIndex=0},n.measureColumns=function(){if(this.getContainerWidth(),!this.columnWidth){var t=this.items[0],i=t&&t.element;this.columnWidth=i&&e(i).outerWidth||this.containerWidth}var n=this.columnWidth+=this.gutter,o=this.containerWidth+this.gutter,s=o/n,r=n-o%n,a=r&&r<1?"round":"floor";s=Math[a](s),this.cols=Math.max(s,1)},n.getContainerWidth=function(){var t=this._getOption("fitWidth")?this.element.parentNode:this.element,i=e(t);this.containerWidth=i&&i.innerWidth},n._getItemLayoutPosition=function(t){t.getSize();var e=t.size.outerWidth%this.columnWidth,i=e&&e<1?"round":"ceil",n=Math[i](t.size.outerWidth/this.columnWidth);n=Math.min(n,this.cols);for(var o=this[this.options.horizontalOrder?"_getHorizontalColPosition":"_getTopColPosition"](n,t),s={x:this.columnWidth*o.col,y:o.y},r=o.y+t.size.outerHeight,a=n+o.col,l=o.col;l<a;l++)this.colYs[l]=r;return s},n._getTopColPosition=function(t){var e=this._getTopColGroup(t),i=Math.min.apply(Math,e);return{col:e.indexOf(i),y:i}},n._getTopColGroup=function(t){if(t<2)return this.colYs;for(var e=[],i=this.cols+1-t,n=0;n<i;n++)e[n]=this._getColGroupY(n,t);return e},n._getColGroupY=function(t,e){if(e<2)return this.colYs[t];var i=this.colYs.slice(t,t+e);return Math.max.apply(Math,i)},n._getHorizontalColPosition=function(t,e){var i=this.horizontalColIndex%this.cols;i=t>1&&i+t>this.cols?0:i;var n=e.size.outerWidth&&e.size.outerHeight;return this.horizontalColIndex=n?i+t:this.horizontalColIndex,{col:i,y:this._getColGroupY(i,t)}},n._manageStamp=function(t){var i=e(t),n=this._getElementOffset(t),o=this._getOption("originLeft")?n.left:n.right,s=o+i.outerWidth,r=Math.floor(o/this.columnWidth);r=Math.max(0,r);var a=Math.floor(s/this.columnWidth);a-=s%this.columnWidth?0:1,a=Math.min(this.cols-1,a);for(var l=(this._getOption("originTop")?n.top:n.bottom)+i.outerHeight,h=r;h<=a;h++)this.colYs[h]=Math.max(l,this.colYs[h])},n._getContainerSize=function(){this.maxY=Math.max.apply(Math,this.colYs);var t={height:this.maxY};return this._getOption("fitWidth")&&(t.width=this._getContainerFitWidth()),t},n._getContainerFitWidth=function(){for(var t=0,e=this.cols;--e&&0===this.colYs[e];)t++;return(this.cols-t)*this.columnWidth-this.gutter},n.needsResizeLayout=function(){var t=this.containerWidth;return this.getContainerWidth(),t!=this.containerWidth},i}),function(t,e){"function"==typeof define&&define.amd?define("ev-emitter/ev-emitter",e):"object"==typeof module&&module.exports?module.exports=e():t.EvEmitter=e()}("undefined"!=typeof window?window:this,function(){function t(){}var e=t.prototype;return e.on=function(t,e){if(t&&e){var i=this._events=this._events||{},n=i[t]=i[t]||[];return-1==n.indexOf(e)&&n.push(e),this}},e.once=function(t,e){if(t&&e){this.on(t,e);var i=this._onceEvents=this._onceEvents||{};return(i[t]=i[t]||{})[e]=!0,this}},e.off=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){var n=i.indexOf(e);return-1!=n&&i.splice(n,1),this}},e.emitEvent=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){var n=0,o=i[n];e=e||[];for(var s=this._onceEvents&&this._onceEvents[t];o;){var r=s&&s[o];r&&(this.off(t,o),delete s[o]),o.apply(this,e),o=i[n+=r?0:1]}return this}},e.allOff=e.removeAllListeners=function(){delete this._events,delete this._onceEvents},t}),function(t,e){"use strict";"function"==typeof define&&define.amd?define(["ev-emitter/ev-emitter"],function(i){return e(t,i)}):"object"==typeof module&&module.exports?module.exports=e(t,require("ev-emitter")):t.imagesLoaded=e(t,t.EvEmitter)}("undefined"!=typeof window?window:this,function(t,e){function i(t,e){for(var i in e)t[i]=e[i];return t}function n(t){var e=[];if(Array.isArray(t))e=t;else if("number"==typeof t.length)for(var i=0;i<t.length;i++)e.push(t[i]);else e.push(t);return e}function o(t,e,s){return this instanceof o?("string"==typeof t&&(t=document.querySelectorAll(t)),this.elements=n(t),this.options=i({},this.options),"function"==typeof e?s=e:i(this.options,e),s&&this.on("always",s),this.getImages(),a&&(this.jqDeferred=new a.Deferred),void setTimeout(function(){this.check()}.bind(this))):new o(t,e,s)}function s(t){this.img=t}function r(t,e){this.url=t,this.element=e,this.img=new Image}var a=t.jQuery,l=t.console;o.prototype=Object.create(e.prototype),o.prototype.options={},o.prototype.getImages=function(){this.images=[],this.elements.forEach(this.addElementImages,this)},o.prototype.addElementImages=function(t){"IMG"==t.nodeName&&this.addImage(t),!0===this.options.background&&this.addElementBackgroundImages(t);var e=t.nodeType;if(e&&h[e]){for(var i=t.querySelectorAll("img"),n=0;n<i.length;n++){var o=i[n];this.addImage(o)}if("string"==typeof this.options.background){var s=t.querySelectorAll(this.options.background);for(n=0;n<s.length;n++){var r=s[n];this.addElementBackgroundImages(r)}}}};var h={1:!0,9:!0,11:!0};return o.prototype.addElementBackgroundImages=function(t){var e=getComputedStyle(t);if(e)for(var i=/url\((['"])?(.*?)\1\)/gi,n=i.exec(e.backgroundImage);null!==n;){var o=n&&n[2];o&&this.addBackground(o,t),n=i.exec(e.backgroundImage)}},o.prototype.addImage=function(t){var e=new s(t);this.images.push(e)},o.prototype.addBackground=function(t,e){var i=new r(t,e);this.images.push(i)},o.prototype.check=function(){function t(t,i,n){setTimeout(function(){e.progress(t,i,n)})}var e=this;return this.progressedCount=0,this.hasAnyBroken=!1,this.images.length?void this.images.forEach(function(e){e.once("progress",t),e.check()}):void this.complete()},o.prototype.progress=function(t,e,i){this.progressedCount++,this.hasAnyBroken=this.hasAnyBroken||!t.isLoaded,this.emitEvent("progress",[this,t,e]),this.jqDeferred&&this.jqDeferred.notify&&this.jqDeferred.notify(this,t),this.progressedCount==this.images.length&&this.complete(),this.options.debug&&l&&l.log("progress: "+i,t,e)},o.prototype.complete=function(){var t=this.hasAnyBroken?"fail":"done";if(this.isComplete=!0,this.emitEvent(t,[this]),this.emitEvent("always",[this]),this.jqDeferred){var e=this.hasAnyBroken?"reject":"resolve";this.jqDeferred[e](this)}},s.prototype=Object.create(e.prototype),s.prototype.check=function(){return this.getIsImageComplete()?void this.confirm(0!==this.img.naturalWidth,"naturalWidth"):(this.proxyImage=new Image,this.proxyImage.addEventListener("load",this),this.proxyImage.addEventListener("error",this),this.img.addEventListener("load",this),this.img.addEventListener("error",this),void(this.proxyImage.src=this.img.src))},s.prototype.getIsImageComplete=function(){return this.img.complete&&void 0!==this.img.naturalWidth},s.prototype.confirm=function(t,e){this.isLoaded=t,this.emitEvent("progress",[this,this.img,e])},s.prototype.handleEvent=function(t){var e="on"+t.type;this[e]&&this[e](t)},s.prototype.onload=function(){this.confirm(!0,"onload"),this.unbindEvents()},s.prototype.onerror=function(){this.confirm(!1,"onerror"),this.unbindEvents()},s.prototype.unbindEvents=function(){this.proxyImage.removeEventListener("load",this),this.proxyImage.removeEventListener("error",this),this.img.removeEventListener("load",this),this.img.removeEventListener("error",this)},r.prototype=Object.create(s.prototype),r.prototype.check=function(){this.img.addEventListener("load",this),this.img.addEventListener("error",this),this.img.src=this.url,this.getIsImageComplete()&&(this.confirm(0!==this.img.naturalWidth,"naturalWidth"),this.unbindEvents())},r.prototype.unbindEvents=function(){this.img.removeEventListener("load",this),this.img.removeEventListener("error",this)},r.prototype.confirm=function(t,e){this.isLoaded=t,this.emitEvent("progress",[this,this.element,e])},o.makeJQueryPlugin=function(e){(e=e||t.jQuery)&&(a=e,a.fn.imagesLoaded=function(t,e){return new o(this,t,e).jqDeferred.promise(a(this))})},o.makeJQueryPlugin(),o}),function(){"use strict";function t(t,e){var i;for(i in e)e.hasOwnProperty(i)&&(t[i]=e[i]);return t}function e(t){if(!this||this.find!==e.prototype.find)return new e(t);if(this.length=0,t)if("string"==typeof t&&(t=this.find(t)),t.nodeType||t===t.window)this.length=1,this[0]=t;else{var i=t.length;for(this.length=i;i;)this[i-=1]=t[i]}}e.extend=t,e.contains=function(t,e){do{if((e=e.parentNode)===t)return!0}while(e);return!1},e.parseJSON=function(t){return window.JSON&&JSON.parse(t)},t(e.prototype,{find:function(t){var i=this[0]||document;return"string"==typeof t&&(t=i.querySelectorAll?i.querySelectorAll(t):"#"===t.charAt(0)?i.getElementById(t.slice(1)):i.getElementsByTagName(t)),new e(t)},hasClass:function(t){return!!this[0]&&new RegExp("(^|\\s+)"+t+"(\\s+|$)").test(this[0].className)},addClass:function(t){for(var e,i=this.length;i;){if(i-=1,!(e=this[i]).className)return e.className=t,this;if(this.hasClass(t))return this;e.className+=" "+t}return this},removeClass:function(t){for(var e,i=new RegExp("(^|\\s+)"+t+"(\\s+|$)"),n=this.length;n;)(e=this[n-=1]).className=e.className.replace(i," ");return this},on:function(t,e){for(var i,n,o=t.split(/\s+/);o.length;)for(t=o.shift(),i=this.length;i;)(n=this[i-=1]).addEventListener?n.addEventListener(t,e,!1):n.attachEvent&&n.attachEvent("on"+t,e);return this},off:function(t,e){for(var i,n,o=t.split(/\s+/);o.length;)for(t=o.shift(),i=this.length;i;)(n=this[i-=1]).removeEventListener?n.removeEventListener(t,e,!1):n.detachEvent&&n.detachEvent("on"+t,e);return this},empty:function(){for(var t,e=this.length;e;)for(t=this[e-=1];t.hasChildNodes();)t.removeChild(t.lastChild);return this},first:function(){return new e(this[0])}}),"function"==typeof define&&define.amd?define(function(){return e}):(window.blueimp=window.blueimp||{},window.blueimp.helper=e)}(),function(t){"use strict";"function"==typeof define&&define.amd?define(["./blueimp-helper"],t):(window.blueimp=window.blueimp||{},window.blueimp.Gallery=t(window.blueimp.helper||window.jQuery))}(function(t){"use strict";function e(t,i){return void 0===document.body.style.maxHeight?null:this&&this.options===e.prototype.options?void(t&&t.length?(this.list=t,this.num=t.length,this.initOptions(i),this.initialize()):this.console.log("blueimp Gallery: No or empty list provided as first argument.",t)):new e(t,i)}return t.extend(e.prototype,{options:{container:"#blueimp-gallery",slidesContainer:"div",titleElement:"h3",displayClass:"blueimp-gallery-display",controlsClass:"blueimp-gallery-controls",singleClass:"blueimp-gallery-single",leftEdgeClass:"blueimp-gallery-left",rightEdgeClass:"blueimp-gallery-right",playingClass:"blueimp-gallery-playing",slideClass:"slide",slideLoadingClass:"slide-loading",slideErrorClass:"slide-error",slideContentClass:"slide-content",toggleClass:"toggle",prevClass:"prev",nextClass:"next",closeClass:"close",playPauseClass:"play-pause",typeProperty:"type",titleProperty:"title",urlProperty:"href",srcsetProperty:"urlset",displayTransition:!0,clearSlides:!0,stretchImages:!1,toggleControlsOnReturn:!0,toggleControlsOnSlideClick:!0,toggleSlideshowOnSpace:!0,enableKeyboardNavigation:!0,closeOnEscape:!0,closeOnSlideClick:!0,closeOnSwipeUpOrDown:!0,emulateTouchEvents:!0,stopTouchEventsPropagation:!1,hidePageScrollbars:!0,disableScroll:!0,carousel:!1,continuous:!0,unloadElements:!0,startSlideshow:!1,slideshowInterval:5e3,index:0,preloadRange:2,transitionSpeed:400,slideshowTransitionSpeed:void 0,event:void 0,onopen:void 0,onopened:void 0,onslide:void 0,onslideend:void 0,onslidecomplete:void 0,onclose:void 0,onclosed:void 0},carouselOptions:{hidePageScrollbars:!1,toggleControlsOnReturn:!1,toggleSlideshowOnSpace:!1,enableKeyboardNavigation:!1,closeOnEscape:!1,closeOnSlideClick:!1,closeOnSwipeUpOrDown:!1,disableScroll:!1,startSlideshow:!0},console:window.console&&"function"==typeof window.console.log?window.console:{log:function(){}},support:function(e){function i(){var t,i,n=o.transition;document.body.appendChild(e),n&&(t=n.name.slice(0,-9)+"ransform",void 0!==e.style[t]&&(e.style[t]="translateZ(0)",i=window.getComputedStyle(e).getPropertyValue(n.prefix+"transform"),o.transform={prefix:n.prefix,name:t,translate:!0,translateZ:!!i&&"none"!==i})),void 0!==e.style.backgroundSize&&(o.backgroundSize={},e.style.backgroundSize="contain",o.backgroundSize.contain="contain"===window.getComputedStyle(e).getPropertyValue("background-size"),e.style.backgroundSize="cover",o.backgroundSize.cover="cover"===window.getComputedStyle(e).getPropertyValue("background-size")),document.body.removeChild(e)}var n,o={touch:void 0!==window.ontouchstart||window.DocumentTouch&&document instanceof DocumentTouch},s={webkitTransition:{end:"webkitTransitionEnd",prefix:"-webkit-"},MozTransition:{end:"transitionend",prefix:"-moz-"},OTransition:{end:"otransitionend",prefix:"-o-"},transition:{end:"transitionend",prefix:""}};for(n in s)if(s.hasOwnProperty(n)&&void 0!==e.style[n]){o.transition=s[n],o.transition.name=n;break}return document.body?i():t(document).on("DOMContentLoaded",i),o}(document.createElement("div")),requestAnimationFrame:window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame,initialize:function(){if(this.initStartIndex(),!1===this.initWidget())return!1;this.initEventListeners(),this.onslide(this.index),this.ontransitionend(),this.options.startSlideshow&&this.play()},slide:function(t,e){window.clearTimeout(this.timeout);var i,n,o,s=this.index;if(s!==t&&1!==this.num){if(e||(e=this.options.transitionSpeed),this.support.transform){for(this.options.continuous||(t=this.circle(t)),i=Math.abs(s-t)/(s-t),this.options.continuous&&(n=i,(i=-this.positions[this.circle(t)]/this.slideWidth)!==n&&(t=-i*this.num+t)),o=Math.abs(s-t)-1;o;)o-=1,this.move(this.circle((t>s?t:s)-o-1),this.slideWidth*i,0);t=this.circle(t),this.move(s,this.slideWidth*i,e),this.move(t,0,e),this.options.continuous&&this.move(this.circle(t-i),-this.slideWidth*i,0)}else t=this.circle(t),this.animate(s*-this.slideWidth,t*-this.slideWidth,e);this.onslide(t)}},getIndex:function(){return this.index},getNumber:function(){return this.num},prev:function(){(this.options.continuous||this.index)&&this.slide(this.index-1)},next:function(){(this.options.continuous||this.index<this.num-1)&&this.slide(this.index+1)},play:function(t){var e=this;window.clearTimeout(this.timeout),this.interval=t||this.options.slideshowInterval,this.elements[this.index]>1&&(this.timeout=this.setTimeout(!this.requestAnimationFrame&&this.slide||function(t,i){e.animationFrameId=e.requestAnimationFrame.call(window,function(){e.slide(t,i)})},[this.index+1,this.options.slideshowTransitionSpeed],this.interval)),this.container.addClass(this.options.playingClass)},pause:function(){window.clearTimeout(this.timeout),this.interval=null,this.container.removeClass(this.options.playingClass)},add:function(t){var e;for(t.concat||(t=Array.prototype.slice.call(t)),this.list.concat||(this.list=Array.prototype.slice.call(this.list)),this.list=this.list.concat(t),this.num=this.list.length,this.num>2&&null===this.options.continuous&&(this.options.continuous=!0,this.container.removeClass(this.options.leftEdgeClass)),this.container.removeClass(this.options.rightEdgeClass).removeClass(this.options.singleClass),e=this.num-t.length;e<this.num;e+=1)this.addSlide(e),this.positionSlide(e);this.positions.length=this.num,this.initSlides(!0)},resetSlides:function(){this.slidesContainer.empty(),this.unloadAllSlides(),this.slides=[]},handleClose:function(){var t=this.options;this.destroyEventListeners(),this.pause(),this.container[0].style.display="none",this.container.removeClass(t.displayClass).removeClass(t.singleClass).removeClass(t.leftEdgeClass).removeClass(t.rightEdgeClass),t.hidePageScrollbars&&(document.body.style.overflow=this.bodyOverflowStyle),this.options.clearSlides&&this.resetSlides(),this.options.onclosed&&this.options.onclosed.call(this)},close:function(){function t(i){i.target===e.container[0]&&(e.container.off(e.support.transition.end,t),e.handleClose())}var e=this;this.options.onclose&&this.options.onclose.call(this),this.support.transition&&this.options.displayTransition?(this.container.on(this.support.transition.end,t),this.container.removeClass(this.options.displayClass)):this.handleClose()},circle:function(t){return(this.num+t%this.num)%this.num},move:function(t,e,i){this.translateX(t,e,i),this.positions[t]=e},translate:function(t,e,i,n){var o=this.slides[t].style,s=this.support.transition,r=this.support.transform;o[s.name+"Duration"]=n+"ms",o[r.name]="translate("+e+"px, "+i+"px)"+(r.translateZ?" translateZ(0)":"")},translateX:function(t,e,i){this.translate(t,e,0,i)},translateY:function(t,e,i){this.translate(t,0,e,i)},animate:function(t,e,i){if(i)var n=this,o=(new Date).getTime(),s=window.setInterval(function(){var r=(new Date).getTime()-o;if(r>i)return n.slidesContainer[0].style.left=e+"px",n.ontransitionend(),void window.clearInterval(s);n.slidesContainer[0].style.left=(e-t)*(Math.floor(r/i*100)/100)+t+"px"},4);else this.slidesContainer[0].style.left=e+"px"},preventDefault:function(t){t.preventDefault?t.preventDefault():t.returnValue=!1},stopPropagation:function(t){t.stopPropagation?t.stopPropagation():t.cancelBubble=!0},onresize:function(){this.initSlides(!0)},onmousedown:function(t){t.which&&1===t.which&&"VIDEO"!==t.target.nodeName&&(t.preventDefault(),(t.originalEvent||t).touches=[{pageX:t.pageX,pageY:t.pageY}],this.ontouchstart(t))},onmousemove:function(t){this.touchStart&&((t.originalEvent||t).touches=[{pageX:t.pageX,pageY:t.pageY}],this.ontouchmove(t))},onmouseup:function(t){this.touchStart&&(this.ontouchend(t),delete this.touchStart)},onmouseout:function(e){if(this.touchStart){var i=e.target,n=e.relatedTarget;n&&(n===i||t.contains(i,n))||this.onmouseup(e)}},ontouchstart:function(t){this.options.stopTouchEventsPropagation&&this.stopPropagation(t);var e=(t.originalEvent||t).touches[0];this.touchStart={x:e.pageX,y:e.pageY,time:Date.now()},this.isScrolling=void 0,this.touchDelta={}},ontouchmove:function(t){this.options.stopTouchEventsPropagation&&this.stopPropagation(t);var e,i,n=(t.originalEvent||t).touches[0],o=(t.originalEvent||t).scale,s=this.index;if(!(n.length>1||o&&1!==o))if(this.options.disableScroll&&t.preventDefault(),this.touchDelta={x:n.pageX-this.touchStart.x,y:n.pageY-this.touchStart.y},e=this.touchDelta.x,void 0===this.isScrolling&&(this.isScrolling=this.isScrolling||Math.abs(e)<Math.abs(this.touchDelta.y)),this.isScrolling)this.translateY(s,this.touchDelta.y+this.positions[s],0);else for(t.preventDefault(),window.clearTimeout(this.timeout),this.options.continuous?i=[this.circle(s+1),s,this.circle(s-1)]:(this.touchDelta.x=e/=!s&&e>0||s===this.num-1&&e<0?Math.abs(e)/this.slideWidth+1:1,i=[s],s&&i.push(s-1),s<this.num-1&&i.unshift(s+1));i.length;)s=i.pop(),this.translateX(s,e+this.positions[s],0)},ontouchend:function(t){this.options.stopTouchEventsPropagation&&this.stopPropagation(t);var e,i,n,o,s,r=this.index,a=this.options.transitionSpeed,l=this.slideWidth,h=Number(Date.now()-this.touchStart.time)<250,d=h&&Math.abs(this.touchDelta.x)>20||Math.abs(this.touchDelta.x)>l/2,u=!r&&this.touchDelta.x>0||r===this.num-1&&this.touchDelta.x<0,c=!d&&this.options.closeOnSwipeUpOrDown&&(h&&Math.abs(this.touchDelta.y)>20||Math.abs(this.touchDelta.y)>this.slideHeight/2);this.options.continuous&&(u=!1),e=this.touchDelta.x<0?-1:1,this.isScrolling?c?this.close():this.translateY(r,0,a):d&&!u?(i=r+e,n=r-e,o=l*e,s=-l*e,this.options.continuous?(this.move(this.circle(i),o,0),this.move(this.circle(r-2*e),s,0)):i>=0&&i<this.num&&this.move(i,o,0),this.move(r,this.positions[r]+o,a),this.move(this.circle(n),this.positions[this.circle(n)]+o,a),r=this.circle(n),this.onslide(r)):this.options.continuous?(this.move(this.circle(r-1),-l,a),this.move(r,0,a),this.move(this.circle(r+1),l,a)):(r&&this.move(r-1,-l,a),this.move(r,0,a),r<this.num-1&&this.move(r+1,l,a))},ontouchcancel:function(t){this.touchStart&&(this.ontouchend(t),delete this.touchStart)},ontransitionend:function(t){var e=this.slides[this.index];t&&e!==t.target||(this.interval&&this.play(),this.setTimeout(this.options.onslideend,[this.index,e]))},oncomplete:function(e){var i,n=e.target||e.srcElement,o=n&&n.parentNode;n&&o&&(i=this.getNodeIndex(o),t(o).removeClass(this.options.slideLoadingClass),"error"===e.type?(t(o).addClass(this.options.slideErrorClass),this.elements[i]=3):this.elements[i]=2,n.clientHeight>this.container[0].clientHeight&&(n.style.maxHeight=this.container[0].clientHeight),this.interval&&this.slides[this.index]===o&&this.play(),this.setTimeout(this.options.onslidecomplete,[i,o]))},onload:function(t){this.oncomplete(t)},onerror:function(t){this.oncomplete(t)},onkeydown:function(t){switch(t.which||t.keyCode){case 13:this.options.toggleControlsOnReturn&&(this.preventDefault(t),this.toggleControls());break;case 27:this.options.closeOnEscape&&(this.close(),t.stopImmediatePropagation());break;case 32:this.options.toggleSlideshowOnSpace&&(this.preventDefault(t),this.toggleSlideshow());break;case 37:this.options.enableKeyboardNavigation&&(this.preventDefault(t),this.prev());break;case 39:this.options.enableKeyboardNavigation&&(this.preventDefault(t),this.next())}},handleClick:function(e){function i(e){return t(o).hasClass(e)||t(s).hasClass(e)}var n=this.options,o=e.target||e.srcElement,s=o.parentNode;i(n.toggleClass)?(this.preventDefault(e),this.toggleControls()):i(n.prevClass)?(this.preventDefault(e),this.prev()):i(n.nextClass)?(this.preventDefault(e),this.next()):i(n.closeClass)?(this.preventDefault(e),this.close()):i(n.playPauseClass)?(this.preventDefault(e),this.toggleSlideshow()):s===this.slidesContainer[0]?n.closeOnSlideClick?(this.preventDefault(e),this.close()):n.toggleControlsOnSlideClick&&(this.preventDefault(e),this.toggleControls()):s.parentNode&&s.parentNode===this.slidesContainer[0]&&n.toggleControlsOnSlideClick&&(this.preventDefault(e),this.toggleControls())},onclick:function(t){if(!(this.options.emulateTouchEvents&&this.touchDelta&&(Math.abs(this.touchDelta.x)>20||Math.abs(this.touchDelta.y)>20)))return this.handleClick(t);delete this.touchDelta},updateEdgeClasses:function(t){t?this.container.removeClass(this.options.leftEdgeClass):this.container.addClass(this.options.leftEdgeClass),t===this.num-1?this.container.addClass(this.options.rightEdgeClass):this.container.removeClass(this.options.rightEdgeClass)},handleSlide:function(t){this.options.continuous||this.updateEdgeClasses(t),this.loadElements(t),this.options.unloadElements&&this.unloadElements(t),this.setTitle(t)},onslide:function(t){this.index=t,this.handleSlide(t),this.setTimeout(this.options.onslide,[t,this.slides[t]])},setTitle:function(t){var e=this.slides[t].firstChild.title,i=this.titleElement;i.length&&(this.titleElement.empty(),e&&i[0].appendChild(document.createTextNode(e)))},setTimeout:function(t,e,i){var n=this;return t&&window.setTimeout(function(){t.apply(n,e||[])},i||0)},imageFactory:function(e,i){function n(e){if(!o){if(e={type:e.type,target:s},!s.parentNode)return a.setTimeout(n,[e]);o=!0,t(l).off("load error",n),d&&"load"===e.type&&(s.style.background='url("'+h+'") center no-repeat',s.style.backgroundSize=d),i(e)}}var o,s,r,a=this,l=this.imagePrototype.cloneNode(!1),h=e,d=this.options.stretchImages;return"string"!=typeof h&&(h=this.getItemProperty(e,this.options.urlProperty),r=this.getItemProperty(e,this.options.titleProperty)),!0===d&&(d="contain"),(d=this.support.backgroundSize&&this.support.backgroundSize[d]&&d)?s=this.elementPrototype.cloneNode(!1):(s=l,l.draggable=!1),r&&(s.title=r),t(l).on("load error",n),l.src=h,s},createElement:function(e,i){var n=e&&this.getItemProperty(e,this.options.typeProperty),o=n&&this[n.split("/")[0]+"Factory"]||this.imageFactory,s=e&&o.call(this,e,i),r=this.getItemProperty(e,this.options.srcsetProperty);return s||(s=this.elementPrototype.cloneNode(!1),this.setTimeout(i,[{type:"error",target:s}])),r&&s.setAttribute("srcset",r),t(s).addClass(this.options.slideContentClass),s},loadElement:function(e){this.elements[e]||(this.slides[e].firstChild?this.elements[e]=t(this.slides[e]).hasClass(this.options.slideErrorClass)?3:2:(this.elements[e]=1,t(this.slides[e]).addClass(this.options.slideLoadingClass),this.slides[e].appendChild(this.createElement(this.list[e],this.proxyListener))))},loadElements:function(t){var e,i=Math.min(this.num,2*this.options.preloadRange+1),n=t;for(e=0;e<i;e+=1)n+=e*(e%2==0?-1:1),n=this.circle(n),this.loadElement(n)},unloadElements:function(t){var e,i;for(e in this.elements)this.elements.hasOwnProperty(e)&&(i=Math.abs(t-e))>this.options.preloadRange&&i+this.options.preloadRange<this.num&&(this.unloadSlide(e),delete this.elements[e])},addSlide:function(t){var e=this.slidePrototype.cloneNode(!1);e.setAttribute("data-index",t),this.slidesContainer[0].appendChild(e),this.slides.push(e)},positionSlide:function(t){var e=this.slides[t];e.style.width=this.slideWidth+"px",this.support.transform&&(e.style.left=t*-this.slideWidth+"px",this.move(t,this.index>t?-this.slideWidth:this.index<t?this.slideWidth:0,0))},initSlides:function(e){var i,n;for(e||(this.positions=[],this.positions.length=this.num,this.elements={},this.imagePrototype=document.createElement("img"),this.elementPrototype=document.createElement("div"),this.slidePrototype=document.createElement("div"),t(this.slidePrototype).addClass(this.options.slideClass),this.slides=this.slidesContainer[0].children,i=this.options.clearSlides||this.slides.length!==this.num),this.slideWidth=this.container[0].offsetWidth,this.slideHeight=this.container[0].offsetHeight,this.slidesContainer[0].style.width=this.num*this.slideWidth+"px",i&&this.resetSlides(),n=0;n<this.num;n+=1)i&&this.addSlide(n),this.positionSlide(n);this.options.continuous&&this.support.transform&&(this.move(this.circle(this.index-1),-this.slideWidth,0),this.move(this.circle(this.index+1),this.slideWidth,0)),this.support.transform||(this.slidesContainer[0].style.left=this.index*-this.slideWidth+"px")},unloadSlide:function(t){var e,i;null!==(i=(e=this.slides[t]).firstChild)&&e.removeChild(i)},unloadAllSlides:function(){var t,e;for(t=0,e=this.slides.length;t<e;t++)this.unloadSlide(t)},toggleControls:function(){var t=this.options.controlsClass;this.container.hasClass(t)?this.container.removeClass(t):this.container.addClass(t)},toggleSlideshow:function(){this.interval?this.pause():this.play()},getNodeIndex:function(t){return parseInt(t.getAttribute("data-index"),10)},getNestedProperty:function(t,e){return e.replace(/\[(?:'([^']+)'|"([^"]+)"|(\d+))\]|(?:(?:^|\.)([^\.\[]+))/g,function(e,i,n,o,s){var r=s||i||n||o&&parseInt(o,10);e&&t&&(t=t[r])}),t},getDataProperty:function(e,i){var n,o;if(e.dataset?(n=i.replace(/-([a-z])/g,function(t,e){return e.toUpperCase()}),o=e.dataset[n]):e.getAttribute&&(o=e.getAttribute("data-"+i.replace(/([A-Z])/g,"-$1").toLowerCase())),"string"==typeof o){if(/^(true|false|null|-?\d+(\.\d+)?|\{[\s\S]*\}|\[[\s\S]*\])$/.test(o))try{return t.parseJSON(o)}catch(t){}return o}},getItemProperty:function(t,e){var i=this.getDataProperty(t,e);return void 0===i&&(i=t[e]),void 0===i&&(i=this.getNestedProperty(t,e)),i},initStartIndex:function(){var t,e=this.options.index,i=this.options.urlProperty;if(e&&"number"!=typeof e)for(t=0;t<this.num;t+=1)if(this.list[t]===e||this.getItemProperty(this.list[t],i)===this.getItemProperty(e,i)){e=t;break}this.index=this.circle(parseInt(e,10)||0)},initEventListeners:function(){function e(t){var e=i.support.transition&&i.support.transition.end===t.type?"transitionend":t.type;i["on"+e](t)}var i=this,n=this.slidesContainer;t(window).on("resize",e),t(document.body).on("keydown",e),this.container.on("click",e),this.support.touch?n.on("touchstart touchmove touchend touchcancel",e):this.options.emulateTouchEvents&&this.support.transition&&n.on("mousedown mousemove mouseup mouseout",e),this.support.transition&&n.on(this.support.transition.end,e),this.proxyListener=e},destroyEventListeners:function(){var e=this.slidesContainer,i=this.proxyListener;t(window).off("resize",i),t(document.body).off("keydown",i),this.container.off("click",i),this.support.touch?e.off("touchstart touchmove touchend touchcancel",i):this.options.emulateTouchEvents&&this.support.transition&&e.off("mousedown mousemove mouseup mouseout",i),this.support.transition&&e.off(this.support.transition.end,i)},handleOpen:function(){this.options.onopened&&this.options.onopened.call(this)},initWidget:function(){function e(t){t.target===i.container[0]&&(i.container.off(i.support.transition.end,e),i.handleOpen())}var i=this;return this.container=t(this.options.container),this.container.length?(this.slidesContainer=this.container.find(this.options.slidesContainer).first(),this.slidesContainer.length?(this.titleElement=this.container.find(this.options.titleElement).first(),1===this.num&&this.container.addClass(this.options.singleClass),this.options.onopen&&this.options.onopen.call(this),this.support.transition&&this.options.displayTransition?this.container.on(this.support.transition.end,e):this.handleOpen(),this.options.hidePageScrollbars&&(this.bodyOverflowStyle=document.body.style.overflow,document.body.style.overflow="hidden"),this.container[0].style.display="block",this.initSlides(),void this.container.addClass(this.options.displayClass)):(this.console.log("blueimp Gallery: Slides container not found.",this.options.slidesContainer),!1)):(this.console.log("blueimp Gallery: Widget container not found.",this.options.container),!1)},initOptions:function(e){this.options=t.extend({},this.options),(e&&e.carousel||this.options.carousel&&(!e||!1!==e.carousel))&&t.extend(this.options,this.carouselOptions),t.extend(this.options,e),this.num<3&&(this.options.continuous=!!this.options.continuous&&null),this.support.transition||(this.options.emulateTouchEvents=!1),this.options.event&&this.preventDefault(this.options.event)}}),e}),function(t){"use strict";"function"==typeof define&&define.amd?define(["./blueimp-helper","./blueimp-gallery"],t):t(window.blueimp.helper||window.jQuery,window.blueimp.Gallery)}(function(t,e){"use strict";t.extend(e.prototype.options,{fullScreen:!1});var i=e.prototype.initialize,n=e.prototype.close;return t.extend(e.prototype,{getFullScreenElement:function(){return document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement},requestFullScreen:function(t){t.requestFullscreen?t.requestFullscreen():t.webkitRequestFullscreen?t.webkitRequestFullscreen():t.mozRequestFullScreen?t.mozRequestFullScreen():t.msRequestFullscreen&&t.msRequestFullscreen()},exitFullScreen:function(){document.exitFullscreen?document.exitFullscreen():document.webkitCancelFullScreen?document.webkitCancelFullScreen():document.mozCancelFullScreen?document.mozCancelFullScreen():document.msExitFullscreen&&document.msExitFullscreen()},initialize:function(){i.call(this),this.options.fullScreen&&!this.getFullScreenElement()&&this.requestFullScreen(this.container[0])},close:function(){this.getFullScreenElement()===this.container[0]&&this.exitFullScreen(),n.call(this)}}),e}),function(t){"use strict";"function"==typeof define&&define.amd?define(["./blueimp-helper","./blueimp-gallery"],t):t(window.blueimp.helper||window.jQuery,window.blueimp.Gallery)}(function(t,e){"use strict";t.extend(e.prototype.options,{indicatorContainer:"ol",activeIndicatorClass:"active",thumbnailProperty:"thumbnail",thumbnailIndicators:!0});var i=e.prototype.initSlides,n=e.prototype.addSlide,o=e.prototype.resetSlides,s=e.prototype.handleClick,r=e.prototype.handleSlide,a=e.prototype.handleClose;return t.extend(e.prototype,{createIndicator:function(e){var i,n,o=this.indicatorPrototype.cloneNode(!1),s=this.getItemProperty(e,this.options.titleProperty),r=this.options.thumbnailProperty;return this.options.thumbnailIndicators&&(r&&(i=this.getItemProperty(e,r)),void 0===i&&(n=e.getElementsByTagName&&t(e).find("img")[0])&&(i=n.src),i&&(o.style.backgroundImage='url("'+i+'")')),s&&(o.title=s),o},addIndicator:function(t){if(this.indicatorContainer.length){var e=this.createIndicator(this.list[t]);e.setAttribute("data-index",t),this.indicatorContainer[0].appendChild(e),this.indicators.push(e)}},setActiveIndicator:function(e){this.indicators&&(this.activeIndicator&&this.activeIndicator.removeClass(this.options.activeIndicatorClass),this.activeIndicator=t(this.indicators[e]),this.activeIndicator.addClass(this.options.activeIndicatorClass))},initSlides:function(t){t||(this.indicatorContainer=this.container.find(this.options.indicatorContainer),this.indicatorContainer.length&&(this.indicatorPrototype=document.createElement("li"),this.indicators=this.indicatorContainer[0].children)),i.call(this,t)},addSlide:function(t){n.call(this,t),this.addIndicator(t)},resetSlides:function(){o.call(this),this.indicatorContainer.empty(),this.indicators=[]},handleClick:function(t){var e=t.target||t.srcElement,i=e.parentNode;if(i===this.indicatorContainer[0])this.preventDefault(t),this.slide(this.getNodeIndex(e));else{if(i.parentNode!==this.indicatorContainer[0])return s.call(this,t);this.preventDefault(t),this.slide(this.getNodeIndex(i))}},handleSlide:function(t){r.call(this,t),this.setActiveIndicator(t)},handleClose:function(){this.activeIndicator&&this.activeIndicator.removeClass(this.options.activeIndicatorClass),a.call(this)}}),e}),function(t){"use strict";"function"==typeof define&&define.amd?define(["./blueimp-helper","./blueimp-gallery"],t):t(window.blueimp.helper||window.jQuery,window.blueimp.Gallery)}(function(t,e){"use strict";t.extend(e.prototype.options,{videoContentClass:"video-content",videoLoadingClass:"video-loading",videoPlayingClass:"video-playing",videoPosterProperty:"poster",videoSourcesProperty:"sources"});var i=e.prototype.handleSlide;return t.extend(e.prototype,{handleSlide:function(t){i.call(this,t),this.playingVideo&&this.playingVideo.pause()},videoFactory:function(e,i,n){var o,s,r,a,l,h=this,d=this.options,u=this.elementPrototype.cloneNode(!1),c=t(u),p=[{type:"error",target:u}],m=n||document.createElement("video"),f=this.getItemProperty(e,d.urlProperty),y=this.getItemProperty(e,d.typeProperty),g=this.getItemProperty(e,d.titleProperty),v=this.getItemProperty(e,d.videoPosterProperty),C=this.getItemProperty(e,d.videoSourcesProperty);if(c.addClass(d.videoContentClass),g&&(u.title=g),m.canPlayType)if(f&&y&&m.canPlayType(y))m.src=f;else if(C)for(;C.length;)if(s=C.shift(),f=this.getItemProperty(s,d.urlProperty),y=this.getItemProperty(s,d.typeProperty),f&&y&&m.canPlayType(y)){m.src=f;break}return v&&(m.poster=v,o=this.imagePrototype.cloneNode(!1),t(o).addClass(d.toggleClass),o.src=v,o.draggable=!1,u.appendChild(o)),(r=document.createElement("a")).setAttribute("target","_blank"),n||r.setAttribute("download",g),r.href=f,m.src&&(m.controls=!0,(n||t(m)).on("error",function(){h.setTimeout(i,p)}).on("pause",function(){m.seeking||(a=!1,c.removeClass(h.options.videoLoadingClass).removeClass(h.options.videoPlayingClass),l&&h.container.addClass(h.options.controlsClass),delete h.playingVideo,h.interval&&h.play())}).on("playing",function(){a=!1,c.removeClass(h.options.videoLoadingClass).addClass(h.options.videoPlayingClass),h.container.hasClass(h.options.controlsClass)?(l=!0,h.container.removeClass(h.options.controlsClass)):l=!1}).on("play",function(){window.clearTimeout(h.timeout),a=!0,c.addClass(h.options.videoLoadingClass),h.playingVideo=m}),t(r).on("click",function(t){h.preventDefault(t),a?m.pause():m.play()}),u.appendChild(n&&n.element||m)),u.appendChild(r),this.setTimeout(i,[{type:"load",target:u}]),u}}),e}),function(t){"use strict";"function"==typeof define&&define.amd?define(["./blueimp-helper","./blueimp-gallery-video"],t):t(window.blueimp.helper||window.jQuery,window.blueimp.Gallery)}(function(t,e){"use strict";if(!window.postMessage)return e;t.extend(e.prototype.options,{vimeoVideoIdProperty:"vimeo",vimeoPlayerUrl:"//player.vimeo.com/video/VIDEO_ID?api=1&player_id=PLAYER_ID",vimeoPlayerIdPrefix:"vimeo-player-",vimeoClickToPlay:!0});var i=e.prototype.textFactory||e.prototype.imageFactory,n=function(t,e,i,n){this.url=t,this.videoId=e,this.playerId=i,this.clickToPlay=n,this.element=document.createElement("div"),this.listeners={}},o=0;return t.extend(n.prototype,{canPlayType:function(){return!0},on:function(t,e){return this.listeners[t]=e,this},loadAPI:function(){function e(){!n&&o.playOnReady&&o.play(),n=!0}for(var i,n,o=this,s="//f.vimeocdn.com/js/froogaloop2.min.js",r=document.getElementsByTagName("script"),a=r.length;a;)if(a-=1,r[a].src===s){i=r[a];break}i||((i=document.createElement("script")).src=s),t(i).on("load",e),r[0].parentNode.insertBefore(i,r[0]),/loaded|complete/.test(i.readyState)&&e()},onReady:function(){var t=this;this.ready=!0,this.player.addEvent("play",function(){t.hasPlayed=!0,t.onPlaying()}),this.player.addEvent("pause",function(){t.onPause()}),this.player.addEvent("finish",function(){t.onPause()}),this.playOnReady&&this.play()},onPlaying:function(){this.playStatus<2&&(this.listeners.playing(),this.playStatus=2)},onPause:function(){this.listeners.pause(),delete this.playStatus},insertIframe:function(){var t=document.createElement("iframe");t.src=this.url.replace("VIDEO_ID",this.videoId).replace("PLAYER_ID",this.playerId),t.id=this.playerId,this.element.parentNode.replaceChild(t,this.element),this.element=t},play:function(){var t=this;this.playStatus||(this.listeners.play(),this.playStatus=1),this.ready?!this.hasPlayed&&(this.clickToPlay||window.navigator&&/iP(hone|od|ad)/.test(window.navigator.platform))?this.onPlaying():this.player.api("play"):(this.playOnReady=!0,window.$f?this.player||(this.insertIframe(),this.player=$f(this.element),this.player.addEvent("ready",function(){t.onReady()})):this.loadAPI())},pause:function(){this.ready?this.player.api("pause"):this.playStatus&&(delete this.playOnReady,this.listeners.pause(),delete this.playStatus)}}),t.extend(e.prototype,{VimeoPlayer:n,textFactory:function(t,e){var s=this.options,r=this.getItemProperty(t,s.vimeoVideoIdProperty);return r?(void 0===this.getItemProperty(t,s.urlProperty)&&(t[s.urlProperty]="//vimeo.com/"+r),o+=1,this.videoFactory(t,e,new n(s.vimeoPlayerUrl,r,s.vimeoPlayerIdPrefix+o,s.vimeoClickToPlay))):i.call(this,t,e)}}),e}),function(t){"use strict";"function"==typeof define&&define.amd?define(["./blueimp-helper","./blueimp-gallery-video"],t):t(window.blueimp.helper||window.jQuery,window.blueimp.Gallery)}(function(t,e){"use strict";if(!window.postMessage)return e;t.extend(e.prototype.options,{youTubeVideoIdProperty:"youtube",youTubePlayerVars:{wmode:"transparent"},youTubeClickToPlay:!0});var i=e.prototype.textFactory||e.prototype.imageFactory,n=function(t,e,i){this.videoId=t,this.playerVars=e,this.clickToPlay=i,this.element=document.createElement("div"),this.listeners={}};return t.extend(n.prototype,{canPlayType:function(){return!0},on:function(t,e){return this.listeners[t]=e,this},loadAPI:function(){var t,e=this,i=window.onYouTubeIframeAPIReady,n="//www.youtube.com/iframe_api",o=document.getElementsByTagName("script"),s=o.length;for(window.onYouTubeIframeAPIReady=function(){i&&i.apply(this),e.playOnReady&&e.play()};s;)if(s-=1,o[s].src===n)return;(t=document.createElement("script")).src=n,o[0].parentNode.insertBefore(t,o[0])},onReady:function(){this.ready=!0,this.playOnReady&&this.play()},onPlaying:function(){this.playStatus<2&&(this.listeners.playing(),this.playStatus=2)},onPause:function(){e.prototype.setTimeout.call(this,this.checkSeek,null,2e3)},checkSeek:function(){this.stateChange!==YT.PlayerState.PAUSED&&this.stateChange!==YT.PlayerState.ENDED||(this.listeners.pause(),delete this.playStatus)},onStateChange:function(t){switch(t.data){case YT.PlayerState.PLAYING:this.hasPlayed=!0,this.onPlaying();break;case YT.PlayerState.PAUSED:case YT.PlayerState.ENDED:this.onPause()}this.stateChange=t.data},onError:function(t){this.listeners.error(t)},play:function(){var t=this;this.playStatus||(this.listeners.play(),this.playStatus=1),this.ready?!this.hasPlayed&&(this.clickToPlay||window.navigator&&/iP(hone|od|ad)/.test(window.navigator.platform))?this.onPlaying():this.player.playVideo():(this.playOnReady=!0,window.YT&&YT.Player?this.player||(this.player=new YT.Player(this.element,{videoId:this.videoId,playerVars:this.playerVars,events:{onReady:function(){t.onReady()},onStateChange:function(e){t.onStateChange(e)},onError:function(e){t.onError(e)}}})):this.loadAPI())},pause:function(){this.ready?this.player.pauseVideo():this.playStatus&&(delete this.playOnReady,this.listeners.pause(),delete this.playStatus)}}),t.extend(e.prototype,{YouTubePlayer:n,textFactory:function(t,e){var o=this.options,s=this.getItemProperty(t,o.youTubeVideoIdProperty);return s?(void 0===this.getItemProperty(t,o.urlProperty)&&(t[o.urlProperty]="//www.youtube.com/watch?v="+s),void 0===this.getItemProperty(t,o.videoPosterProperty)&&(t[o.videoPosterProperty]="//img.youtube.com/vi/"+s+"/maxresdefault.jpg"),this.videoFactory(t,e,new n(s,o.youTubePlayerVars,o.youTubeClickToPlay))):i.call(this,t,e)}}),e}),jQuery(document).ready(function(t){var e=t(".grid").imagesLoaded(function(){e.masonry({itemSelector:".grid-item",percentPosition:!0,columnWidth:".grid-sizer"})})}),document.getElementById("links").onclick=function(t){var e=(t=t||window.event).target||t.srcElement,i={index:e.src?e.parentNode:e,event:t},n=this.getElementsByTagName("a");blueimp.Gallery(n,i)};
+(self["webpackChunkiDrop"] = self["webpackChunkiDrop"] || []).push([[543],{
+
+/***/ 59:
+/***/ (() => {
+
+"use strict";
+
+
+document.getElementById('links').onclick = function (event) {
+  event = event || window.event;
+  var target = event.target || event.srcElement,
+    link = target.src ? target.parentNode : target,
+    options = {
+      index: link,
+      event: event
+    },
+    links = this.getElementsByTagName('a');
+  blueimp.Gallery(links, options);
+};
+
+/***/ }),
+
+/***/ 409:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
+ * blueimp Gallery JS
+ * https://github.com/blueimp/Gallery
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Swipe implementation based on
+ * https://github.com/bradbirdsall/Swipe
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+
+/* global define, DocumentTouch */
+
+/* eslint-disable no-param-reassign */
+
+;(function (factory) {
+  'use strict'
+  if (true) {
+    // Register as an anonymous AMD module:
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(527)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+  } else {}
+})(function ($) {
+  'use strict'
+
+  /**
+   * Gallery constructor
+   *
+   * @class
+   * @param {Array|NodeList} list Gallery content
+   * @param {object} [options] Gallery options
+   * @returns {object} Gallery object
+   */
+  function Gallery(list, options) {
+    if (document.body.style.maxHeight === undefined) {
+      // document.body.style.maxHeight is undefined on IE6 and lower
+      return null
+    }
+    if (!this || this.options !== Gallery.prototype.options) {
+      // Called as function instead of as constructor,
+      // so we simply return a new instance:
+      return new Gallery(list, options)
+    }
+    if (!list || !list.length) {
+      this.console.log(
+        'blueimp Gallery: No or empty list provided as first argument.',
+        list
+      )
+      return
+    }
+    this.list = list
+    this.num = list.length
+    this.initOptions(options)
+    this.initialize()
+  }
+
+  $.extend(Gallery.prototype, {
+    options: {
+      // The Id, element or querySelector of the gallery widget:
+      container: '#blueimp-gallery',
+      // The tag name, Id, element or querySelector of the slides container:
+      slidesContainer: 'div',
+      // The tag name, Id, element or querySelector of the title element:
+      titleElement: 'h3',
+      // The class to add when the gallery is visible:
+      displayClass: 'blueimp-gallery-display',
+      // The class to add when the gallery controls are visible:
+      controlsClass: 'blueimp-gallery-controls',
+      // The class to add when the gallery only displays one element:
+      singleClass: 'blueimp-gallery-single',
+      // The class to add when the left edge has been reached:
+      leftEdgeClass: 'blueimp-gallery-left',
+      // The class to add when the right edge has been reached:
+      rightEdgeClass: 'blueimp-gallery-right',
+      // The class to add when the automatic slideshow is active:
+      playingClass: 'blueimp-gallery-playing',
+      // The class to add when the browser supports SVG as img (or background):
+      svgasimgClass: 'blueimp-gallery-svgasimg',
+      // The class to add when the browser supports SMIL (animated SVGs):
+      smilClass: 'blueimp-gallery-smil',
+      // The class for all slides:
+      slideClass: 'slide',
+      // The slide class for the active (current index) slide:
+      slideActiveClass: 'slide-active',
+      // The slide class for the previous (before current index) slide:
+      slidePrevClass: 'slide-prev',
+      // The slide class for the next (after current index) slide:
+      slideNextClass: 'slide-next',
+      // The slide class for loading elements:
+      slideLoadingClass: 'slide-loading',
+      // The slide class for elements that failed to load:
+      slideErrorClass: 'slide-error',
+      // The class for the content element loaded into each slide:
+      slideContentClass: 'slide-content',
+      // The class for the "toggle" control:
+      toggleClass: 'toggle',
+      // The class for the "prev" control:
+      prevClass: 'prev',
+      // The class for the "next" control:
+      nextClass: 'next',
+      // The class for the "close" control:
+      closeClass: 'close',
+      // The class for the "play-pause" toggle control:
+      playPauseClass: 'play-pause',
+      // The list object property (or data attribute) with the object type:
+      typeProperty: 'type',
+      // The list object property (or data attribute) with the object title:
+      titleProperty: 'title',
+      // The list object property (or data attribute) with the object alt text:
+      altTextProperty: 'alt',
+      // The list object property (or data attribute) with the object URL:
+      urlProperty: 'href',
+      // The list object property (or data attribute) with the object srcset:
+      srcsetProperty: 'srcset',
+      // The list object property (or data attribute) with the object sizes:
+      sizesProperty: 'sizes',
+      // The list object property (or data attribute) with the object sources:
+      sourcesProperty: 'sources',
+      // The gallery listens for transitionend events before triggering the
+      // opened and closed events, unless the following option is set to false:
+      displayTransition: true,
+      // Defines if the gallery slides are cleared from the gallery modal,
+      // or reused for the next gallery initialization:
+      clearSlides: true,
+      // Toggle the controls on pressing the Enter key:
+      toggleControlsOnEnter: true,
+      // Toggle the controls on slide click:
+      toggleControlsOnSlideClick: true,
+      // Toggle the automatic slideshow interval on pressing the Space key:
+      toggleSlideshowOnSpace: true,
+      // Navigate the gallery by pressing the ArrowLeft and ArrowRight keys:
+      enableKeyboardNavigation: true,
+      // Close the gallery on pressing the Escape key:
+      closeOnEscape: true,
+      // Close the gallery when clicking on an empty slide area:
+      closeOnSlideClick: true,
+      // Close the gallery by swiping up or down:
+      closeOnSwipeUpOrDown: true,
+      // Close the gallery when the URL hash changes:
+      closeOnHashChange: true,
+      // Emulate touch events on mouse-pointer devices such as desktop browsers:
+      emulateTouchEvents: true,
+      // Stop touch events from bubbling up to ancestor elements of the Gallery:
+      stopTouchEventsPropagation: false,
+      // Hide the page scrollbars:
+      hidePageScrollbars: true,
+      // Stops any touches on the container from scrolling the page:
+      disableScroll: true,
+      // Carousel mode (shortcut for carousel specific options):
+      carousel: false,
+      // Allow continuous navigation, moving from last to first
+      // and from first to last slide:
+      continuous: true,
+      // Remove elements outside of the preload range from the DOM:
+      unloadElements: true,
+      // Start with the automatic slideshow:
+      startSlideshow: false,
+      // Delay in milliseconds between slides for the automatic slideshow:
+      slideshowInterval: 5000,
+      // The direction the slides are moving: ltr=LeftToRight or rtl=RightToLeft
+      slideshowDirection: 'ltr',
+      // The starting index as integer.
+      // Can also be an object of the given list,
+      // or an equal object with the same url property:
+      index: 0,
+      // The number of elements to load around the current index:
+      preloadRange: 2,
+      // The transition duration between slide changes in milliseconds:
+      transitionDuration: 300,
+      // The transition duration for automatic slide changes, set to an integer
+      // greater 0 to override the default transition duration:
+      slideshowTransitionDuration: 500,
+      // The event object for which the default action will be canceled
+      // on Gallery initialization (e.g. the click event to open the Gallery):
+      event: undefined,
+      // Callback function executed when the Gallery is initialized.
+      // Is called with the gallery instance as "this" object:
+      onopen: undefined,
+      // Callback function executed when the Gallery has been initialized
+      // and the initialization transition has been completed.
+      // Is called with the gallery instance as "this" object:
+      onopened: undefined,
+      // Callback function executed on slide change.
+      // Is called with the gallery instance as "this" object and the
+      // current index and slide as arguments:
+      onslide: undefined,
+      // Callback function executed after the slide change transition.
+      // Is called with the gallery instance as "this" object and the
+      // current index and slide as arguments:
+      onslideend: undefined,
+      // Callback function executed on slide content load.
+      // Is called with the gallery instance as "this" object and the
+      // slide index and slide element as arguments:
+      onslidecomplete: undefined,
+      // Callback function executed when the Gallery is about to be closed.
+      // Is called with the gallery instance as "this" object:
+      onclose: undefined,
+      // Callback function executed when the Gallery has been closed
+      // and the closing transition has been completed.
+      // Is called with the gallery instance as "this" object:
+      onclosed: undefined
+    },
+
+    carouselOptions: {
+      hidePageScrollbars: false,
+      toggleControlsOnEnter: false,
+      toggleSlideshowOnSpace: false,
+      enableKeyboardNavigation: false,
+      closeOnEscape: false,
+      closeOnSlideClick: false,
+      closeOnSwipeUpOrDown: false,
+      closeOnHashChange: false,
+      disableScroll: false,
+      startSlideshow: true
+    },
+
+    console:
+      window.console && typeof window.console.log === 'function'
+        ? window.console
+        : { log: function () {} },
+
+    // Detect touch, transition, transform and background-size support:
+    support: (function (element) {
+      var support = {
+        source: !!window.HTMLSourceElement,
+        picture: !!window.HTMLPictureElement,
+        svgasimg: document.implementation.hasFeature(
+          'http://www.w3.org/TR/SVG11/feature#Image',
+          '1.1'
+        ),
+        smil:
+          !!document.createElementNS &&
+          /SVGAnimate/.test(
+            document
+              .createElementNS('http://www.w3.org/2000/svg', 'animate')
+              .toString()
+          ),
+        touch:
+          window.ontouchstart !== undefined ||
+          (window.DocumentTouch && document instanceof DocumentTouch)
+      }
+      var transitions = {
+        webkitTransition: {
+          end: 'webkitTransitionEnd',
+          prefix: '-webkit-'
+        },
+        MozTransition: {
+          end: 'transitionend',
+          prefix: '-moz-'
+        },
+        OTransition: {
+          end: 'otransitionend',
+          prefix: '-o-'
+        },
+        transition: {
+          end: 'transitionend',
+          prefix: ''
+        }
+      }
+      var prop
+      for (prop in transitions) {
+        if (
+          Object.prototype.hasOwnProperty.call(transitions, prop) &&
+          element.style[prop] !== undefined
+        ) {
+          support.transition = transitions[prop]
+          support.transition.name = prop
+          break
+        }
+      }
+      /**
+       * Tests browser support
+       */
+      function elementTests() {
+        var transition = support.transition
+        var prop
+        var translateZ
+        document.body.appendChild(element)
+        if (transition) {
+          prop = transition.name.slice(0, -9) + 'ransform'
+          if (element.style[prop] !== undefined) {
+            element.style[prop] = 'translateZ(0)'
+            translateZ = window
+              .getComputedStyle(element)
+              .getPropertyValue(transition.prefix + 'transform')
+            support.transform = {
+              prefix: transition.prefix,
+              name: prop,
+              translate: true,
+              translateZ: !!translateZ && translateZ !== 'none'
+            }
+          }
+        }
+        document.body.removeChild(element)
+      }
+      if (document.body) {
+        elementTests()
+      } else {
+        $(document).on('DOMContentLoaded', elementTests)
+      }
+      return support
+      // Test element, has to be standard HTML and must not be hidden
+      // for the CSS3 tests using window.getComputedStyle to be applicable:
+    })(document.createElement('div')),
+
+    requestAnimationFrame:
+      window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame,
+
+    cancelAnimationFrame:
+      window.cancelAnimationFrame ||
+      window.webkitCancelRequestAnimationFrame ||
+      window.webkitCancelAnimationFrame ||
+      window.mozCancelAnimationFrame,
+
+    initialize: function () {
+      this.initStartIndex()
+      if (this.initWidget() === false) {
+        return false
+      }
+      this.initEventListeners()
+      // Load the slide at the given index:
+      this.onslide(this.index)
+      // Manually trigger the slideend event for the initial slide:
+      this.ontransitionend()
+      // Start the automatic slideshow if applicable:
+      if (this.options.startSlideshow) {
+        this.play()
+      }
+    },
+
+    slide: function (to, duration) {
+      window.clearTimeout(this.timeout)
+      var index = this.index
+      var direction
+      var naturalDirection
+      var diff
+      if (index === to || this.num === 1) {
+        return
+      }
+      if (!duration) {
+        duration = this.options.transitionDuration
+      }
+      if (this.support.transform) {
+        if (!this.options.continuous) {
+          to = this.circle(to)
+        }
+        // 1: backward, -1: forward:
+        direction = Math.abs(index - to) / (index - to)
+        // Get the actual position of the slide:
+        if (this.options.continuous) {
+          naturalDirection = direction
+          direction = -this.positions[this.circle(to)] / this.slideWidth
+          // If going forward but to < index, use to = slides.length + to
+          // If going backward but to > index, use to = -slides.length + to
+          if (direction !== naturalDirection) {
+            to = -direction * this.num + to
+          }
+        }
+        diff = Math.abs(index - to) - 1
+        // Move all the slides between index and to in the right direction:
+        while (diff) {
+          diff -= 1
+          this.move(
+            this.circle((to > index ? to : index) - diff - 1),
+            this.slideWidth * direction,
+            0
+          )
+        }
+        to = this.circle(to)
+        this.move(index, this.slideWidth * direction, duration)
+        this.move(to, 0, duration)
+        if (this.options.continuous) {
+          this.move(
+            this.circle(to - direction),
+            -(this.slideWidth * direction),
+            0
+          )
+        }
+      } else {
+        to = this.circle(to)
+        this.animate(index * -this.slideWidth, to * -this.slideWidth, duration)
+      }
+      this.onslide(to)
+    },
+
+    getIndex: function () {
+      return this.index
+    },
+
+    getNumber: function () {
+      return this.num
+    },
+
+    prev: function () {
+      if (this.options.continuous || this.index) {
+        this.slide(this.index - 1)
+      }
+    },
+
+    next: function () {
+      if (this.options.continuous || this.index < this.num - 1) {
+        this.slide(this.index + 1)
+      }
+    },
+
+    play: function (time) {
+      var that = this
+      var nextIndex =
+        this.index + (this.options.slideshowDirection === 'rtl' ? -1 : 1)
+      window.clearTimeout(this.timeout)
+      this.interval = time || this.options.slideshowInterval
+      if (this.elements[this.index] > 1) {
+        this.timeout = this.setTimeout(
+          (!this.requestAnimationFrame && this.slide) ||
+            function (to, duration) {
+              that.animationFrameId = that.requestAnimationFrame.call(
+                window,
+                function () {
+                  that.slide(to, duration)
+                }
+              )
+            },
+          [nextIndex, this.options.slideshowTransitionDuration],
+          this.interval
+        )
+      }
+      this.container.addClass(this.options.playingClass)
+      this.slidesContainer[0].setAttribute('aria-live', 'off')
+      if (this.playPauseElement.length) {
+        this.playPauseElement[0].setAttribute('aria-pressed', 'true')
+      }
+    },
+
+    pause: function () {
+      window.clearTimeout(this.timeout)
+      this.interval = null
+      if (this.cancelAnimationFrame) {
+        this.cancelAnimationFrame.call(window, this.animationFrameId)
+        this.animationFrameId = null
+      }
+      this.container.removeClass(this.options.playingClass)
+      this.slidesContainer[0].setAttribute('aria-live', 'polite')
+      if (this.playPauseElement.length) {
+        this.playPauseElement[0].setAttribute('aria-pressed', 'false')
+      }
+    },
+
+    add: function (list) {
+      var i
+      if (!list.concat) {
+        // Make a real array out of the list to add:
+        list = Array.prototype.slice.call(list)
+      }
+      if (!this.list.concat) {
+        // Make a real array out of the Gallery list:
+        this.list = Array.prototype.slice.call(this.list)
+      }
+      this.list = this.list.concat(list)
+      this.num = this.list.length
+      if (this.num > 2 && this.options.continuous === null) {
+        this.options.continuous = true
+        this.container.removeClass(this.options.leftEdgeClass)
+      }
+      this.container
+        .removeClass(this.options.rightEdgeClass)
+        .removeClass(this.options.singleClass)
+      for (i = this.num - list.length; i < this.num; i += 1) {
+        this.addSlide(i)
+        this.positionSlide(i)
+      }
+      this.positions.length = this.num
+      this.initSlides(true)
+    },
+
+    resetSlides: function () {
+      this.slidesContainer.empty()
+      this.unloadAllSlides()
+      this.slides = []
+    },
+
+    handleClose: function () {
+      var options = this.options
+      this.destroyEventListeners()
+      // Cancel the slideshow:
+      this.pause()
+      this.container[0].style.display = 'none'
+      this.container
+        .removeClass(options.displayClass)
+        .removeClass(options.singleClass)
+        .removeClass(options.leftEdgeClass)
+        .removeClass(options.rightEdgeClass)
+      if (options.hidePageScrollbars) {
+        document.body.style.overflow = this.bodyOverflowStyle
+      }
+      if (this.options.clearSlides) {
+        this.resetSlides()
+      }
+      if (this.options.onclosed) {
+        this.options.onclosed.call(this)
+      }
+    },
+
+    close: function () {
+      var that = this
+      /**
+       * Close handler
+       *
+       * @param {event} event Close event
+       */
+      function closeHandler(event) {
+        if (event.target === that.container[0]) {
+          that.container.off(that.support.transition.end, closeHandler)
+          that.handleClose()
+        }
+      }
+      if (this.options.onclose) {
+        this.options.onclose.call(this)
+      }
+      if (this.support.transition && this.options.displayTransition) {
+        this.container.on(this.support.transition.end, closeHandler)
+        this.container.removeClass(this.options.displayClass)
+      } else {
+        this.handleClose()
+      }
+    },
+
+    circle: function (index) {
+      // Always return a number inside of the slides index range:
+      return (this.num + (index % this.num)) % this.num
+    },
+
+    move: function (index, dist, duration) {
+      this.translateX(index, dist, duration)
+      this.positions[index] = dist
+    },
+
+    translate: function (index, x, y, duration) {
+      if (!this.slides[index]) return
+      var style = this.slides[index].style
+      var transition = this.support.transition
+      var transform = this.support.transform
+      style[transition.name + 'Duration'] = duration + 'ms'
+      style[transform.name] =
+        'translate(' +
+        x +
+        'px, ' +
+        y +
+        'px)' +
+        (transform.translateZ ? ' translateZ(0)' : '')
+    },
+
+    translateX: function (index, x, duration) {
+      this.translate(index, x, 0, duration)
+    },
+
+    translateY: function (index, y, duration) {
+      this.translate(index, 0, y, duration)
+    },
+
+    animate: function (from, to, duration) {
+      if (!duration) {
+        this.slidesContainer[0].style.left = to + 'px'
+        return
+      }
+      var that = this
+      var start = new Date().getTime()
+      var timer = window.setInterval(function () {
+        var timeElap = new Date().getTime() - start
+        if (timeElap > duration) {
+          that.slidesContainer[0].style.left = to + 'px'
+          that.ontransitionend()
+          window.clearInterval(timer)
+          return
+        }
+        that.slidesContainer[0].style.left =
+          (to - from) * (Math.floor((timeElap / duration) * 100) / 100) +
+          from +
+          'px'
+      }, 4)
+    },
+
+    preventDefault: function (event) {
+      if (event.preventDefault) {
+        event.preventDefault()
+      } else {
+        event.returnValue = false
+      }
+    },
+
+    stopPropagation: function (event) {
+      if (event.stopPropagation) {
+        event.stopPropagation()
+      } else {
+        event.cancelBubble = true
+      }
+    },
+
+    onresize: function () {
+      this.initSlides(true)
+    },
+
+    onhashchange: function () {
+      if (this.options.closeOnHashChange) {
+        this.close()
+      }
+    },
+
+    onmousedown: function (event) {
+      // Trigger on clicks of the left mouse button only
+      // and exclude video & audio elements:
+      if (
+        event.which &&
+        event.which === 1 &&
+        event.target.nodeName !== 'VIDEO' &&
+        event.target.nodeName !== 'AUDIO'
+      ) {
+        // Preventing the default mousedown action is required
+        // to make touch emulation work with Firefox:
+        event.preventDefault()
+        ;(event.originalEvent || event).touches = [
+          {
+            pageX: event.pageX,
+            pageY: event.pageY
+          }
+        ]
+        this.ontouchstart(event)
+      }
+    },
+
+    onmousemove: function (event) {
+      if (this.touchStart) {
+        ;(event.originalEvent || event).touches = [
+          {
+            pageX: event.pageX,
+            pageY: event.pageY
+          }
+        ]
+        this.ontouchmove(event)
+      }
+    },
+
+    onmouseup: function (event) {
+      if (this.touchStart) {
+        this.ontouchend(event)
+        delete this.touchStart
+      }
+    },
+
+    onmouseout: function (event) {
+      if (this.touchStart) {
+        var target = event.target
+        var related = event.relatedTarget
+        if (!related || (related !== target && !$.contains(target, related))) {
+          this.onmouseup(event)
+        }
+      }
+    },
+
+    ontouchstart: function (event) {
+      if (this.options.stopTouchEventsPropagation) {
+        this.stopPropagation(event)
+      }
+      // jQuery doesn't copy touch event properties by default,
+      // so we have to access the originalEvent object:
+      var touch = (event.originalEvent || event).touches[0]
+      this.touchStart = {
+        // Remember the initial touch coordinates:
+        x: touch.pageX,
+        y: touch.pageY,
+        // Store the time to determine touch duration:
+        time: Date.now()
+      }
+      // Helper variable to detect scroll movement:
+      this.isScrolling = undefined
+      // Reset delta values:
+      this.touchDelta = {}
+    },
+
+    ontouchmove: function (event) {
+      if (this.options.stopTouchEventsPropagation) {
+        this.stopPropagation(event)
+      }
+      // jQuery doesn't copy touch event properties by default,
+      // so we have to access the originalEvent object:
+      var touches = (event.originalEvent || event).touches
+      var touch = touches[0]
+      var scale = (event.originalEvent || event).scale
+      var index = this.index
+      var touchDeltaX
+      var indices
+      // Ensure this is a one touch swipe and not, e.g. a pinch:
+      if (touches.length > 1 || (scale && scale !== 1)) {
+        return
+      }
+      if (this.options.disableScroll) {
+        event.preventDefault()
+      }
+      // Measure change in x and y coordinates:
+      this.touchDelta = {
+        x: touch.pageX - this.touchStart.x,
+        y: touch.pageY - this.touchStart.y
+      }
+      touchDeltaX = this.touchDelta.x
+      // Detect if this is a vertical scroll movement (run only once per touch):
+      if (this.isScrolling === undefined) {
+        this.isScrolling =
+          this.isScrolling ||
+          Math.abs(touchDeltaX) < Math.abs(this.touchDelta.y)
+      }
+      if (!this.isScrolling) {
+        // Always prevent horizontal scroll:
+        event.preventDefault()
+        // Stop the slideshow:
+        window.clearTimeout(this.timeout)
+        if (this.options.continuous) {
+          indices = [this.circle(index + 1), index, this.circle(index - 1)]
+        } else {
+          // Increase resistance if first slide and sliding left
+          // or last slide and sliding right:
+          this.touchDelta.x = touchDeltaX =
+            touchDeltaX /
+            ((!index && touchDeltaX > 0) ||
+            (index === this.num - 1 && touchDeltaX < 0)
+              ? Math.abs(touchDeltaX) / this.slideWidth + 1
+              : 1)
+          indices = [index]
+          if (index) {
+            indices.push(index - 1)
+          }
+          if (index < this.num - 1) {
+            indices.unshift(index + 1)
+          }
+        }
+        while (indices.length) {
+          index = indices.pop()
+          this.translateX(index, touchDeltaX + this.positions[index], 0)
+        }
+      } else if (!this.options.carousel) {
+        this.translateY(index, this.touchDelta.y + this.positions[index], 0)
+      }
+    },
+
+    ontouchend: function (event) {
+      if (this.options.stopTouchEventsPropagation) {
+        this.stopPropagation(event)
+      }
+      var index = this.index
+      var absTouchDeltaX = Math.abs(this.touchDelta.x)
+      var slideWidth = this.slideWidth
+      var duration = Math.ceil(
+        (this.options.transitionDuration * (1 - absTouchDeltaX / slideWidth)) /
+          2
+      )
+      // Determine if slide attempt triggers next/prev slide:
+      var isValidSlide = absTouchDeltaX > 20
+      // Determine if slide attempt is past start or end:
+      var isPastBounds =
+        (!index && this.touchDelta.x > 0) ||
+        (index === this.num - 1 && this.touchDelta.x < 0)
+      var isValidClose =
+        !isValidSlide &&
+        this.options.closeOnSwipeUpOrDown &&
+        Math.abs(this.touchDelta.y) > 20
+      var direction
+      var indexForward
+      var indexBackward
+      var distanceForward
+      var distanceBackward
+      if (this.options.continuous) {
+        isPastBounds = false
+      }
+      // Determine direction of swipe (true: right, false: left):
+      direction = this.touchDelta.x < 0 ? -1 : 1
+      if (!this.isScrolling) {
+        if (isValidSlide && !isPastBounds) {
+          indexForward = index + direction
+          indexBackward = index - direction
+          distanceForward = slideWidth * direction
+          distanceBackward = -slideWidth * direction
+          if (this.options.continuous) {
+            this.move(this.circle(indexForward), distanceForward, 0)
+            this.move(this.circle(index - 2 * direction), distanceBackward, 0)
+          } else if (indexForward >= 0 && indexForward < this.num) {
+            this.move(indexForward, distanceForward, 0)
+          }
+          this.move(index, this.positions[index] + distanceForward, duration)
+          this.move(
+            this.circle(indexBackward),
+            this.positions[this.circle(indexBackward)] + distanceForward,
+            duration
+          )
+          index = this.circle(indexBackward)
+          this.onslide(index)
+        } else {
+          // Move back into position
+          if (this.options.continuous) {
+            this.move(this.circle(index - 1), -slideWidth, duration)
+            this.move(index, 0, duration)
+            this.move(this.circle(index + 1), slideWidth, duration)
+          } else {
+            if (index) {
+              this.move(index - 1, -slideWidth, duration)
+            }
+            this.move(index, 0, duration)
+            if (index < this.num - 1) {
+              this.move(index + 1, slideWidth, duration)
+            }
+          }
+        }
+      } else {
+        if (isValidClose) {
+          this.close()
+        } else {
+          // Move back into position
+          this.translateY(index, 0, duration)
+        }
+      }
+    },
+
+    ontouchcancel: function (event) {
+      if (this.touchStart) {
+        this.ontouchend(event)
+        delete this.touchStart
+      }
+    },
+
+    ontransitionend: function (event) {
+      var slide = this.slides[this.index]
+      if (!event || slide === event.target) {
+        if (this.interval) {
+          this.play()
+        }
+        this.setTimeout(this.options.onslideend, [this.index, slide])
+      }
+    },
+
+    oncomplete: function (event) {
+      var target = event.target || event.srcElement
+      var parent = target && target.parentNode
+      var index
+      if (!target || !parent) {
+        return
+      }
+      index = this.getNodeIndex(parent)
+      $(parent).removeClass(this.options.slideLoadingClass)
+      if (event.type === 'error') {
+        $(parent).addClass(this.options.slideErrorClass)
+        this.elements[index] = 3 // Fail
+      } else {
+        this.elements[index] = 2 // Done
+      }
+      // Fix for IE7's lack of support for percentage max-height:
+      if (target.clientHeight > this.container[0].clientHeight) {
+        target.style.maxHeight = this.container[0].clientHeight
+      }
+      if (this.interval && this.slides[this.index] === parent) {
+        this.play()
+      }
+      this.setTimeout(this.options.onslidecomplete, [index, parent])
+    },
+
+    onload: function (event) {
+      this.oncomplete(event)
+    },
+
+    onerror: function (event) {
+      this.oncomplete(event)
+    },
+
+    onkeydown: function (event) {
+      switch (event.which || event.keyCode) {
+        case 13: // Enter
+          if (this.options.toggleControlsOnEnter) {
+            this.preventDefault(event)
+            this.toggleControls()
+          }
+          break
+        case 27: // Escape
+          if (this.options.closeOnEscape) {
+            this.close()
+            // prevent Escape from closing other things
+            event.stopImmediatePropagation()
+          }
+          break
+        case 32: // Space
+          if (this.options.toggleSlideshowOnSpace) {
+            this.preventDefault(event)
+            this.toggleSlideshow()
+          }
+          break
+        case 37: // ArrowLeft
+          if (this.options.enableKeyboardNavigation) {
+            this.preventDefault(event)
+            this.prev()
+          }
+          break
+        case 39: // ArrowRight
+          if (this.options.enableKeyboardNavigation) {
+            this.preventDefault(event)
+            this.next()
+          }
+          break
+      }
+    },
+
+    handleClick: function (event) {
+      var options = this.options
+      var target = event.target || event.srcElement
+      var parent = target.parentNode
+      /**
+       * Checks if the target from the close has the given class
+       *
+       * @param {string} className Class name
+       * @returns {boolean} Returns true if the target has the class name
+       */
+      function isTarget(className) {
+        return $(target).hasClass(className) || $(parent).hasClass(className)
+      }
+      if (isTarget(options.toggleClass)) {
+        // Click on "toggle" control
+        this.preventDefault(event)
+        this.toggleControls()
+      } else if (isTarget(options.prevClass)) {
+        // Click on "prev" control
+        this.preventDefault(event)
+        this.prev()
+      } else if (isTarget(options.nextClass)) {
+        // Click on "next" control
+        this.preventDefault(event)
+        this.next()
+      } else if (isTarget(options.closeClass)) {
+        // Click on "close" control
+        this.preventDefault(event)
+        this.close()
+      } else if (isTarget(options.playPauseClass)) {
+        // Click on "play-pause" control
+        this.preventDefault(event)
+        this.toggleSlideshow()
+      } else if (parent === this.slidesContainer[0]) {
+        // Click on slide background
+        if (options.closeOnSlideClick) {
+          this.preventDefault(event)
+          this.close()
+        } else if (options.toggleControlsOnSlideClick) {
+          this.preventDefault(event)
+          this.toggleControls()
+        }
+      } else if (
+        parent.parentNode &&
+        parent.parentNode === this.slidesContainer[0]
+      ) {
+        // Click on displayed element
+        if (options.toggleControlsOnSlideClick) {
+          this.preventDefault(event)
+          this.toggleControls()
+        }
+      }
+    },
+
+    onclick: function (event) {
+      if (
+        this.options.emulateTouchEvents &&
+        this.touchDelta &&
+        (Math.abs(this.touchDelta.x) > 20 || Math.abs(this.touchDelta.y) > 20)
+      ) {
+        delete this.touchDelta
+        return
+      }
+      return this.handleClick(event)
+    },
+
+    updateEdgeClasses: function (index) {
+      if (!index) {
+        this.container.addClass(this.options.leftEdgeClass)
+      } else {
+        this.container.removeClass(this.options.leftEdgeClass)
+      }
+      if (index === this.num - 1) {
+        this.container.addClass(this.options.rightEdgeClass)
+      } else {
+        this.container.removeClass(this.options.rightEdgeClass)
+      }
+    },
+
+    updateActiveSlide: function (oldIndex, newIndex) {
+      var slides = this.slides
+      var options = this.options
+      var list = [
+        {
+          index: newIndex,
+          method: 'addClass',
+          hidden: false
+        },
+        {
+          index: oldIndex,
+          method: 'removeClass',
+          hidden: true
+        }
+      ]
+      var item, index
+      while (list.length) {
+        item = list.pop()
+        $(slides[item.index])[item.method](options.slideActiveClass)
+        index = this.circle(item.index - 1)
+        if (options.continuous || index < item.index) {
+          $(slides[index])[item.method](options.slidePrevClass)
+        }
+        index = this.circle(item.index + 1)
+        if (options.continuous || index > item.index) {
+          $(slides[index])[item.method](options.slideNextClass)
+        }
+      }
+      this.slides[oldIndex].setAttribute('aria-hidden', 'true')
+      this.slides[newIndex].removeAttribute('aria-hidden')
+    },
+
+    handleSlide: function (oldIndex, newIndex) {
+      if (!this.options.continuous) {
+        this.updateEdgeClasses(newIndex)
+      }
+      this.updateActiveSlide(oldIndex, newIndex)
+      this.loadElements(newIndex)
+      if (this.options.unloadElements) {
+        this.unloadElements(oldIndex, newIndex)
+      }
+      this.setTitle(newIndex)
+    },
+
+    onslide: function (index) {
+      this.handleSlide(this.index, index)
+      this.index = index
+      this.setTimeout(this.options.onslide, [index, this.slides[index]])
+    },
+
+    setTitle: function (index) {
+      var firstChild = this.slides[index].firstChild
+      var text = firstChild.title || firstChild.alt
+      var titleElement = this.titleElement
+      if (titleElement.length) {
+        this.titleElement.empty()
+        if (text) {
+          titleElement[0].appendChild(document.createTextNode(text))
+        }
+      }
+    },
+
+    setTimeout: function (func, args, wait) {
+      var that = this
+      return (
+        func &&
+        window.setTimeout(function () {
+          func.apply(that, args || [])
+        }, wait || 0)
+      )
+    },
+
+    imageFactory: function (obj, callback) {
+      var options = this.options
+      var that = this
+      var url = obj
+      var img = this.imagePrototype.cloneNode(false)
+      var picture
+      var called
+      var sources
+      var srcset
+      var sizes
+      var title
+      var altText
+      var i
+      /**
+       * Wraps the callback function for the load/error event
+       *
+       * @param {event} event load/error event
+       * @returns {number} timeout ID
+       */
+      function callbackWrapper(event) {
+        if (!called) {
+          event = {
+            type: event.type,
+            target: picture || img
+          }
+          if (!event.target.parentNode) {
+            // Fix for browsers (e.g. IE7) firing the load event for
+            // cached images before the element could
+            // be added to the DOM:
+            return that.setTimeout(callbackWrapper, [event])
+          }
+          called = true
+          $(img).off('load error', callbackWrapper)
+          callback(event)
+        }
+      }
+      if (typeof url !== 'string') {
+        url = this.getItemProperty(obj, options.urlProperty)
+        sources =
+          this.support.picture &&
+          this.support.source &&
+          this.getItemProperty(obj, options.sourcesProperty)
+        srcset = this.getItemProperty(obj, options.srcsetProperty)
+        sizes = this.getItemProperty(obj, options.sizesProperty)
+        title = this.getItemProperty(obj, options.titleProperty)
+        altText = this.getItemProperty(obj, options.altTextProperty) || title
+      }
+      img.draggable = false
+      if (title) {
+        img.title = title
+      }
+      if (altText) {
+        img.alt = altText
+      }
+      $(img).on('load error', callbackWrapper)
+      if (sources && sources.length) {
+        picture = this.picturePrototype.cloneNode(false)
+        for (i = 0; i < sources.length; i += 1) {
+          picture.appendChild(
+            $.extend(this.sourcePrototype.cloneNode(false), sources[i])
+          )
+        }
+        picture.appendChild(img)
+        $(picture).addClass(options.toggleClass)
+      }
+      if (srcset) {
+        if (sizes) {
+          img.sizes = sizes
+        }
+        img.srcset = srcset
+      }
+      img.src = url
+      if (picture) return picture
+      return img
+    },
+
+    createElement: function (obj, callback) {
+      var type = obj && this.getItemProperty(obj, this.options.typeProperty)
+      var factory =
+        (type && this[type.split('/')[0] + 'Factory']) || this.imageFactory
+      var element = obj && factory.call(this, obj, callback)
+      if (!element) {
+        element = this.elementPrototype.cloneNode(false)
+        this.setTimeout(callback, [
+          {
+            type: 'error',
+            target: element
+          }
+        ])
+      }
+      $(element).addClass(this.options.slideContentClass)
+      return element
+    },
+
+    iteratePreloadRange: function (index, func) {
+      var num = this.num
+      var options = this.options
+      var limit = Math.min(num, options.preloadRange * 2 + 1)
+      var j = index
+      var i
+      for (i = 0; i < limit; i += 1) {
+        // First iterate to the current index (0),
+        // then the next one (+1),
+        // then the previous one (-1),
+        // then the next after next (+2),
+        // then the one before the previous one (-2), etc.:
+        j += i * (i % 2 === 0 ? -1 : 1)
+        if (j < 0 || j >= num) {
+          if (!options.continuous) continue
+          // Connect the ends of the list to load slide elements for
+          // continuous iteration:
+          j = this.circle(j)
+        }
+        func.call(this, j)
+      }
+    },
+
+    loadElement: function (index) {
+      if (!this.elements[index]) {
+        if (this.slides[index].firstChild) {
+          this.elements[index] = $(this.slides[index]).hasClass(
+            this.options.slideErrorClass
+          )
+            ? 3
+            : 2
+        } else {
+          this.elements[index] = 1 // Loading
+          $(this.slides[index]).addClass(this.options.slideLoadingClass)
+          this.slides[index].appendChild(
+            this.createElement(this.list[index], this.proxyListener)
+          )
+        }
+      }
+    },
+
+    loadElements: function (index) {
+      this.iteratePreloadRange(index, this.loadElement)
+    },
+
+    unloadElements: function (oldIndex, newIndex) {
+      var preloadRange = this.options.preloadRange
+      this.iteratePreloadRange(oldIndex, function (i) {
+        var diff = Math.abs(i - newIndex)
+        if (diff > preloadRange && diff + preloadRange < this.num) {
+          this.unloadSlide(i)
+          delete this.elements[i]
+        }
+      })
+    },
+
+    addSlide: function (index) {
+      var slide = this.slidePrototype.cloneNode(false)
+      slide.setAttribute('data-index', index)
+      slide.setAttribute('aria-hidden', 'true')
+      this.slidesContainer[0].appendChild(slide)
+      this.slides.push(slide)
+    },
+
+    positionSlide: function (index) {
+      var slide = this.slides[index]
+      slide.style.width = this.slideWidth + 'px'
+      if (this.support.transform) {
+        slide.style.left = index * -this.slideWidth + 'px'
+        this.move(
+          index,
+          this.index > index
+            ? -this.slideWidth
+            : this.index < index
+            ? this.slideWidth
+            : 0,
+          0
+        )
+      }
+    },
+
+    initSlides: function (reload) {
+      var clearSlides, i
+      if (!reload) {
+        this.positions = []
+        this.positions.length = this.num
+        this.elements = {}
+        this.picturePrototype =
+          this.support.picture && document.createElement('picture')
+        this.sourcePrototype =
+          this.support.source && document.createElement('source')
+        this.imagePrototype = document.createElement('img')
+        this.elementPrototype = document.createElement('div')
+        this.slidePrototype = this.elementPrototype.cloneNode(false)
+        $(this.slidePrototype).addClass(this.options.slideClass)
+        this.slides = this.slidesContainer[0].children
+        clearSlides =
+          this.options.clearSlides || this.slides.length !== this.num
+      }
+      this.slideWidth = this.container[0].clientWidth
+      this.slideHeight = this.container[0].clientHeight
+      this.slidesContainer[0].style.width = this.num * this.slideWidth + 'px'
+      if (clearSlides) {
+        this.resetSlides()
+      }
+      for (i = 0; i < this.num; i += 1) {
+        if (clearSlides) {
+          this.addSlide(i)
+        }
+        this.positionSlide(i)
+      }
+      // Reposition the slides before and after the given index:
+      if (this.options.continuous && this.support.transform) {
+        this.move(this.circle(this.index - 1), -this.slideWidth, 0)
+        this.move(this.circle(this.index + 1), this.slideWidth, 0)
+      }
+      if (!this.support.transform) {
+        this.slidesContainer[0].style.left =
+          this.index * -this.slideWidth + 'px'
+      }
+    },
+
+    unloadSlide: function (index) {
+      var slide, firstChild
+      slide = this.slides[index]
+      firstChild = slide.firstChild
+      if (firstChild !== null) {
+        slide.removeChild(firstChild)
+      }
+    },
+
+    unloadAllSlides: function () {
+      var i, len
+      for (i = 0, len = this.slides.length; i < len; i++) {
+        this.unloadSlide(i)
+      }
+    },
+
+    toggleControls: function () {
+      var controlsClass = this.options.controlsClass
+      if (this.container.hasClass(controlsClass)) {
+        this.container.removeClass(controlsClass)
+      } else {
+        this.container.addClass(controlsClass)
+      }
+    },
+
+    toggleSlideshow: function () {
+      if (!this.interval) {
+        this.play()
+      } else {
+        this.pause()
+      }
+    },
+
+    getNodeIndex: function (element) {
+      return parseInt(element.getAttribute('data-index'), 10)
+    },
+
+    getNestedProperty: function (obj, property) {
+      property.replace(
+        // Matches native JavaScript notation in a String,
+        // e.g. '["doubleQuoteProp"].dotProp[2]'
+        // eslint-disable-next-line no-useless-escape
+        /\[(?:'([^']+)'|"([^"]+)"|(\d+))\]|(?:(?:^|\.)([^\.\[]+))/g,
+        function (str, singleQuoteProp, doubleQuoteProp, arrayIndex, dotProp) {
+          var prop =
+            dotProp ||
+            singleQuoteProp ||
+            doubleQuoteProp ||
+            (arrayIndex && parseInt(arrayIndex, 10))
+          if (str && obj) {
+            obj = obj[prop]
+          }
+        }
+      )
+      return obj
+    },
+
+    getDataProperty: function (obj, property) {
+      var key
+      var prop
+      if (obj.dataset) {
+        key = property.replace(/-([a-z])/g, function (_, b) {
+          return b.toUpperCase()
+        })
+        prop = obj.dataset[key]
+      } else if (obj.getAttribute) {
+        prop = obj.getAttribute(
+          'data-' + property.replace(/([A-Z])/g, '-$1').toLowerCase()
+        )
+      }
+      if (typeof prop === 'string') {
+        // eslint-disable-next-line no-useless-escape
+        if (
+          /^(true|false|null|-?\d+(\.\d+)?|\{[\s\S]*\}|\[[\s\S]*\])$/.test(prop)
+        ) {
+          try {
+            return $.parseJSON(prop)
+          } catch (ignore) {
+            // ignore JSON parsing errors
+          }
+        }
+        return prop
+      }
+    },
+
+    getItemProperty: function (obj, property) {
+      var prop = this.getDataProperty(obj, property)
+      if (prop === undefined) {
+        prop = obj[property]
+      }
+      if (prop === undefined) {
+        prop = this.getNestedProperty(obj, property)
+      }
+      return prop
+    },
+
+    initStartIndex: function () {
+      var index = this.options.index
+      var urlProperty = this.options.urlProperty
+      var i
+      // Check if the index is given as a list object:
+      if (index && typeof index !== 'number') {
+        for (i = 0; i < this.num; i += 1) {
+          if (
+            this.list[i] === index ||
+            this.getItemProperty(this.list[i], urlProperty) ===
+              this.getItemProperty(index, urlProperty)
+          ) {
+            index = i
+            break
+          }
+        }
+      }
+      // Make sure the index is in the list range:
+      this.index = this.circle(parseInt(index, 10) || 0)
+    },
+
+    initEventListeners: function () {
+      var that = this
+      var slidesContainer = this.slidesContainer
+      /**
+       * Proxy listener
+       *
+       * @param {event} event original event
+       */
+      function proxyListener(event) {
+        var type =
+          that.support.transition && that.support.transition.end === event.type
+            ? 'transitionend'
+            : event.type
+        that['on' + type](event)
+      }
+      $(window).on('resize', proxyListener)
+      $(window).on('hashchange', proxyListener)
+      $(document.body).on('keydown', proxyListener)
+      this.container.on('click', proxyListener)
+      if (this.support.touch) {
+        slidesContainer.on(
+          'touchstart touchmove touchend touchcancel',
+          proxyListener
+        )
+      } else if (this.options.emulateTouchEvents && this.support.transition) {
+        slidesContainer.on(
+          'mousedown mousemove mouseup mouseout',
+          proxyListener
+        )
+      }
+      if (this.support.transition) {
+        slidesContainer.on(this.support.transition.end, proxyListener)
+      }
+      this.proxyListener = proxyListener
+    },
+
+    destroyEventListeners: function () {
+      var slidesContainer = this.slidesContainer
+      var proxyListener = this.proxyListener
+      $(window).off('resize', proxyListener)
+      $(document.body).off('keydown', proxyListener)
+      this.container.off('click', proxyListener)
+      if (this.support.touch) {
+        slidesContainer.off(
+          'touchstart touchmove touchend touchcancel',
+          proxyListener
+        )
+      } else if (this.options.emulateTouchEvents && this.support.transition) {
+        slidesContainer.off(
+          'mousedown mousemove mouseup mouseout',
+          proxyListener
+        )
+      }
+      if (this.support.transition) {
+        slidesContainer.off(this.support.transition.end, proxyListener)
+      }
+    },
+
+    handleOpen: function () {
+      if (this.options.onopened) {
+        this.options.onopened.call(this)
+      }
+    },
+
+    initWidget: function () {
+      var that = this
+      /**
+       * Open handler
+       *
+       * @param {event} event Gallery open event
+       */
+      function openHandler(event) {
+        if (event.target === that.container[0]) {
+          that.container.off(that.support.transition.end, openHandler)
+          that.handleOpen()
+        }
+      }
+      this.container = $(this.options.container)
+      if (!this.container.length) {
+        this.console.log(
+          'blueimp Gallery: Widget container not found.',
+          this.options.container
+        )
+        return false
+      }
+      this.slidesContainer = this.container
+        .find(this.options.slidesContainer)
+        .first()
+      if (!this.slidesContainer.length) {
+        this.console.log(
+          'blueimp Gallery: Slides container not found.',
+          this.options.slidesContainer
+        )
+        return false
+      }
+      this.titleElement = this.container.find(this.options.titleElement).first()
+      this.playPauseElement = this.container
+        .find('.' + this.options.playPauseClass)
+        .first()
+      if (this.num === 1) {
+        this.container.addClass(this.options.singleClass)
+      }
+      if (this.support.svgasimg) {
+        this.container.addClass(this.options.svgasimgClass)
+      }
+      if (this.support.smil) {
+        this.container.addClass(this.options.smilClass)
+      }
+      if (this.options.onopen) {
+        this.options.onopen.call(this)
+      }
+      if (this.support.transition && this.options.displayTransition) {
+        this.container.on(this.support.transition.end, openHandler)
+      } else {
+        this.handleOpen()
+      }
+      if (this.options.hidePageScrollbars) {
+        // Hide the page scrollbars:
+        this.bodyOverflowStyle = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+      }
+      this.container[0].style.display = 'block'
+      this.initSlides()
+      this.container.addClass(this.options.displayClass)
+    },
+
+    initOptions: function (options) {
+      // Create a copy of the prototype options:
+      this.options = $.extend({}, this.options)
+      // Check if carousel mode is enabled:
+      if (
+        (options && options.carousel) ||
+        (this.options.carousel && (!options || options.carousel !== false))
+      ) {
+        $.extend(this.options, this.carouselOptions)
+      }
+      // Override any given options:
+      $.extend(this.options, options)
+      if (this.num < 3) {
+        // 1 or 2 slides cannot be displayed continuous,
+        // remember the original option by setting to null instead of false:
+        this.options.continuous = this.options.continuous ? null : false
+      }
+      if (!this.support.transition) {
+        this.options.emulateTouchEvents = false
+      }
+      if (this.options.event) {
+        this.preventDefault(this.options.event)
+      }
+    }
+  })
+
+  return Gallery
+})
+
+
+/***/ }),
+
+/***/ 527:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*
+ * blueimp helper JS
+ * https://github.com/blueimp/Gallery
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+
+/* global define */
+
+/* eslint-disable no-param-reassign */
+
+;(function () {
+  'use strict'
+
+  /**
+   * Object.assign polyfill
+   *
+   * @param {object} obj1 First object
+   * @param {object} obj2 Second object
+   * @returns {object} Merged object
+   */
+  function extend(obj1, obj2) {
+    var prop
+    for (prop in obj2) {
+      if (Object.prototype.hasOwnProperty.call(obj2, prop)) {
+        obj1[prop] = obj2[prop]
+      }
+    }
+    return obj1
+  }
+  /**
+   * Helper constructor
+   *
+   * @class
+   * @param {*} query jQuery type query argument
+   */
+  function Helper(query) {
+    if (!this || this.find !== Helper.prototype.find) {
+      // Called as function instead of as constructor,
+      // so we simply return a new instance:
+      return new Helper(query)
+    }
+    this.length = 0
+    if (query) {
+      if (typeof query === 'string') {
+        query = this.find(query)
+      }
+      if (query.nodeType || query === query.window) {
+        // Single HTML element
+        this.length = 1
+        this[0] = query
+      } else {
+        // HTML element collection
+        var i = query.length
+        this.length = i
+        while (i) {
+          i -= 1
+          this[i] = query[i]
+        }
+      }
+    }
+  }
+
+  Helper.extend = extend
+
+  Helper.contains = function (container, element) {
+    do {
+      element = element.parentNode
+      if (element === container) {
+        return true
+      }
+    } while (element)
+    return false
+  }
+
+  Helper.parseJSON = function (string) {
+    return JSON.parse(string)
+  }
+
+  extend(Helper.prototype, {
+    find: function (query) {
+      var container = this[0] || document
+      if (typeof query === 'string') {
+        if (container.querySelectorAll) {
+          query = container.querySelectorAll(query)
+        } else if (query.charAt(0) === '#') {
+          query = container.getElementById(query.slice(1))
+        } else {
+          query = container.getElementsByTagName(query)
+        }
+      }
+      return new Helper(query)
+    },
+
+    hasClass: function (className) {
+      if (!this[0]) return false
+      return new RegExp('(?:^|\\s+)' + className + '(?:\\s+|$)').test(
+        this[0].className
+      )
+    },
+
+    addClass: function (className) {
+      var i = this.length
+      var classNames
+      var element
+      var j
+      while (i) {
+        i -= 1
+        element = this[i]
+        if (!element.className) {
+          element.className = className
+          continue
+        }
+        if (!classNames) classNames = className.split(/\s+/)
+        for (j = 0; j < classNames.length; j += 1) {
+          if (this.hasClass(classNames[j])) {
+            continue
+          }
+          element.className += ' ' + classNames[j]
+        }
+      }
+      return this
+    },
+
+    removeClass: function (className) {
+      // Match any of the given class names
+      var regexp = new RegExp('^(?:' + className.split(/\s+/).join('|') + ')$')
+      // Match any class names and their trailing whitespace
+      var matcher = /(\S+)(?:\s+|$)/g
+      var replacer = function (match, className) {
+        // Replace class names that match the given ones
+        return regexp.test(className) ? '' : match
+      }
+      var trimEnd = /\s+$/
+      var i = this.length
+      var element
+      while (i) {
+        i -= 1
+        element = this[i]
+        element.className = element.className
+          .replace(matcher, replacer)
+          .replace(trimEnd, '')
+      }
+      return this
+    },
+
+    on: function (eventName, handler) {
+      var eventNames = eventName.split(/\s+/)
+      var i
+      var element
+      while (eventNames.length) {
+        eventName = eventNames.shift()
+        i = this.length
+        while (i) {
+          i -= 1
+          element = this[i]
+          if (element.addEventListener) {
+            element.addEventListener(eventName, handler, false)
+          } else if (element.attachEvent) {
+            element.attachEvent('on' + eventName, handler)
+          }
+        }
+      }
+      return this
+    },
+
+    off: function (eventName, handler) {
+      var eventNames = eventName.split(/\s+/)
+      var i
+      var element
+      while (eventNames.length) {
+        eventName = eventNames.shift()
+        i = this.length
+        while (i) {
+          i -= 1
+          element = this[i]
+          if (element.removeEventListener) {
+            element.removeEventListener(eventName, handler, false)
+          } else if (element.detachEvent) {
+            element.detachEvent('on' + eventName, handler)
+          }
+        }
+      }
+      return this
+    },
+
+    empty: function () {
+      var i = this.length
+      var element
+      while (i) {
+        i -= 1
+        element = this[i]
+        while (element.hasChildNodes()) {
+          element.removeChild(element.lastChild)
+        }
+      }
+      return this
+    },
+
+    first: function () {
+      return new Helper(this[0])
+    }
+  })
+
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+      return Helper
+    }).call(exports, __webpack_require__, exports, module),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+  } else {}
+})()
+
+
+/***/ }),
+
+/***/ 786:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * matchesSelector v2.0.2
+ * matchesSelector( element, '.selector' )
+ * MIT license
+ */
+
+/*jshint browser: true, strict: true, undef: true, unused: true */
+
+( function( window, factory ) {
+  /*global define: false, module: false */
+  'use strict';
+  // universal module definition
+  if ( true ) {
+    // AMD
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+}( window, function factory() {
+  'use strict';
+
+  var matchesMethod = ( function() {
+    var ElemProto = window.Element.prototype;
+    // check for the standard method name first
+    if ( ElemProto.matches ) {
+      return 'matches';
+    }
+    // check un-prefixed
+    if ( ElemProto.matchesSelector ) {
+      return 'matchesSelector';
+    }
+    // check vendor prefixes
+    var prefixes = [ 'webkit', 'moz', 'ms', 'o' ];
+
+    for ( var i=0; i < prefixes.length; i++ ) {
+      var prefix = prefixes[i];
+      var method = prefix + 'MatchesSelector';
+      if ( ElemProto[ method ] ) {
+        return method;
+      }
+    }
+  })();
+
+  return function matchesSelector( elem, selector ) {
+    return elem[ matchesMethod ]( selector );
+  };
+
+}));
+
+
+/***/ }),
+
+/***/ 137:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+( function( global, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if ( true ) {
+    // AMD - RequireJS
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+"use strict";
+
+function EvEmitter() {}
+
+var proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // set events hash
+  var events = this._events = this._events || {};
+  // set listeners array
+  var listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( listeners.indexOf( listener ) == -1 ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  var onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  var index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
+  args = args || [];
+  // once stuff
+  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
+    var isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+};
+
+return EvEmitter;
+
+}));
+
+
+/***/ }),
+
+/***/ 977:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * Fizzy UI utils v2.0.7
+ * MIT license
+ */
+
+/*jshint browser: true, undef: true, unused: true, strict: true */
+
+( function( window, factory ) {
+  // universal module definition
+  /*jshint strict: false */ /*globals define, module, require */
+
+  if ( true ) {
+    // AMD
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+      __webpack_require__(786)
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( matchesSelector ) {
+      return factory( window, matchesSelector );
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+}( window, function factory( window, matchesSelector ) {
+
+'use strict';
+
+var utils = {};
+
+// ----- extend ----- //
+
+// extends objects
+utils.extend = function( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+};
+
+// ----- modulo ----- //
+
+utils.modulo = function( num, div ) {
+  return ( ( num % div ) + div ) % div;
+};
+
+// ----- makeArray ----- //
+
+var arraySlice = Array.prototype.slice;
+
+// turn element or nodeList into an array
+utils.makeArray = function( obj ) {
+  if ( Array.isArray( obj ) ) {
+    // use object if already an array
+    return obj;
+  }
+  // return empty array if undefined or null. #6
+  if ( obj === null || obj === undefined ) {
+    return [];
+  }
+
+  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  if ( isArrayLike ) {
+    // convert nodeList to array
+    return arraySlice.call( obj );
+  }
+
+  // array of single index
+  return [ obj ];
+};
+
+// ----- removeFrom ----- //
+
+utils.removeFrom = function( ary, obj ) {
+  var index = ary.indexOf( obj );
+  if ( index != -1 ) {
+    ary.splice( index, 1 );
+  }
+};
+
+// ----- getParent ----- //
+
+utils.getParent = function( elem, selector ) {
+  while ( elem.parentNode && elem != document.body ) {
+    elem = elem.parentNode;
+    if ( matchesSelector( elem, selector ) ) {
+      return elem;
+    }
+  }
+};
+
+// ----- getQueryElement ----- //
+
+// use element as selector string
+utils.getQueryElement = function( elem ) {
+  if ( typeof elem == 'string' ) {
+    return document.querySelector( elem );
+  }
+  return elem;
+};
+
+// ----- handleEvent ----- //
+
+// enable .ontype to trigger from .addEventListener( elem, 'type' )
+utils.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+// ----- filterFindElements ----- //
+
+utils.filterFindElements = function( elems, selector ) {
+  // make array of elems
+  elems = utils.makeArray( elems );
+  var ffElems = [];
+
+  elems.forEach( function( elem ) {
+    // check that elem is an actual element
+    if ( !( elem instanceof HTMLElement ) ) {
+      return;
+    }
+    // add elem if no selector
+    if ( !selector ) {
+      ffElems.push( elem );
+      return;
+    }
+    // filter & find items if we have a selector
+    // filter
+    if ( matchesSelector( elem, selector ) ) {
+      ffElems.push( elem );
+    }
+    // find children
+    var childElems = elem.querySelectorAll( selector );
+    // concat childElems to filterFound array
+    for ( var i=0; i < childElems.length; i++ ) {
+      ffElems.push( childElems[i] );
+    }
+  });
+
+  return ffElems;
+};
+
+// ----- debounceMethod ----- //
+
+utils.debounceMethod = function( _class, methodName, threshold ) {
+  threshold = threshold || 100;
+  // original method
+  var method = _class.prototype[ methodName ];
+  var timeoutName = methodName + 'Timeout';
+
+  _class.prototype[ methodName ] = function() {
+    var timeout = this[ timeoutName ];
+    clearTimeout( timeout );
+
+    var args = arguments;
+    var _this = this;
+    this[ timeoutName ] = setTimeout( function() {
+      method.apply( _this, args );
+      delete _this[ timeoutName ];
+    }, threshold );
+  };
+};
+
+// ----- docReady ----- //
+
+utils.docReady = function( callback ) {
+  var readyState = document.readyState;
+  if ( readyState == 'complete' || readyState == 'interactive' ) {
+    // do async to allow for other scripts to run. metafizzy/flickity#441
+    setTimeout( callback );
+  } else {
+    document.addEventListener( 'DOMContentLoaded', callback );
+  }
+};
+
+// ----- htmlInit ----- //
+
+// http://jamesroberts.name/blog/2010/02/22/string-functions-for-javascript-trim-to-camel-case-to-dashed-and-to-underscore/
+utils.toDashed = function( str ) {
+  return str.replace( /(.)([A-Z])/g, function( match, $1, $2 ) {
+    return $1 + '-' + $2;
+  }).toLowerCase();
+};
+
+var console = window.console;
+/**
+ * allow user to initialize classes via [data-namespace] or .js-namespace class
+ * htmlInit( Widget, 'widgetName' )
+ * options are parsed from data-namespace-options
+ */
+utils.htmlInit = function( WidgetClass, namespace ) {
+  utils.docReady( function() {
+    var dashedNamespace = utils.toDashed( namespace );
+    var dataAttr = 'data-' + dashedNamespace;
+    var dataAttrElems = document.querySelectorAll( '[' + dataAttr + ']' );
+    var jsDashElems = document.querySelectorAll( '.js-' + dashedNamespace );
+    var elems = utils.makeArray( dataAttrElems )
+      .concat( utils.makeArray( jsDashElems ) );
+    var dataOptionsAttr = dataAttr + '-options';
+    var jQuery = window.jQuery;
+
+    elems.forEach( function( elem ) {
+      var attr = elem.getAttribute( dataAttr ) ||
+        elem.getAttribute( dataOptionsAttr );
+      var options;
+      try {
+        options = attr && JSON.parse( attr );
+      } catch ( error ) {
+        // log error, do not initialize
+        if ( console ) {
+          console.error( 'Error parsing ' + dataAttr + ' on ' + elem.className +
+          ': ' + error );
+        }
+        return;
+      }
+      // initialize
+      var instance = new WidgetClass( elem, options );
+      // make available via $().data('namespace')
+      if ( jQuery ) {
+        jQuery.data( elem, namespace, instance );
+      }
+    });
+
+  });
+};
+
+// -----  ----- //
+
+return utils;
+
+}));
+
+
+/***/ }),
+
+/***/ 485:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * getSize v2.0.3
+ * measure size of elements
+ * MIT license
+ */
+
+/* jshint browser: true, strict: true, undef: true, unused: true */
+/* globals console: false */
+
+( function( window, factory ) {
+  /* jshint strict: false */ /* globals define, module */
+  if ( true ) {
+    // AMD
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+})( window, function factory() {
+'use strict';
+
+// -------------------------- helpers -------------------------- //
+
+// get a number from a string, not a percentage
+function getStyleSize( value ) {
+  var num = parseFloat( value );
+  // not a percent like '100%', and a number
+  var isValid = value.indexOf('%') == -1 && !isNaN( num );
+  return isValid && num;
+}
+
+function noop() {}
+
+var logError = typeof console == 'undefined' ? noop :
+  function( message ) {
+    console.error( message );
+  };
+
+// -------------------------- measurements -------------------------- //
+
+var measurements = [
+  'paddingLeft',
+  'paddingRight',
+  'paddingTop',
+  'paddingBottom',
+  'marginLeft',
+  'marginRight',
+  'marginTop',
+  'marginBottom',
+  'borderLeftWidth',
+  'borderRightWidth',
+  'borderTopWidth',
+  'borderBottomWidth'
+];
+
+var measurementsLength = measurements.length;
+
+function getZeroSize() {
+  var size = {
+    width: 0,
+    height: 0,
+    innerWidth: 0,
+    innerHeight: 0,
+    outerWidth: 0,
+    outerHeight: 0
+  };
+  for ( var i=0; i < measurementsLength; i++ ) {
+    var measurement = measurements[i];
+    size[ measurement ] = 0;
+  }
+  return size;
+}
+
+// -------------------------- getStyle -------------------------- //
+
+/**
+ * getStyle, get style of element, check for Firefox bug
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+ */
+function getStyle( elem ) {
+  var style = getComputedStyle( elem );
+  if ( !style ) {
+    logError( 'Style returned ' + style +
+      '. Are you running this code in a hidden iframe on Firefox? ' +
+      'See https://bit.ly/getsizebug1' );
+  }
+  return style;
+}
+
+// -------------------------- setup -------------------------- //
+
+var isSetup = false;
+
+var isBoxSizeOuter;
+
+/**
+ * setup
+ * check isBoxSizerOuter
+ * do on first getSize() rather than on page load for Firefox bug
+ */
+function setup() {
+  // setup once
+  if ( isSetup ) {
+    return;
+  }
+  isSetup = true;
+
+  // -------------------------- box sizing -------------------------- //
+
+  /**
+   * Chrome & Safari measure the outer-width on style.width on border-box elems
+   * IE11 & Firefox<29 measures the inner-width
+   */
+  var div = document.createElement('div');
+  div.style.width = '200px';
+  div.style.padding = '1px 2px 3px 4px';
+  div.style.borderStyle = 'solid';
+  div.style.borderWidth = '1px 2px 3px 4px';
+  div.style.boxSizing = 'border-box';
+
+  var body = document.body || document.documentElement;
+  body.appendChild( div );
+  var style = getStyle( div );
+  // round value for browser zoom. desandro/masonry#928
+  isBoxSizeOuter = Math.round( getStyleSize( style.width ) ) == 200;
+  getSize.isBoxSizeOuter = isBoxSizeOuter;
+
+  body.removeChild( div );
+}
+
+// -------------------------- getSize -------------------------- //
+
+function getSize( elem ) {
+  setup();
+
+  // use querySeletor if elem is string
+  if ( typeof elem == 'string' ) {
+    elem = document.querySelector( elem );
+  }
+
+  // do not proceed on non-objects
+  if ( !elem || typeof elem != 'object' || !elem.nodeType ) {
+    return;
+  }
+
+  var style = getStyle( elem );
+
+  // if hidden, everything is 0
+  if ( style.display == 'none' ) {
+    return getZeroSize();
+  }
+
+  var size = {};
+  size.width = elem.offsetWidth;
+  size.height = elem.offsetHeight;
+
+  var isBorderBox = size.isBorderBox = style.boxSizing == 'border-box';
+
+  // get all measurements
+  for ( var i=0; i < measurementsLength; i++ ) {
+    var measurement = measurements[i];
+    var value = style[ measurement ];
+    var num = parseFloat( value );
+    // any 'auto', 'medium' value will be 0
+    size[ measurement ] = !isNaN( num ) ? num : 0;
+  }
+
+  var paddingWidth = size.paddingLeft + size.paddingRight;
+  var paddingHeight = size.paddingTop + size.paddingBottom;
+  var marginWidth = size.marginLeft + size.marginRight;
+  var marginHeight = size.marginTop + size.marginBottom;
+  var borderWidth = size.borderLeftWidth + size.borderRightWidth;
+  var borderHeight = size.borderTopWidth + size.borderBottomWidth;
+
+  var isBorderBoxSizeOuter = isBorderBox && isBoxSizeOuter;
+
+  // overwrite width and height if we can get it from style
+  var styleWidth = getStyleSize( style.width );
+  if ( styleWidth !== false ) {
+    size.width = styleWidth +
+      // add padding and border unless it's already including it
+      ( isBorderBoxSizeOuter ? 0 : paddingWidth + borderWidth );
+  }
+
+  var styleHeight = getStyleSize( style.height );
+  if ( styleHeight !== false ) {
+    size.height = styleHeight +
+      // add padding and border unless it's already including it
+      ( isBorderBoxSizeOuter ? 0 : paddingHeight + borderHeight );
+  }
+
+  size.innerWidth = size.width - ( paddingWidth + borderWidth );
+  size.innerHeight = size.height - ( paddingHeight + borderHeight );
+
+  size.outerWidth = size.width + marginWidth;
+  size.outerHeight = size.height + marginHeight;
+
+  return size;
+}
+
+return getSize;
+
+});
+
+
+/***/ }),
+
+/***/ 943:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+/*!
+ * imagesLoaded v5.0.0
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  if (  true && module.exports ) {
+    // CommonJS
+    module.exports = factory( window, __webpack_require__(228) );
+  } else {
+    // browser global
+    window.imagesLoaded = factory( window, window.EvEmitter );
+  }
+
+} )( typeof window !== 'undefined' ? window : this,
+    function factory( window, EvEmitter ) {
+
+let $ = window.jQuery;
+let console = window.console;
+
+// -------------------------- helpers -------------------------- //
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  // use object if already an array
+  if ( Array.isArray( obj ) ) return obj;
+
+  let isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  // convert nodeList to array
+  if ( isArrayLike ) return [ ...obj ];
+
+  // array of single index
+  return [ obj ];
+}
+
+// -------------------------- imagesLoaded -------------------------- //
+
+/**
+ * @param {[Array, Element, NodeList, String]} elem
+ * @param {[Object, Function]} options - if function, use as callback
+ * @param {Function} onAlways - callback function
+ * @returns {ImagesLoaded}
+ */
+function ImagesLoaded( elem, options, onAlways ) {
+  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+  if ( !( this instanceof ImagesLoaded ) ) {
+    return new ImagesLoaded( elem, options, onAlways );
+  }
+  // use elem as selector string
+  let queryElem = elem;
+  if ( typeof elem == 'string' ) {
+    queryElem = document.querySelectorAll( elem );
+  }
+  // bail if bad element
+  if ( !queryElem ) {
+    console.error(`Bad element for imagesLoaded ${queryElem || elem}`);
+    return;
+  }
+
+  this.elements = makeArray( queryElem );
+  this.options = {};
+  // shift arguments if no options set
+  if ( typeof options == 'function' ) {
+    onAlways = options;
+  } else {
+    Object.assign( this.options, options );
+  }
+
+  if ( onAlways ) this.on( 'always', onAlways );
+
+  this.getImages();
+  // add jQuery Deferred object
+  if ( $ ) this.jqDeferred = new $.Deferred();
+
+  // HACK check async to allow time to bind listeners
+  setTimeout( this.check.bind( this ) );
+}
+
+ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
+
+ImagesLoaded.prototype.getImages = function() {
+  this.images = [];
+
+  // filter & find items if we have an item selector
+  this.elements.forEach( this.addElementImages, this );
+};
+
+const elementNodeTypes = [ 1, 9, 11 ];
+
+/**
+ * @param {Node} elem
+ */
+ImagesLoaded.prototype.addElementImages = function( elem ) {
+  // filter siblings
+  if ( elem.nodeName === 'IMG' ) {
+    this.addImage( elem );
+  }
+  // get background image on element
+  if ( this.options.background === true ) {
+    this.addElementBackgroundImages( elem );
+  }
+
+  // find children
+  // no non-element nodes, #143
+  let { nodeType } = elem;
+  if ( !nodeType || !elementNodeTypes.includes( nodeType ) ) return;
+
+  let childImgs = elem.querySelectorAll('img');
+  // concat childElems to filterFound array
+  for ( let img of childImgs ) {
+    this.addImage( img );
+  }
+
+  // get child background images
+  if ( typeof this.options.background == 'string' ) {
+    let children = elem.querySelectorAll( this.options.background );
+    for ( let child of children ) {
+      this.addElementBackgroundImages( child );
+    }
+  }
+};
+
+const reURL = /url\((['"])?(.*?)\1\)/gi;
+
+ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+  let style = getComputedStyle( elem );
+  // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+  if ( !style ) return;
+
+  // get url inside url("...")
+  let matches = reURL.exec( style.backgroundImage );
+  while ( matches !== null ) {
+    let url = matches && matches[2];
+    if ( url ) {
+      this.addBackground( url, elem );
+    }
+    matches = reURL.exec( style.backgroundImage );
+  }
+};
+
+/**
+ * @param {Image} img
+ */
+ImagesLoaded.prototype.addImage = function( img ) {
+  let loadingImage = new LoadingImage( img );
+  this.images.push( loadingImage );
+};
+
+ImagesLoaded.prototype.addBackground = function( url, elem ) {
+  let background = new Background( url, elem );
+  this.images.push( background );
+};
+
+ImagesLoaded.prototype.check = function() {
+  this.progressedCount = 0;
+  this.hasAnyBroken = false;
+  // complete if no images
+  if ( !this.images.length ) {
+    this.complete();
+    return;
+  }
+
+  /* eslint-disable-next-line func-style */
+  let onProgress = ( image, elem, message ) => {
+    // HACK - Chrome triggers event before object properties have changed. #83
+    setTimeout( () => {
+      this.progress( image, elem, message );
+    } );
+  };
+
+  this.images.forEach( function( loadingImage ) {
+    loadingImage.once( 'progress', onProgress );
+    loadingImage.check();
+  } );
+};
+
+ImagesLoaded.prototype.progress = function( image, elem, message ) {
+  this.progressedCount++;
+  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+  // progress event
+  this.emitEvent( 'progress', [ this, image, elem ] );
+  if ( this.jqDeferred && this.jqDeferred.notify ) {
+    this.jqDeferred.notify( this, image );
+  }
+  // check if completed
+  if ( this.progressedCount === this.images.length ) {
+    this.complete();
+  }
+
+  if ( this.options.debug && console ) {
+    console.log( `progress: ${message}`, image, elem );
+  }
+};
+
+ImagesLoaded.prototype.complete = function() {
+  let eventName = this.hasAnyBroken ? 'fail' : 'done';
+  this.isComplete = true;
+  this.emitEvent( eventName, [ this ] );
+  this.emitEvent( 'always', [ this ] );
+  if ( this.jqDeferred ) {
+    let jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+    this.jqDeferred[ jqMethod ]( this );
+  }
+};
+
+// --------------------------  -------------------------- //
+
+function LoadingImage( img ) {
+  this.img = img;
+}
+
+LoadingImage.prototype = Object.create( EvEmitter.prototype );
+
+LoadingImage.prototype.check = function() {
+  // If complete is true and browser supports natural sizes,
+  // try to check for image status manually.
+  let isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    // report based on naturalWidth
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    return;
+  }
+
+  // If none of the checks above matched, simulate loading on detached element.
+  this.proxyImage = new Image();
+  // add crossOrigin attribute. #204
+  if ( this.img.crossOrigin ) {
+    this.proxyImage.crossOrigin = this.img.crossOrigin;
+  }
+  this.proxyImage.addEventListener( 'load', this );
+  this.proxyImage.addEventListener( 'error', this );
+  // bind to image as well for Firefox. #191
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.proxyImage.src = this.img.currentSrc || this.img.src;
+};
+
+LoadingImage.prototype.getIsImageComplete = function() {
+  // check for non-zero, non-undefined naturalWidth
+  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
+  return this.img.complete && this.img.naturalWidth;
+};
+
+LoadingImage.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  let { parentNode } = this.img;
+  // emit progress with parent <picture> or self <img>
+  let elem = parentNode.nodeName === 'PICTURE' ? parentNode : this.img;
+  this.emitEvent( 'progress', [ this, elem, message ] );
+};
+
+// ----- events ----- //
+
+// trigger specified handler for event type
+LoadingImage.prototype.handleEvent = function( event ) {
+  let method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+LoadingImage.prototype.onload = function() {
+  this.confirm( true, 'onload' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.onerror = function() {
+  this.confirm( false, 'onerror' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.unbindEvents = function() {
+  this.proxyImage.removeEventListener( 'load', this );
+  this.proxyImage.removeEventListener( 'error', this );
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+// -------------------------- Background -------------------------- //
+
+function Background( url, element ) {
+  this.url = url;
+  this.element = element;
+  this.img = new Image();
+}
+
+// inherit LoadingImage prototype
+Background.prototype = Object.create( LoadingImage.prototype );
+
+Background.prototype.check = function() {
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.img.src = this.url;
+  // check if image is already complete
+  let isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    this.unbindEvents();
+  }
+};
+
+Background.prototype.unbindEvents = function() {
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+Background.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.element, message ] );
+};
+
+// -------------------------- jQuery -------------------------- //
+
+ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+  jQuery = jQuery || window.jQuery;
+  if ( !jQuery ) return;
+
+  // set local variable
+  $ = jQuery;
+  // $().imagesLoaded()
+  $.fn.imagesLoaded = function( options, onAlways ) {
+    let instance = new ImagesLoaded( this, options, onAlways );
+    return instance.jqDeferred.promise( $( this ) );
+  };
+};
+// try making plugin
+ImagesLoaded.makeJQueryPlugin();
+
+// --------------------------  -------------------------- //
+
+return ImagesLoaded;
+
+} );
+
+
+/***/ }),
+
+/***/ 228:
+/***/ (function(module) {
+
+/**
+ * EvEmitter v2.1.1
+ * Lil' event emitter
+ * MIT License
+ */
+
+( function( global, factory ) {
+  // universal module definition
+  if (  true && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+function EvEmitter() {}
+
+let proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) return this;
+
+  // set events hash
+  let events = this._events = this._events || {};
+  // set listeners array
+  let listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( !listeners.includes( listener ) ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) return this;
+
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  let onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  let onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  let listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) return this;
+
+  let index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  let listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) return this;
+
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice( 0 );
+  args = args || [];
+  // once stuff
+  let onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( let listener of listeners ) {
+    let isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+  return this;
+};
+
+return EvEmitter;
+
+} ) );
+
+
+/***/ }),
+
+/***/ 994:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * Masonry v4.2.2
+ * Cascading grid layout library
+ * https://masonry.desandro.com
+ * MIT License
+ * by David DeSandro
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /*globals define, module, require */
+  if ( true ) {
+    // AMD
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+        __webpack_require__(831),
+        __webpack_require__(485)
+      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+}( window, function factory( Outlayer, getSize ) {
+
+'use strict';
+
+// -------------------------- masonryDefinition -------------------------- //
+
+  // create an Outlayer layout class
+  var Masonry = Outlayer.create('masonry');
+  // isFitWidth -> fitWidth
+  Masonry.compatOptions.fitWidth = 'isFitWidth';
+
+  var proto = Masonry.prototype;
+
+  proto._resetLayout = function() {
+    this.getSize();
+    this._getMeasurement( 'columnWidth', 'outerWidth' );
+    this._getMeasurement( 'gutter', 'outerWidth' );
+    this.measureColumns();
+
+    // reset column Y
+    this.colYs = [];
+    for ( var i=0; i < this.cols; i++ ) {
+      this.colYs.push( 0 );
+    }
+
+    this.maxY = 0;
+    this.horizontalColIndex = 0;
+  };
+
+  proto.measureColumns = function() {
+    this.getContainerWidth();
+    // if columnWidth is 0, default to outerWidth of first item
+    if ( !this.columnWidth ) {
+      var firstItem = this.items[0];
+      var firstItemElem = firstItem && firstItem.element;
+      // columnWidth fall back to item of first element
+      this.columnWidth = firstItemElem && getSize( firstItemElem ).outerWidth ||
+        // if first elem has no width, default to size of container
+        this.containerWidth;
+    }
+
+    var columnWidth = this.columnWidth += this.gutter;
+
+    // calculate columns
+    var containerWidth = this.containerWidth + this.gutter;
+    var cols = containerWidth / columnWidth;
+    // fix rounding errors, typically with gutters
+    var excess = columnWidth - containerWidth % columnWidth;
+    // if overshoot is less than a pixel, round up, otherwise floor it
+    var mathMethod = excess && excess < 1 ? 'round' : 'floor';
+    cols = Math[ mathMethod ]( cols );
+    this.cols = Math.max( cols, 1 );
+  };
+
+  proto.getContainerWidth = function() {
+    // container is parent if fit width
+    var isFitWidth = this._getOption('fitWidth');
+    var container = isFitWidth ? this.element.parentNode : this.element;
+    // check that this.size and size are there
+    // IE8 triggers resize on body size change, so they might not be
+    var size = getSize( container );
+    this.containerWidth = size && size.innerWidth;
+  };
+
+  proto._getItemLayoutPosition = function( item ) {
+    item.getSize();
+    // how many columns does this brick span
+    var remainder = item.size.outerWidth % this.columnWidth;
+    var mathMethod = remainder && remainder < 1 ? 'round' : 'ceil';
+    // round if off by 1 pixel, otherwise use ceil
+    var colSpan = Math[ mathMethod ]( item.size.outerWidth / this.columnWidth );
+    colSpan = Math.min( colSpan, this.cols );
+    // use horizontal or top column position
+    var colPosMethod = this.options.horizontalOrder ?
+      '_getHorizontalColPosition' : '_getTopColPosition';
+    var colPosition = this[ colPosMethod ]( colSpan, item );
+    // position the brick
+    var position = {
+      x: this.columnWidth * colPosition.col,
+      y: colPosition.y
+    };
+    // apply setHeight to necessary columns
+    var setHeight = colPosition.y + item.size.outerHeight;
+    var setMax = colSpan + colPosition.col;
+    for ( var i = colPosition.col; i < setMax; i++ ) {
+      this.colYs[i] = setHeight;
+    }
+
+    return position;
+  };
+
+  proto._getTopColPosition = function( colSpan ) {
+    var colGroup = this._getTopColGroup( colSpan );
+    // get the minimum Y value from the columns
+    var minimumY = Math.min.apply( Math, colGroup );
+
+    return {
+      col: colGroup.indexOf( minimumY ),
+      y: minimumY,
+    };
+  };
+
+  /**
+   * @param {Number} colSpan - number of columns the element spans
+   * @returns {Array} colGroup
+   */
+  proto._getTopColGroup = function( colSpan ) {
+    if ( colSpan < 2 ) {
+      // if brick spans only one column, use all the column Ys
+      return this.colYs;
+    }
+
+    var colGroup = [];
+    // how many different places could this brick fit horizontally
+    var groupCount = this.cols + 1 - colSpan;
+    // for each group potential horizontal position
+    for ( var i = 0; i < groupCount; i++ ) {
+      colGroup[i] = this._getColGroupY( i, colSpan );
+    }
+    return colGroup;
+  };
+
+  proto._getColGroupY = function( col, colSpan ) {
+    if ( colSpan < 2 ) {
+      return this.colYs[ col ];
+    }
+    // make an array of colY values for that one group
+    var groupColYs = this.colYs.slice( col, col + colSpan );
+    // and get the max value of the array
+    return Math.max.apply( Math, groupColYs );
+  };
+
+  // get column position based on horizontal index. #873
+  proto._getHorizontalColPosition = function( colSpan, item ) {
+    var col = this.horizontalColIndex % this.cols;
+    var isOver = colSpan > 1 && col + colSpan > this.cols;
+    // shift to next row if item can't fit on current row
+    col = isOver ? 0 : col;
+    // don't let zero-size items take up space
+    var hasSize = item.size.outerWidth && item.size.outerHeight;
+    this.horizontalColIndex = hasSize ? col + colSpan : this.horizontalColIndex;
+
+    return {
+      col: col,
+      y: this._getColGroupY( col, colSpan ),
+    };
+  };
+
+  proto._manageStamp = function( stamp ) {
+    var stampSize = getSize( stamp );
+    var offset = this._getElementOffset( stamp );
+    // get the columns that this stamp affects
+    var isOriginLeft = this._getOption('originLeft');
+    var firstX = isOriginLeft ? offset.left : offset.right;
+    var lastX = firstX + stampSize.outerWidth;
+    var firstCol = Math.floor( firstX / this.columnWidth );
+    firstCol = Math.max( 0, firstCol );
+    var lastCol = Math.floor( lastX / this.columnWidth );
+    // lastCol should not go over if multiple of columnWidth #425
+    lastCol -= lastX % this.columnWidth ? 0 : 1;
+    lastCol = Math.min( this.cols - 1, lastCol );
+    // set colYs to bottom of the stamp
+
+    var isOriginTop = this._getOption('originTop');
+    var stampMaxY = ( isOriginTop ? offset.top : offset.bottom ) +
+      stampSize.outerHeight;
+    for ( var i = firstCol; i <= lastCol; i++ ) {
+      this.colYs[i] = Math.max( stampMaxY, this.colYs[i] );
+    }
+  };
+
+  proto._getContainerSize = function() {
+    this.maxY = Math.max.apply( Math, this.colYs );
+    var size = {
+      height: this.maxY
+    };
+
+    if ( this._getOption('fitWidth') ) {
+      size.width = this._getContainerFitWidth();
+    }
+
+    return size;
+  };
+
+  proto._getContainerFitWidth = function() {
+    var unusedCols = 0;
+    // count unused columns
+    var i = this.cols;
+    while ( --i ) {
+      if ( this.colYs[i] !== 0 ) {
+        break;
+      }
+      unusedCols++;
+    }
+    // fit container to columns that have been used
+    return ( this.cols - unusedCols ) * this.columnWidth - this.gutter;
+  };
+
+  proto.needsResizeLayout = function() {
+    var previousWidth = this.containerWidth;
+    this.getContainerWidth();
+    return previousWidth != this.containerWidth;
+  };
+
+  return Masonry;
+
+}));
+
+
+/***/ }),
+
+/***/ 169:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * Outlayer Item
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, require */
+  if ( true ) {
+    // AMD - RequireJS
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+        __webpack_require__(137),
+        __webpack_require__(485)
+      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+}( window, function factory( EvEmitter, getSize ) {
+'use strict';
+
+// ----- helpers ----- //
+
+function isEmptyObj( obj ) {
+  for ( var prop in obj ) {
+    return false;
+  }
+  prop = null;
+  return true;
+}
+
+// -------------------------- CSS3 support -------------------------- //
+
+
+var docElemStyle = document.documentElement.style;
+
+var transitionProperty = typeof docElemStyle.transition == 'string' ?
+  'transition' : 'WebkitTransition';
+var transformProperty = typeof docElemStyle.transform == 'string' ?
+  'transform' : 'WebkitTransform';
+
+var transitionEndEvent = {
+  WebkitTransition: 'webkitTransitionEnd',
+  transition: 'transitionend'
+}[ transitionProperty ];
+
+// cache all vendor properties that could have vendor prefix
+var vendorProperties = {
+  transform: transformProperty,
+  transition: transitionProperty,
+  transitionDuration: transitionProperty + 'Duration',
+  transitionProperty: transitionProperty + 'Property',
+  transitionDelay: transitionProperty + 'Delay'
+};
+
+// -------------------------- Item -------------------------- //
+
+function Item( element, layout ) {
+  if ( !element ) {
+    return;
+  }
+
+  this.element = element;
+  // parent layout class, i.e. Masonry, Isotope, or Packery
+  this.layout = layout;
+  this.position = {
+    x: 0,
+    y: 0
+  };
+
+  this._create();
+}
+
+// inherit EvEmitter
+var proto = Item.prototype = Object.create( EvEmitter.prototype );
+proto.constructor = Item;
+
+proto._create = function() {
+  // transition objects
+  this._transn = {
+    ingProperties: {},
+    clean: {},
+    onEnd: {}
+  };
+
+  this.css({
+    position: 'absolute'
+  });
+};
+
+// trigger specified handler for event type
+proto.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+proto.getSize = function() {
+  this.size = getSize( this.element );
+};
+
+/**
+ * apply CSS styles to element
+ * @param {Object} style
+ */
+proto.css = function( style ) {
+  var elemStyle = this.element.style;
+
+  for ( var prop in style ) {
+    // use vendor property if available
+    var supportedProp = vendorProperties[ prop ] || prop;
+    elemStyle[ supportedProp ] = style[ prop ];
+  }
+};
+
+ // measure position, and sets it
+proto.getPosition = function() {
+  var style = getComputedStyle( this.element );
+  var isOriginLeft = this.layout._getOption('originLeft');
+  var isOriginTop = this.layout._getOption('originTop');
+  var xValue = style[ isOriginLeft ? 'left' : 'right' ];
+  var yValue = style[ isOriginTop ? 'top' : 'bottom' ];
+  var x = parseFloat( xValue );
+  var y = parseFloat( yValue );
+  // convert percent to pixels
+  var layoutSize = this.layout.size;
+  if ( xValue.indexOf('%') != -1 ) {
+    x = ( x / 100 ) * layoutSize.width;
+  }
+  if ( yValue.indexOf('%') != -1 ) {
+    y = ( y / 100 ) * layoutSize.height;
+  }
+  // clean up 'auto' or other non-integer values
+  x = isNaN( x ) ? 0 : x;
+  y = isNaN( y ) ? 0 : y;
+  // remove padding from measurement
+  x -= isOriginLeft ? layoutSize.paddingLeft : layoutSize.paddingRight;
+  y -= isOriginTop ? layoutSize.paddingTop : layoutSize.paddingBottom;
+
+  this.position.x = x;
+  this.position.y = y;
+};
+
+// set settled position, apply padding
+proto.layoutPosition = function() {
+  var layoutSize = this.layout.size;
+  var style = {};
+  var isOriginLeft = this.layout._getOption('originLeft');
+  var isOriginTop = this.layout._getOption('originTop');
+
+  // x
+  var xPadding = isOriginLeft ? 'paddingLeft' : 'paddingRight';
+  var xProperty = isOriginLeft ? 'left' : 'right';
+  var xResetProperty = isOriginLeft ? 'right' : 'left';
+
+  var x = this.position.x + layoutSize[ xPadding ];
+  // set in percentage or pixels
+  style[ xProperty ] = this.getXValue( x );
+  // reset other property
+  style[ xResetProperty ] = '';
+
+  // y
+  var yPadding = isOriginTop ? 'paddingTop' : 'paddingBottom';
+  var yProperty = isOriginTop ? 'top' : 'bottom';
+  var yResetProperty = isOriginTop ? 'bottom' : 'top';
+
+  var y = this.position.y + layoutSize[ yPadding ];
+  // set in percentage or pixels
+  style[ yProperty ] = this.getYValue( y );
+  // reset other property
+  style[ yResetProperty ] = '';
+
+  this.css( style );
+  this.emitEvent( 'layout', [ this ] );
+};
+
+proto.getXValue = function( x ) {
+  var isHorizontal = this.layout._getOption('horizontal');
+  return this.layout.options.percentPosition && !isHorizontal ?
+    ( ( x / this.layout.size.width ) * 100 ) + '%' : x + 'px';
+};
+
+proto.getYValue = function( y ) {
+  var isHorizontal = this.layout._getOption('horizontal');
+  return this.layout.options.percentPosition && isHorizontal ?
+    ( ( y / this.layout.size.height ) * 100 ) + '%' : y + 'px';
+};
+
+proto._transitionTo = function( x, y ) {
+  this.getPosition();
+  // get current x & y from top/left
+  var curX = this.position.x;
+  var curY = this.position.y;
+
+  var didNotMove = x == this.position.x && y == this.position.y;
+
+  // save end position
+  this.setPosition( x, y );
+
+  // if did not move and not transitioning, just go to layout
+  if ( didNotMove && !this.isTransitioning ) {
+    this.layoutPosition();
+    return;
+  }
+
+  var transX = x - curX;
+  var transY = y - curY;
+  var transitionStyle = {};
+  transitionStyle.transform = this.getTranslate( transX, transY );
+
+  this.transition({
+    to: transitionStyle,
+    onTransitionEnd: {
+      transform: this.layoutPosition
+    },
+    isCleaning: true
+  });
+};
+
+proto.getTranslate = function( x, y ) {
+  // flip cooridinates if origin on right or bottom
+  var isOriginLeft = this.layout._getOption('originLeft');
+  var isOriginTop = this.layout._getOption('originTop');
+  x = isOriginLeft ? x : -x;
+  y = isOriginTop ? y : -y;
+  return 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+};
+
+// non transition + transform support
+proto.goTo = function( x, y ) {
+  this.setPosition( x, y );
+  this.layoutPosition();
+};
+
+proto.moveTo = proto._transitionTo;
+
+proto.setPosition = function( x, y ) {
+  this.position.x = parseFloat( x );
+  this.position.y = parseFloat( y );
+};
+
+// ----- transition ----- //
+
+/**
+ * @param {Object} style - CSS
+ * @param {Function} onTransitionEnd
+ */
+
+// non transition, just trigger callback
+proto._nonTransition = function( args ) {
+  this.css( args.to );
+  if ( args.isCleaning ) {
+    this._removeStyles( args.to );
+  }
+  for ( var prop in args.onTransitionEnd ) {
+    args.onTransitionEnd[ prop ].call( this );
+  }
+};
+
+/**
+ * proper transition
+ * @param {Object} args - arguments
+ *   @param {Object} to - style to transition to
+ *   @param {Object} from - style to start transition from
+ *   @param {Boolean} isCleaning - removes transition styles after transition
+ *   @param {Function} onTransitionEnd - callback
+ */
+proto.transition = function( args ) {
+  // redirect to nonTransition if no transition duration
+  if ( !parseFloat( this.layout.options.transitionDuration ) ) {
+    this._nonTransition( args );
+    return;
+  }
+
+  var _transition = this._transn;
+  // keep track of onTransitionEnd callback by css property
+  for ( var prop in args.onTransitionEnd ) {
+    _transition.onEnd[ prop ] = args.onTransitionEnd[ prop ];
+  }
+  // keep track of properties that are transitioning
+  for ( prop in args.to ) {
+    _transition.ingProperties[ prop ] = true;
+    // keep track of properties to clean up when transition is done
+    if ( args.isCleaning ) {
+      _transition.clean[ prop ] = true;
+    }
+  }
+
+  // set from styles
+  if ( args.from ) {
+    this.css( args.from );
+    // force redraw. http://blog.alexmaccaw.com/css-transitions
+    var h = this.element.offsetHeight;
+    // hack for JSHint to hush about unused var
+    h = null;
+  }
+  // enable transition
+  this.enableTransition( args.to );
+  // set styles that are transitioning
+  this.css( args.to );
+
+  this.isTransitioning = true;
+
+};
+
+// dash before all cap letters, including first for
+// WebkitTransform => -webkit-transform
+function toDashedAll( str ) {
+  return str.replace( /([A-Z])/g, function( $1 ) {
+    return '-' + $1.toLowerCase();
+  });
+}
+
+var transitionProps = 'opacity,' + toDashedAll( transformProperty );
+
+proto.enableTransition = function(/* style */) {
+  // HACK changing transitionProperty during a transition
+  // will cause transition to jump
+  if ( this.isTransitioning ) {
+    return;
+  }
+
+  // make `transition: foo, bar, baz` from style object
+  // HACK un-comment this when enableTransition can work
+  // while a transition is happening
+  // var transitionValues = [];
+  // for ( var prop in style ) {
+  //   // dash-ify camelCased properties like WebkitTransition
+  //   prop = vendorProperties[ prop ] || prop;
+  //   transitionValues.push( toDashedAll( prop ) );
+  // }
+  // munge number to millisecond, to match stagger
+  var duration = this.layout.options.transitionDuration;
+  duration = typeof duration == 'number' ? duration + 'ms' : duration;
+  // enable transition styles
+  this.css({
+    transitionProperty: transitionProps,
+    transitionDuration: duration,
+    transitionDelay: this.staggerDelay || 0
+  });
+  // listen for transition end event
+  this.element.addEventListener( transitionEndEvent, this, false );
+};
+
+// ----- events ----- //
+
+proto.onwebkitTransitionEnd = function( event ) {
+  this.ontransitionend( event );
+};
+
+proto.onotransitionend = function( event ) {
+  this.ontransitionend( event );
+};
+
+// properties that I munge to make my life easier
+var dashedVendorProperties = {
+  '-webkit-transform': 'transform'
+};
+
+proto.ontransitionend = function( event ) {
+  // disregard bubbled events from children
+  if ( event.target !== this.element ) {
+    return;
+  }
+  var _transition = this._transn;
+  // get property name of transitioned property, convert to prefix-free
+  var propertyName = dashedVendorProperties[ event.propertyName ] || event.propertyName;
+
+  // remove property that has completed transitioning
+  delete _transition.ingProperties[ propertyName ];
+  // check if any properties are still transitioning
+  if ( isEmptyObj( _transition.ingProperties ) ) {
+    // all properties have completed transitioning
+    this.disableTransition();
+  }
+  // clean style
+  if ( propertyName in _transition.clean ) {
+    // clean up style
+    this.element.style[ event.propertyName ] = '';
+    delete _transition.clean[ propertyName ];
+  }
+  // trigger onTransitionEnd callback
+  if ( propertyName in _transition.onEnd ) {
+    var onTransitionEnd = _transition.onEnd[ propertyName ];
+    onTransitionEnd.call( this );
+    delete _transition.onEnd[ propertyName ];
+  }
+
+  this.emitEvent( 'transitionEnd', [ this ] );
+};
+
+proto.disableTransition = function() {
+  this.removeTransitionStyles();
+  this.element.removeEventListener( transitionEndEvent, this, false );
+  this.isTransitioning = false;
+};
+
+/**
+ * removes style property from element
+ * @param {Object} style
+**/
+proto._removeStyles = function( style ) {
+  // clean up transition styles
+  var cleanStyle = {};
+  for ( var prop in style ) {
+    cleanStyle[ prop ] = '';
+  }
+  this.css( cleanStyle );
+};
+
+var cleanTransitionStyle = {
+  transitionProperty: '',
+  transitionDuration: '',
+  transitionDelay: ''
+};
+
+proto.removeTransitionStyles = function() {
+  // remove transition
+  this.css( cleanTransitionStyle );
+};
+
+// ----- stagger ----- //
+
+proto.stagger = function( delay ) {
+  delay = isNaN( delay ) ? 0 : delay;
+  this.staggerDelay = delay + 'ms';
+};
+
+// ----- show/hide/remove ----- //
+
+// remove element from DOM
+proto.removeElem = function() {
+  this.element.parentNode.removeChild( this.element );
+  // remove display: none
+  this.css({ display: '' });
+  this.emitEvent( 'remove', [ this ] );
+};
+
+proto.remove = function() {
+  // just remove element if no transition support or no transition
+  if ( !transitionProperty || !parseFloat( this.layout.options.transitionDuration ) ) {
+    this.removeElem();
+    return;
+  }
+
+  // start transition
+  this.once( 'transitionEnd', function() {
+    this.removeElem();
+  });
+  this.hide();
+};
+
+proto.reveal = function() {
+  delete this.isHidden;
+  // remove display: none
+  this.css({ display: '' });
+
+  var options = this.layout.options;
+
+  var onTransitionEnd = {};
+  var transitionEndProperty = this.getHideRevealTransitionEndProperty('visibleStyle');
+  onTransitionEnd[ transitionEndProperty ] = this.onRevealTransitionEnd;
+
+  this.transition({
+    from: options.hiddenStyle,
+    to: options.visibleStyle,
+    isCleaning: true,
+    onTransitionEnd: onTransitionEnd
+  });
+};
+
+proto.onRevealTransitionEnd = function() {
+  // check if still visible
+  // during transition, item may have been hidden
+  if ( !this.isHidden ) {
+    this.emitEvent('reveal');
+  }
+};
+
+/**
+ * get style property use for hide/reveal transition end
+ * @param {String} styleProperty - hiddenStyle/visibleStyle
+ * @returns {String}
+ */
+proto.getHideRevealTransitionEndProperty = function( styleProperty ) {
+  var optionStyle = this.layout.options[ styleProperty ];
+  // use opacity
+  if ( optionStyle.opacity ) {
+    return 'opacity';
+  }
+  // get first property
+  for ( var prop in optionStyle ) {
+    return prop;
+  }
+};
+
+proto.hide = function() {
+  // set flag
+  this.isHidden = true;
+  // remove display: none
+  this.css({ display: '' });
+
+  var options = this.layout.options;
+
+  var onTransitionEnd = {};
+  var transitionEndProperty = this.getHideRevealTransitionEndProperty('hiddenStyle');
+  onTransitionEnd[ transitionEndProperty ] = this.onHideTransitionEnd;
+
+  this.transition({
+    from: options.visibleStyle,
+    to: options.hiddenStyle,
+    // keep hidden stuff hidden
+    isCleaning: true,
+    onTransitionEnd: onTransitionEnd
+  });
+};
+
+proto.onHideTransitionEnd = function() {
+  // check if still hidden
+  // during transition, item may have been un-hidden
+  if ( this.isHidden ) {
+    this.css({ display: 'none' });
+    this.emitEvent('hide');
+  }
+};
+
+proto.destroy = function() {
+  this.css({
+    position: '',
+    left: '',
+    right: '',
+    top: '',
+    bottom: '',
+    transition: '',
+    transform: ''
+  });
+};
+
+return Item;
+
+}));
+
+
+/***/ }),
+
+/***/ 831:
+/***/ ((module, exports, __webpack_require__) => {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * Outlayer v2.1.1
+ * the brains and guts of a layout library
+ * MIT license
+ */
+
+( function( window, factory ) {
+  'use strict';
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, require */
+  if ( true ) {
+    // AMD - RequireJS
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+        __webpack_require__(137),
+        __webpack_require__(485),
+        __webpack_require__(977),
+        __webpack_require__(169)
+      ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter, getSize, utils, Item ) {
+        return factory( window, EvEmitter, getSize, utils, Item);
+      }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+}( window, function factory( window, EvEmitter, getSize, utils, Item ) {
+'use strict';
+
+// ----- vars ----- //
+
+var console = window.console;
+var jQuery = window.jQuery;
+var noop = function() {};
+
+// -------------------------- Outlayer -------------------------- //
+
+// globally unique identifiers
+var GUID = 0;
+// internal store of all Outlayer intances
+var instances = {};
+
+
+/**
+ * @param {Element, String} element
+ * @param {Object} options
+ * @constructor
+ */
+function Outlayer( element, options ) {
+  var queryElement = utils.getQueryElement( element );
+  if ( !queryElement ) {
+    if ( console ) {
+      console.error( 'Bad element for ' + this.constructor.namespace +
+        ': ' + ( queryElement || element ) );
+    }
+    return;
+  }
+  this.element = queryElement;
+  // add jQuery
+  if ( jQuery ) {
+    this.$element = jQuery( this.element );
+  }
+
+  // options
+  this.options = utils.extend( {}, this.constructor.defaults );
+  this.option( options );
+
+  // add id for Outlayer.getFromElement
+  var id = ++GUID;
+  this.element.outlayerGUID = id; // expando
+  instances[ id ] = this; // associate via id
+
+  // kick it off
+  this._create();
+
+  var isInitLayout = this._getOption('initLayout');
+  if ( isInitLayout ) {
+    this.layout();
+  }
+}
+
+// settings are for internal use only
+Outlayer.namespace = 'outlayer';
+Outlayer.Item = Item;
+
+// default options
+Outlayer.defaults = {
+  containerStyle: {
+    position: 'relative'
+  },
+  initLayout: true,
+  originLeft: true,
+  originTop: true,
+  resize: true,
+  resizeContainer: true,
+  // item options
+  transitionDuration: '0.4s',
+  hiddenStyle: {
+    opacity: 0,
+    transform: 'scale(0.001)'
+  },
+  visibleStyle: {
+    opacity: 1,
+    transform: 'scale(1)'
+  }
+};
+
+var proto = Outlayer.prototype;
+// inherit EvEmitter
+utils.extend( proto, EvEmitter.prototype );
+
+/**
+ * set options
+ * @param {Object} opts
+ */
+proto.option = function( opts ) {
+  utils.extend( this.options, opts );
+};
+
+/**
+ * get backwards compatible option value, check old name
+ */
+proto._getOption = function( option ) {
+  var oldOption = this.constructor.compatOptions[ option ];
+  return oldOption && this.options[ oldOption ] !== undefined ?
+    this.options[ oldOption ] : this.options[ option ];
+};
+
+Outlayer.compatOptions = {
+  // currentName: oldName
+  initLayout: 'isInitLayout',
+  horizontal: 'isHorizontal',
+  layoutInstant: 'isLayoutInstant',
+  originLeft: 'isOriginLeft',
+  originTop: 'isOriginTop',
+  resize: 'isResizeBound',
+  resizeContainer: 'isResizingContainer'
+};
+
+proto._create = function() {
+  // get items from children
+  this.reloadItems();
+  // elements that affect layout, but are not laid out
+  this.stamps = [];
+  this.stamp( this.options.stamp );
+  // set container style
+  utils.extend( this.element.style, this.options.containerStyle );
+
+  // bind resize method
+  var canBindResize = this._getOption('resize');
+  if ( canBindResize ) {
+    this.bindResize();
+  }
+};
+
+// goes through all children again and gets bricks in proper order
+proto.reloadItems = function() {
+  // collection of item elements
+  this.items = this._itemize( this.element.children );
+};
+
+
+/**
+ * turn elements into Outlayer.Items to be used in layout
+ * @param {Array or NodeList or HTMLElement} elems
+ * @returns {Array} items - collection of new Outlayer Items
+ */
+proto._itemize = function( elems ) {
+
+  var itemElems = this._filterFindItemElements( elems );
+  var Item = this.constructor.Item;
+
+  // create new Outlayer Items for collection
+  var items = [];
+  for ( var i=0; i < itemElems.length; i++ ) {
+    var elem = itemElems[i];
+    var item = new Item( elem, this );
+    items.push( item );
+  }
+
+  return items;
+};
+
+/**
+ * get item elements to be used in layout
+ * @param {Array or NodeList or HTMLElement} elems
+ * @returns {Array} items - item elements
+ */
+proto._filterFindItemElements = function( elems ) {
+  return utils.filterFindElements( elems, this.options.itemSelector );
+};
+
+/**
+ * getter method for getting item elements
+ * @returns {Array} elems - collection of item elements
+ */
+proto.getItemElements = function() {
+  return this.items.map( function( item ) {
+    return item.element;
+  });
+};
+
+// ----- init & layout ----- //
+
+/**
+ * lays out all items
+ */
+proto.layout = function() {
+  this._resetLayout();
+  this._manageStamps();
+
+  // don't animate first layout
+  var layoutInstant = this._getOption('layoutInstant');
+  var isInstant = layoutInstant !== undefined ?
+    layoutInstant : !this._isLayoutInited;
+  this.layoutItems( this.items, isInstant );
+
+  // flag for initalized
+  this._isLayoutInited = true;
+};
+
+// _init is alias for layout
+proto._init = proto.layout;
+
+/**
+ * logic before any new layout
+ */
+proto._resetLayout = function() {
+  this.getSize();
+};
+
+
+proto.getSize = function() {
+  this.size = getSize( this.element );
+};
+
+/**
+ * get measurement from option, for columnWidth, rowHeight, gutter
+ * if option is String -> get element from selector string, & get size of element
+ * if option is Element -> get size of element
+ * else use option as a number
+ *
+ * @param {String} measurement
+ * @param {String} size - width or height
+ * @private
+ */
+proto._getMeasurement = function( measurement, size ) {
+  var option = this.options[ measurement ];
+  var elem;
+  if ( !option ) {
+    // default to 0
+    this[ measurement ] = 0;
+  } else {
+    // use option as an element
+    if ( typeof option == 'string' ) {
+      elem = this.element.querySelector( option );
+    } else if ( option instanceof HTMLElement ) {
+      elem = option;
+    }
+    // use size of element, if element
+    this[ measurement ] = elem ? getSize( elem )[ size ] : option;
+  }
+};
+
+/**
+ * layout a collection of item elements
+ * @api public
+ */
+proto.layoutItems = function( items, isInstant ) {
+  items = this._getItemsForLayout( items );
+
+  this._layoutItems( items, isInstant );
+
+  this._postLayout();
+};
+
+/**
+ * get the items to be laid out
+ * you may want to skip over some items
+ * @param {Array} items
+ * @returns {Array} items
+ */
+proto._getItemsForLayout = function( items ) {
+  return items.filter( function( item ) {
+    return !item.isIgnored;
+  });
+};
+
+/**
+ * layout items
+ * @param {Array} items
+ * @param {Boolean} isInstant
+ */
+proto._layoutItems = function( items, isInstant ) {
+  this._emitCompleteOnItems( 'layout', items );
+
+  if ( !items || !items.length ) {
+    // no items, emit event with empty array
+    return;
+  }
+
+  var queue = [];
+
+  items.forEach( function( item ) {
+    // get x/y object from method
+    var position = this._getItemLayoutPosition( item );
+    // enqueue
+    position.item = item;
+    position.isInstant = isInstant || item.isLayoutInstant;
+    queue.push( position );
+  }, this );
+
+  this._processLayoutQueue( queue );
+};
+
+/**
+ * get item layout position
+ * @param {Outlayer.Item} item
+ * @returns {Object} x and y position
+ */
+proto._getItemLayoutPosition = function( /* item */ ) {
+  return {
+    x: 0,
+    y: 0
+  };
+};
+
+/**
+ * iterate over array and position each item
+ * Reason being - separating this logic prevents 'layout invalidation'
+ * thx @paul_irish
+ * @param {Array} queue
+ */
+proto._processLayoutQueue = function( queue ) {
+  this.updateStagger();
+  queue.forEach( function( obj, i ) {
+    this._positionItem( obj.item, obj.x, obj.y, obj.isInstant, i );
+  }, this );
+};
+
+// set stagger from option in milliseconds number
+proto.updateStagger = function() {
+  var stagger = this.options.stagger;
+  if ( stagger === null || stagger === undefined ) {
+    this.stagger = 0;
+    return;
+  }
+  this.stagger = getMilliseconds( stagger );
+  return this.stagger;
+};
+
+/**
+ * Sets position of item in DOM
+ * @param {Outlayer.Item} item
+ * @param {Number} x - horizontal position
+ * @param {Number} y - vertical position
+ * @param {Boolean} isInstant - disables transitions
+ */
+proto._positionItem = function( item, x, y, isInstant, i ) {
+  if ( isInstant ) {
+    // if not transition, just set CSS
+    item.goTo( x, y );
+  } else {
+    item.stagger( i * this.stagger );
+    item.moveTo( x, y );
+  }
+};
+
+/**
+ * Any logic you want to do after each layout,
+ * i.e. size the container
+ */
+proto._postLayout = function() {
+  this.resizeContainer();
+};
+
+proto.resizeContainer = function() {
+  var isResizingContainer = this._getOption('resizeContainer');
+  if ( !isResizingContainer ) {
+    return;
+  }
+  var size = this._getContainerSize();
+  if ( size ) {
+    this._setContainerMeasure( size.width, true );
+    this._setContainerMeasure( size.height, false );
+  }
+};
+
+/**
+ * Sets width or height of container if returned
+ * @returns {Object} size
+ *   @param {Number} width
+ *   @param {Number} height
+ */
+proto._getContainerSize = noop;
+
+/**
+ * @param {Number} measure - size of width or height
+ * @param {Boolean} isWidth
+ */
+proto._setContainerMeasure = function( measure, isWidth ) {
+  if ( measure === undefined ) {
+    return;
+  }
+
+  var elemSize = this.size;
+  // add padding and border width if border box
+  if ( elemSize.isBorderBox ) {
+    measure += isWidth ? elemSize.paddingLeft + elemSize.paddingRight +
+      elemSize.borderLeftWidth + elemSize.borderRightWidth :
+      elemSize.paddingBottom + elemSize.paddingTop +
+      elemSize.borderTopWidth + elemSize.borderBottomWidth;
+  }
+
+  measure = Math.max( measure, 0 );
+  this.element.style[ isWidth ? 'width' : 'height' ] = measure + 'px';
+};
+
+/**
+ * emit eventComplete on a collection of items events
+ * @param {String} eventName
+ * @param {Array} items - Outlayer.Items
+ */
+proto._emitCompleteOnItems = function( eventName, items ) {
+  var _this = this;
+  function onComplete() {
+    _this.dispatchEvent( eventName + 'Complete', null, [ items ] );
+  }
+
+  var count = items.length;
+  if ( !items || !count ) {
+    onComplete();
+    return;
+  }
+
+  var doneCount = 0;
+  function tick() {
+    doneCount++;
+    if ( doneCount == count ) {
+      onComplete();
+    }
+  }
+
+  // bind callback
+  items.forEach( function( item ) {
+    item.once( eventName, tick );
+  });
+};
+
+/**
+ * emits events via EvEmitter and jQuery events
+ * @param {String} type - name of event
+ * @param {Event} event - original event
+ * @param {Array} args - extra arguments
+ */
+proto.dispatchEvent = function( type, event, args ) {
+  // add original event to arguments
+  var emitArgs = event ? [ event ].concat( args ) : args;
+  this.emitEvent( type, emitArgs );
+
+  if ( jQuery ) {
+    // set this.$element
+    this.$element = this.$element || jQuery( this.element );
+    if ( event ) {
+      // create jQuery event
+      var $event = jQuery.Event( event );
+      $event.type = type;
+      this.$element.trigger( $event, args );
+    } else {
+      // just trigger with type if no event available
+      this.$element.trigger( type, args );
+    }
+  }
+};
+
+// -------------------------- ignore & stamps -------------------------- //
+
+
+/**
+ * keep item in collection, but do not lay it out
+ * ignored items do not get skipped in layout
+ * @param {Element} elem
+ */
+proto.ignore = function( elem ) {
+  var item = this.getItem( elem );
+  if ( item ) {
+    item.isIgnored = true;
+  }
+};
+
+/**
+ * return item to layout collection
+ * @param {Element} elem
+ */
+proto.unignore = function( elem ) {
+  var item = this.getItem( elem );
+  if ( item ) {
+    delete item.isIgnored;
+  }
+};
+
+/**
+ * adds elements to stamps
+ * @param {NodeList, Array, Element, or String} elems
+ */
+proto.stamp = function( elems ) {
+  elems = this._find( elems );
+  if ( !elems ) {
+    return;
+  }
+
+  this.stamps = this.stamps.concat( elems );
+  // ignore
+  elems.forEach( this.ignore, this );
+};
+
+/**
+ * removes elements to stamps
+ * @param {NodeList, Array, or Element} elems
+ */
+proto.unstamp = function( elems ) {
+  elems = this._find( elems );
+  if ( !elems ){
+    return;
+  }
+
+  elems.forEach( function( elem ) {
+    // filter out removed stamp elements
+    utils.removeFrom( this.stamps, elem );
+    this.unignore( elem );
+  }, this );
+};
+
+/**
+ * finds child elements
+ * @param {NodeList, Array, Element, or String} elems
+ * @returns {Array} elems
+ */
+proto._find = function( elems ) {
+  if ( !elems ) {
+    return;
+  }
+  // if string, use argument as selector string
+  if ( typeof elems == 'string' ) {
+    elems = this.element.querySelectorAll( elems );
+  }
+  elems = utils.makeArray( elems );
+  return elems;
+};
+
+proto._manageStamps = function() {
+  if ( !this.stamps || !this.stamps.length ) {
+    return;
+  }
+
+  this._getBoundingRect();
+
+  this.stamps.forEach( this._manageStamp, this );
+};
+
+// update boundingLeft / Top
+proto._getBoundingRect = function() {
+  // get bounding rect for container element
+  var boundingRect = this.element.getBoundingClientRect();
+  var size = this.size;
+  this._boundingRect = {
+    left: boundingRect.left + size.paddingLeft + size.borderLeftWidth,
+    top: boundingRect.top + size.paddingTop + size.borderTopWidth,
+    right: boundingRect.right - ( size.paddingRight + size.borderRightWidth ),
+    bottom: boundingRect.bottom - ( size.paddingBottom + size.borderBottomWidth )
+  };
+};
+
+/**
+ * @param {Element} stamp
+**/
+proto._manageStamp = noop;
+
+/**
+ * get x/y position of element relative to container element
+ * @param {Element} elem
+ * @returns {Object} offset - has left, top, right, bottom
+ */
+proto._getElementOffset = function( elem ) {
+  var boundingRect = elem.getBoundingClientRect();
+  var thisRect = this._boundingRect;
+  var size = getSize( elem );
+  var offset = {
+    left: boundingRect.left - thisRect.left - size.marginLeft,
+    top: boundingRect.top - thisRect.top - size.marginTop,
+    right: thisRect.right - boundingRect.right - size.marginRight,
+    bottom: thisRect.bottom - boundingRect.bottom - size.marginBottom
+  };
+  return offset;
+};
+
+// -------------------------- resize -------------------------- //
+
+// enable event handlers for listeners
+// i.e. resize -> onresize
+proto.handleEvent = utils.handleEvent;
+
+/**
+ * Bind layout to window resizing
+ */
+proto.bindResize = function() {
+  window.addEventListener( 'resize', this );
+  this.isResizeBound = true;
+};
+
+/**
+ * Unbind layout to window resizing
+ */
+proto.unbindResize = function() {
+  window.removeEventListener( 'resize', this );
+  this.isResizeBound = false;
+};
+
+proto.onresize = function() {
+  this.resize();
+};
+
+utils.debounceMethod( Outlayer, 'onresize', 100 );
+
+proto.resize = function() {
+  // don't trigger if size did not change
+  // or if resize was unbound. See #9
+  if ( !this.isResizeBound || !this.needsResizeLayout() ) {
+    return;
+  }
+
+  this.layout();
+};
+
+/**
+ * check if layout is needed post layout
+ * @returns Boolean
+ */
+proto.needsResizeLayout = function() {
+  var size = getSize( this.element );
+  // check that this.size and size are there
+  // IE8 triggers resize on body size change, so they might not be
+  var hasSizes = this.size && size;
+  return hasSizes && size.innerWidth !== this.size.innerWidth;
+};
+
+// -------------------------- methods -------------------------- //
+
+/**
+ * add items to Outlayer instance
+ * @param {Array or NodeList or Element} elems
+ * @returns {Array} items - Outlayer.Items
+**/
+proto.addItems = function( elems ) {
+  var items = this._itemize( elems );
+  // add items to collection
+  if ( items.length ) {
+    this.items = this.items.concat( items );
+  }
+  return items;
+};
+
+/**
+ * Layout newly-appended item elements
+ * @param {Array or NodeList or Element} elems
+ */
+proto.appended = function( elems ) {
+  var items = this.addItems( elems );
+  if ( !items.length ) {
+    return;
+  }
+  // layout and reveal just the new items
+  this.layoutItems( items, true );
+  this.reveal( items );
+};
+
+/**
+ * Layout prepended elements
+ * @param {Array or NodeList or Element} elems
+ */
+proto.prepended = function( elems ) {
+  var items = this._itemize( elems );
+  if ( !items.length ) {
+    return;
+  }
+  // add items to beginning of collection
+  var previousItems = this.items.slice(0);
+  this.items = items.concat( previousItems );
+  // start new layout
+  this._resetLayout();
+  this._manageStamps();
+  // layout new stuff without transition
+  this.layoutItems( items, true );
+  this.reveal( items );
+  // layout previous items
+  this.layoutItems( previousItems );
+};
+
+/**
+ * reveal a collection of items
+ * @param {Array of Outlayer.Items} items
+ */
+proto.reveal = function( items ) {
+  this._emitCompleteOnItems( 'reveal', items );
+  if ( !items || !items.length ) {
+    return;
+  }
+  var stagger = this.updateStagger();
+  items.forEach( function( item, i ) {
+    item.stagger( i * stagger );
+    item.reveal();
+  });
+};
+
+/**
+ * hide a collection of items
+ * @param {Array of Outlayer.Items} items
+ */
+proto.hide = function( items ) {
+  this._emitCompleteOnItems( 'hide', items );
+  if ( !items || !items.length ) {
+    return;
+  }
+  var stagger = this.updateStagger();
+  items.forEach( function( item, i ) {
+    item.stagger( i * stagger );
+    item.hide();
+  });
+};
+
+/**
+ * reveal item elements
+ * @param {Array}, {Element}, {NodeList} items
+ */
+proto.revealItemElements = function( elems ) {
+  var items = this.getItems( elems );
+  this.reveal( items );
+};
+
+/**
+ * hide item elements
+ * @param {Array}, {Element}, {NodeList} items
+ */
+proto.hideItemElements = function( elems ) {
+  var items = this.getItems( elems );
+  this.hide( items );
+};
+
+/**
+ * get Outlayer.Item, given an Element
+ * @param {Element} elem
+ * @param {Function} callback
+ * @returns {Outlayer.Item} item
+ */
+proto.getItem = function( elem ) {
+  // loop through items to get the one that matches
+  for ( var i=0; i < this.items.length; i++ ) {
+    var item = this.items[i];
+    if ( item.element == elem ) {
+      // return item
+      return item;
+    }
+  }
+};
+
+/**
+ * get collection of Outlayer.Items, given Elements
+ * @param {Array} elems
+ * @returns {Array} items - Outlayer.Items
+ */
+proto.getItems = function( elems ) {
+  elems = utils.makeArray( elems );
+  var items = [];
+  elems.forEach( function( elem ) {
+    var item = this.getItem( elem );
+    if ( item ) {
+      items.push( item );
+    }
+  }, this );
+
+  return items;
+};
+
+/**
+ * remove element(s) from instance and DOM
+ * @param {Array or NodeList or Element} elems
+ */
+proto.remove = function( elems ) {
+  var removeItems = this.getItems( elems );
+
+  this._emitCompleteOnItems( 'remove', removeItems );
+
+  // bail if no items to remove
+  if ( !removeItems || !removeItems.length ) {
+    return;
+  }
+
+  removeItems.forEach( function( item ) {
+    item.remove();
+    // remove item from collection
+    utils.removeFrom( this.items, item );
+  }, this );
+};
+
+// ----- destroy ----- //
+
+// remove and disable Outlayer instance
+proto.destroy = function() {
+  // clean up dynamic styles
+  var style = this.element.style;
+  style.height = '';
+  style.position = '';
+  style.width = '';
+  // destroy items
+  this.items.forEach( function( item ) {
+    item.destroy();
+  });
+
+  this.unbindResize();
+
+  var id = this.element.outlayerGUID;
+  delete instances[ id ]; // remove reference to instance by id
+  delete this.element.outlayerGUID;
+  // remove data for jQuery
+  if ( jQuery ) {
+    jQuery.removeData( this.element, this.constructor.namespace );
+  }
+
+};
+
+// -------------------------- data -------------------------- //
+
+/**
+ * get Outlayer instance from element
+ * @param {Element} elem
+ * @returns {Outlayer}
+ */
+Outlayer.data = function( elem ) {
+  elem = utils.getQueryElement( elem );
+  var id = elem && elem.outlayerGUID;
+  return id && instances[ id ];
+};
+
+
+// -------------------------- create Outlayer class -------------------------- //
+
+/**
+ * create a layout class
+ * @param {String} namespace
+ */
+Outlayer.create = function( namespace, options ) {
+  // sub-class Outlayer
+  var Layout = subclass( Outlayer );
+  // apply new options and compatOptions
+  Layout.defaults = utils.extend( {}, Outlayer.defaults );
+  utils.extend( Layout.defaults, options );
+  Layout.compatOptions = utils.extend( {}, Outlayer.compatOptions  );
+
+  Layout.namespace = namespace;
+
+  Layout.data = Outlayer.data;
+
+  // sub-class Item
+  Layout.Item = subclass( Item );
+
+  // -------------------------- declarative -------------------------- //
+
+  utils.htmlInit( Layout, namespace );
+
+  // -------------------------- jQuery bridge -------------------------- //
+
+  // make into jQuery plugin
+  if ( jQuery && jQuery.bridget ) {
+    jQuery.bridget( namespace, Layout );
+  }
+
+  return Layout;
+};
+
+function subclass( Parent ) {
+  function SubClass() {
+    Parent.apply( this, arguments );
+  }
+
+  SubClass.prototype = Object.create( Parent.prototype );
+  SubClass.prototype.constructor = SubClass;
+
+  return SubClass;
+}
+
+// ----- helpers ----- //
+
+// how many milliseconds are in each unit
+var msUnits = {
+  ms: 1,
+  s: 1000
+};
+
+// munge time-like parameter into millisecond number
+// '0.4s' -> 40
+function getMilliseconds( time ) {
+  if ( typeof time == 'number' ) {
+    return time;
+  }
+  var matches = time.match( /(^\d*\.?\d*)(\w*)/ );
+  var num = matches && matches[1];
+  var unit = matches && matches[2];
+  if ( !num.length ) {
+    return 0;
+  }
+  num = parseFloat( num );
+  var mult = msUnits[ unit ] || 1;
+  return num * mult;
+}
+
+// ----- fin ----- //
+
+// back in global
+Outlayer.Item = Item;
+
+return Outlayer;
+
+}));
+
+
+/***/ })
+
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ var __webpack_exports__ = (__webpack_exec__(994), __webpack_exec__(943), __webpack_exec__(409), __webpack_exec__(59));
+/******/ }
+]);

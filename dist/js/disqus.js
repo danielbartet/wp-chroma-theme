@@ -1,1 +1,150 @@
-var disqus_data=document.getElementById("disqus"),disqus_shortname="idropnews";disqus_data&&function(t,e,s){"use strict";var i=function(t,e){var s,i;return function(){var n=this,a=arguments,d=+new Date;s&&d<s+t?(clearTimeout(i),i=setTimeout(function(){s=d,e.apply(n,a)},t)):(s=d,e.apply(n,a))}},n=!1,a=!1,d=!1,r=!1,o="unloaded",u=!1,l=function(){if(!u||!e.body.contains(u)||"loaded"==u.disqusLoaderStatus)return!0;var s=t.pageYOffset,i=function(t){var s=t.getBoundingClientRect();return{top:s.top+e.body.scrollTop,left:s.left+e.body.scrollLeft}}(u).top;if(i-s>t.innerHeight*a||s-i-u.offsetHeight-t.innerHeight*a>0)return!0;var n=e.getElementById("disqus_thread");n&&n.removeAttribute("id"),u.setAttribute("id","disqus_thread"),u.disqusLoaderStatus="loaded","loaded"==o?DISQUS.reset({reload:!0,config:d}):(t.disqus_config=d,"unloaded"==o&&(o="loading",function(t,s){var i=e.createElement("script");i.src=t,i.async=!0,i.setAttribute("data-timestamp",+new Date),i.addEventListener("load",function(){"function"==typeof s&&s()}),(e.head||e.body).appendChild(i)}(r,function(){o="loaded"})))};t.addEventListener("scroll",i(n,l)),t.addEventListener("resize",i(n,l)),t.disqusLoader=function(t,s){s=function(t,e){var s,i={};for(s in t)Object.prototype.hasOwnProperty.call(t,s)&&(i[s]=t[s]);for(s in e)Object.prototype.hasOwnProperty.call(e,s)&&(i[s]=e[s]);return i}({laziness:1,throttle:250,scriptUrl:!1,disqusConfig:!1},s),a=s.laziness+1,n=s.throttle,d=s.disqusConfig,r=!1===r?s.scriptUrl:r,(u="string"==typeof t?e.querySelector(t):"number"==typeof t.length?t[0]:t).disqusLoaderStatus="unloaded",l()};var c={scriptUrl:"//username.disqus.com/embed.js",laziness:1,throttle:250,disqusConfig:function(){this.page.title=disqus_data.dataset.pageTitle,this.page.url=disqus_data.dataset.pageUrl,this.page.identifier=disqus_data.dataset.pageIdentifer}};disqusLoader(".disqus",c)}(window,document);
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+var __webpack_exports__ = {};
+
+
+var disqus_data = document.getElementById('disqus'),
+  disqus_shortname = 'idropnews';
+if (disqus_data) {
+  ;
+  (function (window, document, index) {
+    'use strict';
+
+    var extendObj = function extendObj(defaults, options) {
+        var prop,
+          extended = {};
+        for (prop in defaults) {
+          if (Object.prototype.hasOwnProperty.call(defaults, prop)) extended[prop] = defaults[prop];
+        }
+        for (prop in options) {
+          if (Object.prototype.hasOwnProperty.call(options, prop)) extended[prop] = options[prop];
+        }
+        return extended;
+      },
+      getOffset = function getOffset(el) {
+        var rect = el.getBoundingClientRect();
+        return {
+          top: rect.top + document.body.scrollTop,
+          left: rect.left + document.body.scrollLeft
+        };
+      },
+      loadScript = function loadScript(url, callback) {
+        var script = document.createElement('script');
+        script.src = url;
+        script.async = true;
+        script.setAttribute('data-timestamp', +new Date());
+        script.addEventListener('load', function () {
+          if (typeof callback === 'function') callback();
+        });
+        (document.head || document.body).appendChild(script);
+      },
+      throttle = function throttle(a, b) {
+        var c, d;
+        return function () {
+          var e = this,
+            f = arguments,
+            g = +new Date();
+          c && g < c + a ? (clearTimeout(d), d = setTimeout(function () {
+            c = g, b.apply(e, f);
+          }, a)) : (c = g, b.apply(e, f));
+        };
+      },
+      throttleTO = false,
+      laziness = false,
+      disqusConfig = false,
+      scriptUrl = false,
+      scriptStatus = 'unloaded',
+      instance = false,
+      init = function init() {
+        if (!instance || !document.body.contains(instance) || instance.disqusLoaderStatus == 'loaded') return true;
+        var winST = window.pageYOffset,
+          offset = getOffset(instance).top;
+
+        // if the element is too far below || too far above
+        if (offset - winST > window.innerHeight * laziness || winST - offset - instance.offsetHeight - window.innerHeight * laziness > 0) return true;
+        var tmp = document.getElementById('disqus_thread');
+        if (tmp) tmp.removeAttribute('id');
+        instance.setAttribute('id', 'disqus_thread');
+        instance.disqusLoaderStatus = 'loaded';
+        if (scriptStatus == 'loaded') {
+          DISQUS.reset({
+            reload: true,
+            config: disqusConfig
+          });
+        } else
+          // unloaded | loading
+          {
+            window.disqus_config = disqusConfig;
+            if (scriptStatus == 'unloaded') {
+              scriptStatus = 'loading';
+              loadScript(scriptUrl, function () {
+                scriptStatus = 'loaded';
+              });
+            }
+          }
+      };
+    window.addEventListener('scroll', throttle(throttleTO, init));
+    window.addEventListener('resize', throttle(throttleTO, init));
+    window.disqusLoader = function (element, options) {
+      options = extendObj({
+        laziness: 1,
+        throttle: 250,
+        scriptUrl: false,
+        disqusConfig: false
+      }, options);
+      laziness = options.laziness + 1;
+      throttleTO = options.throttle;
+      disqusConfig = options.disqusConfig;
+      scriptUrl = scriptUrl === false ? options.scriptUrl : scriptUrl; // set it only once
+
+      if (typeof element === 'string') instance = document.querySelector(element);else if (typeof element.length === 'number') instance = element[0];else instance = element;
+      instance.disqusLoaderStatus = 'unloaded';
+      init();
+    };
+    var options = {
+      scriptUrl: '//username.disqus.com/embed.js',
+      /*
+        @type: string (url)
+        @default: none
+        @required
+        URL of Disqus' executive JS file. The value is memorized on the first function call
+        and ignored otherwise because Disqus allows only one instance per page at the time.
+      */
+
+      laziness: 1,
+      /*
+        @type: int (>=0)
+        @default: 1
+        Sets the laziness of loading the widget: (viewport height) * laziness . For example:
+        0 - widget load starts when at the least a tiny part of it gets in the viewport;
+        1 - widget load starts when the distance between the widget zone and the viewport is no more than the height of the viewport;
+        2 - 2x viewports, etc.
+      */
+
+      throttle: 250,
+      /*
+        @type: int (milliseconds)
+        @default: 250
+        Defines how often the plugin should make calculations during the
+        processes such as resize of a browser's window or viewport scroll.
+        250 = 4 times in a second.
+      */
+
+      /*
+        @type: function
+        @default: none
+        Disqus-native options. Check Disqus' manual for more information.
+      */
+      disqusConfig: function disqusConfig() {
+        this.page.title = disqus_data.dataset.pageTitle;
+        this.page.url = disqus_data.dataset.pageUrl;
+        this.page.identifier = disqus_data.dataset.pageIdentifer;
+      }
+    };
+
+    // vanilla
+    disqusLoader('.disqus', options);
+  })(window, document, 0);
+}
+/******/ })()
+;
