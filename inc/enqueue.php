@@ -43,9 +43,9 @@ function chroma_scripts_method() {
     $affiliate_js = get_latest_file('/dist/js/', 'apple-affiliate-linker');
     wp_register_script('apple-affiliate-linker', $affiliate_js, ['main'], null, true);
 
-    $chroma_js = get_template_directory_uri() . '/dist/js/chroma.js';
-    wp_register_script('chroma', $chroma_js, ['main'], null, true);
-    wp_enqueue_script('chroma');
+    // $chroma_js = get_template_directory_uri() . '/dist/js/chroma.js';
+    // wp_register_script('chroma', $chroma_js, ['main'], null, true);
+    // wp_enqueue_script('chroma');
 
     // Enqueue scripts based on specific conditions
     if (is_single()) {
