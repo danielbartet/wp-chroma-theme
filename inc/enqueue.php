@@ -13,8 +13,9 @@ function chroma_scripts_method() {
   //enqueue style
 	wp_enqueue_style( 'chroma-styles', get_template_directory_uri() . '/dist/css/main.css', '', $csstime );
   //register
-	wp_enqueue_script('redux', get_template_directory_uri() . '/node_modules/redux/dist/redux.min.js', '', $jstime, true);
-	wp_register_script('main', get_template_directory_uri() . '/dist/js/main.js', 'redux', $jstime, true);
+	//wp_enqueue_script('redux', get_template_directory_uri() . '/node_modules/redux/dist/redux.min.js', '', $jstime, true);
+	wp_enqueue_script('redux', 'https://cdn.jsdelivr.net/npm/redux@4.0.5/dist/redux.min.js', array(), null, true);
+    wp_register_script('main', get_template_directory_uri() . '/dist/js/main.js', ['redux'], $jstime, true);
 	wp_register_script('masonry-layout', get_template_directory_uri() . '/dist/js/gallery.js', array('main'), $jstime, true);
 	wp_register_script( 'apple-affiliate-linker', get_template_directory_uri() . '/dist/js/apple-affiliate-linker.js', array('main'), $jstime, true);
   wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', false, '1.12.4');
