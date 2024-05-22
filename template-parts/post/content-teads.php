@@ -62,8 +62,9 @@ $i = 0;
         global $wp;
         $curr_url = home_url($wp->request) . '/';
         $url = $_SERVER['REQUEST_URI'];
-  
+        error_log($url);
         if(strpos($url, 'fbclid')) {
+        error_log('entro if fbclid teads');
         ?>
         <div class='fbLikeContainer' style='margin: 2% 0;'>
           <div class="fb-like" style="margin: 0 2%;" data-href="https://www.facebook.com/idropnews/" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
