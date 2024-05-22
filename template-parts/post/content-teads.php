@@ -66,7 +66,7 @@ $i = 0;
         if(strpos($url, 'fbclid')) {
         error_log('entro if fbclid teads');
         ?>
-        <div class='fbLikeContainer' style='margin: 2% 0;'>
+        <div class='fbLikeContainer teads' style='margin: 2% 0;'>
           <div class="fb-like" style="margin: 0 2%;" data-href="https://www.facebook.com/idropnews/" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
           <div class="fb-share-button" data-href="<?php echo $curr_url; ?>" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
         </div>
