@@ -220,6 +220,9 @@ if ($page == $numpages) {
  if ($page != $numpages - 1) { ?>
    <div class="content_ad_container" id="content_ad_container"></div>
 <?php } ?>
+<!-- place in the body  -->
+<div data-type="_mgwidget" data-widget-id="1607722"> </div>
+<script>(function(w,q){w[q]=w[q]||[];w[q].push(["_mgc.load"])})(window,"_mgq");</script>
 </div>
 <div class='galleryFooter'>
 <div class="share-text">Share</div>
