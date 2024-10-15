@@ -2,11 +2,23 @@
 
 function nativeAd() {
     $revcontent = '
+        <div data-type="_mgwidget" data-widget-id="1607722"></div> 
+        <script>
+                (function(w,q){w[q]=w[q]||[];w[q].push(["_mgc.load"])})(window,"_mgq");
+        </script>';
+
+        return $revcontent;
+}
+
+
+function nativeAd_bak() {
+    $revcontent = '
     <div id="rc-widget-a5a9b2" data-rc-widget data-widget-host="habitat" data-endpoint="//trends.revcontent.com" data-widget-id="90320" style="background: white;"></div>
     <script type="text/javascript" src="https://assets.revcontent.com/master/delivery.js" defer="defer"></script>';
 
     return $revcontent;
 }
+
 
 function tbn_ads_inside_content( $content ) {
         
