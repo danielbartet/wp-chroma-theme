@@ -306,3 +306,8 @@ function fsjadminStylesCss() {
         <!-- /end Admin CSS styles -->';
 }
 add_action('pre-upload-ui', 'fsjadminStylesCss');
+
+function add_mgid_script() {
+    wp_enqueue_script( 'mgid-script', 'https://jsc.mgid.com/site/952724.js', array(), null, true );
+}
+add_action( 'wp_enqueue_scripts', 'add_mgid_script' );
